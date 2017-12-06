@@ -18,5 +18,20 @@ namespace MmiSoft.Core.Math.Units
 		{
 			return new Seconds();
 		}
+
+		public static Radians operator *(RadiansPerSecond omega, TimeUnit t)
+		{
+			return ((AngularVelocity)omega * t).To<Radians>();
+		}
+
+		public static Radians operator *(RadiansPerSecond omega, TimeSpan t)
+		{
+			return omega * new Seconds(t);
+		}
+
+		public static Seconds operator /(AngleUnit a, RadiansPerSecond omega)
+		{
+			return (a / (AngularVelocity)omega).To<Seconds>();
+		}
 	}
 }

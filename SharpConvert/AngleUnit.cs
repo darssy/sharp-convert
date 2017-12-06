@@ -3,7 +3,7 @@
 namespace MmiSoft.Core.Math.Units
 {
 	[Serializable]
-	public abstract class AngleUnit : UnitBase
+	public abstract class AngleUnit : UnitBase, IComparable<AngleUnit>
 	{
 		protected AngleUnit(double unitValue, double toSiFactor)
 			: base(unitValue, toSiFactor)
@@ -58,6 +58,20 @@ namespace MmiSoft.Core.Math.Units
 			return x.ToSi() >= y.ToSi();
 		}
 
+		public static A Add<A>(AngleUnit x, AngleUnit y) where A : AngleUnit, new()
+		{
+			A dif = new A();
+			dif.FromSi(x.ToSi() + y.ToSi());
+			return dif;
+		}
+
+		public static A Subtract<A>(AngleUnit x, AngleUnit y) where A : AngleUnit, new()
+		{
+			A dif = new A();
+			dif.FromSi(System.Math.Abs(x.ToSi() - y.ToSi()));
+			return dif;
+		}
+
 		public static AngleUnit operator /(AngleUnit x, int y)
 		{
 			AngleUnit a = (AngleUnit) x.MemberwiseClone();
@@ -92,6 +106,11 @@ namespace MmiSoft.Core.Math.Units
 		public double Tan()
 		{
 			return System.Math.Tan(ToSi());
+		}
+
+		public int CompareTo(AngleUnit other)
+		{
+			return ToSi().CompareTo(other.ToSi());
 		}
 	}
 }

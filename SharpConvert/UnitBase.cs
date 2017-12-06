@@ -69,6 +69,7 @@ namespace MmiSoft.Core.Math.Units
 			where U2 : UnitBase
 			where U1 : U2, new()
 		{
+			if (l is U1) return (U1)l;
 			U1 converted = new U1();
 			converted.FromSi(l.ToSi());
 			return converted;

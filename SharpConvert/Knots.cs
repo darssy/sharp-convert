@@ -22,5 +22,20 @@ namespace MmiSoft.Core.Math.Units
 		{
 			return new Hours();
 		}
+
+		public static NauticalMiles operator *(Knots u, TimeUnit t)
+		{
+			return ((SpeedUnit)u * t).To<NauticalMiles>();
+		}
+
+		public static LengthUnit operator *(Knots u, TimeSpan t)
+		{
+			return u * new Seconds(t);
+		}
+
+		public static Hours operator /(LengthUnit s, Knots u)
+		{
+			return (s / (SpeedUnit)u).To<Hours>();
+		}
 	}
 }

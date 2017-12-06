@@ -3,7 +3,7 @@
 namespace MmiSoft.Core.Math.Units
 {
 	[Serializable]
-	public class TimeUnit : UnitBase
+	public class TimeUnit : UnitBase, IComparable<TimeUnit>
 	{
 		protected TimeUnit(double time, double toSiFactor)
 			: base(time, toSiFactor)
@@ -30,6 +30,11 @@ namespace MmiSoft.Core.Math.Units
 		public override int GetHashCode()
 		{
 			return ToSi().GetHashCode() * 1000000017;
+		}
+
+		public int CompareTo(TimeUnit other)
+		{
+			return ToSi().CompareTo(other.ToSi());
 		}
 
 		public static implicit operator double(TimeUnit t)

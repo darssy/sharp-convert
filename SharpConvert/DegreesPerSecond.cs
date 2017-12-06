@@ -13,7 +13,7 @@ namespace MmiSoft.Core.Math.Units
 		}
 
 		public DegreesPerSecond(decimal unitValue)
-			: this((double) unitValue)
+			: this((double)unitValue)
 		{
 		}
 
@@ -30,6 +30,21 @@ namespace MmiSoft.Core.Math.Units
 		protected override TimeUnit GetTimeUnit()
 		{
 			return new Seconds();
+		}
+
+		public static Degrees operator *(DegreesPerSecond omega, TimeUnit t)
+		{
+			return ((AngularVelocity)omega * t).To<Degrees>();
+		}
+
+		public static Degrees operator *(DegreesPerSecond omega, TimeSpan t)
+		{
+			return omega * new Seconds(t);
+		}
+
+		public static Seconds operator /(AngleUnit a, DegreesPerSecond omega)
+		{
+			return (a / (AngularVelocity)omega).To<Seconds>();
 		}
 	}
 }

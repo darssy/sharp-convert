@@ -19,5 +19,15 @@ namespace MmiSoft.Core.Math.Units
 		public Degrees(int unitValue)
 			: this((float)unitValue)
 		{ }
+
+		public static Degrees operator -(Degrees x, AngleUnit y)
+		{
+			return Subtract<Degrees>(x, y);
+		}
+
+		public static Degrees operator +(Degrees x, AngleUnit y)
+		{
+			return Add<Degrees>(x, y);
+		}
 	}
 }
