@@ -5,6 +5,7 @@ namespace MmiSoft.Core.Math.Units
 	[Serializable]
 	public abstract class UnitBase
 	{
+		private const double Threshold = 1e-14;
 		protected double unitValue;
 		protected readonly double toSiFactor;
 
@@ -14,15 +15,11 @@ namespace MmiSoft.Core.Math.Units
 			this.toSiFactor = toSiFactor;
 		}
 
-		public double ToSiFactor
-		{
-			get { return toSiFactor; }
-		}
+		protected internal double ToSiFactor => toSiFactor;
 
-		public double UnitValue
-		{
-			get { return unitValue; }
-		}
+		public abstract string Symbol { get; }
+
+		public double UnitValue => unitValue;
 
 		public double Round(int decimals = 0)
 		{
@@ -43,7 +40,7 @@ namespace MmiSoft.Core.Math.Units
 
 		/// <summary>
 		/// Should be used wisely and from subclasses only; it does not support type checking,
-		/// therefore it migth be comparing distance to time or anything else
+		/// therefore it might be comparing distance to time or anything else
 		/// </summary>
 		/// <param name="other"></param>
 		/// <returns></returns>
@@ -52,24 +49,24 @@ namespace MmiSoft.Core.Math.Units
 			double otherSi = other.ToSi();
 			double si = ToSi();
 			double diff = System.Math.Abs(otherSi - si);
-			return otherSi == si || diff < 1e-14;
+			return diff <= Threshold;
 		}
 
 		public override string ToString()
 		{
-			return unitValue + "";
+			return $"{unitValue}{Symbol}";
 		}
 
 		public string ToString(string format)
 		{
-			return unitValue.ToString(format);
+			return $"{unitValue.ToString(format)}{Symbol}";
 		}
 
 		public static U1 ConvertTo<U1, U2>(U2 l)
 			where U2 : UnitBase
 			where U1 : U2, new()
 		{
-			if (l is U1) return (U1)l;
+			if (l is U1 u2) return u2;
 			U1 converted = new U1();
 			converted.FromSi(l.ToSi());
 			return converted;

@@ -37,5 +37,7 @@ namespace MmiSoft.Core.Math.Units
 		{
 			return (s / (SpeedUnit)u).To<Hours>();
 		}
+
+		public override string Symbol => "kt";
 	}
 }

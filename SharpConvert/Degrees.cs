@@ -5,6 +5,8 @@ namespace MmiSoft.Core.Math.Units
 	[Serializable]
 	public class Degrees : AngleUnit
 	{
+		public static readonly Degrees FullCircle = new Degrees(360);
+
 		public Degrees() :this(0f)
 		{ }
 
@@ -29,5 +31,7 @@ namespace MmiSoft.Core.Math.Units
 		{
 			return Add<Degrees>(x, y);
 		}
+
+		public override string Symbol => "\u00B0";
 	}
 }

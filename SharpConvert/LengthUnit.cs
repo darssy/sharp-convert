@@ -25,7 +25,9 @@ namespace MmiSoft.Core.Math.Units
 
 		public int CompareTo(LengthUnit other)
 		{
-			return ToSi().CompareTo(other.ToSi());
+			return other.GetType() == GetType()
+				? unitValue.CompareTo(other.unitValue)
+				: ToSi().CompareTo(other.ToSi());
 		}
 
 		public override bool Equals(object obj)
@@ -83,6 +85,16 @@ namespace MmiSoft.Core.Math.Units
 			L dif = new L();
 			dif.FromSi(System.Math.Abs(x.ToSi() - y.ToSi()));
 			return dif;
+		}
+
+		public static LengthUnit operator -(LengthUnit l, LengthUnit r)
+		{
+			return new Meters(System.Math.Abs(l.ToSi() - r.ToSi()));
+		}
+
+		public static LengthUnit operator +(LengthUnit l, LengthUnit r)
+		{
+			return new Meters(l.ToSi() + r.ToSi());
 		}
 
 		public static LengthUnit operator *(LengthUnit t, double f)

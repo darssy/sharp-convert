@@ -1,10 +1,65 @@
 ﻿
 using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
+using System.Linq.Expressions;
+using System.Reflection;
 
 namespace MmiSoft.Core.Math.Units
 {
 	public static class Extensions
 	{
+		private static List<string> registeredUnitSymbols = new List<string>();
+		private static Dictionary<string, Func<double, UnitBase>> registeredUnitConstructors
+			= new Dictionary<string, Func<double, UnitBase>>();
+
+		static Extensions()
+		{
+			var type = typeof(UnitBase);
+			List<Type> types = AppDomain.CurrentDomain.GetAssemblies()
+				.SelectMany(a => a.GetTypes())
+				.Where(t => type.IsAssignableFrom(t) && !t.IsAbstract)
+				.ToList();
+
+			Type paramType = typeof(double);
+			foreach (Type t in types)
+			{
+				foreach (ConstructorInfo constructor in t.GetConstructors())
+				{
+					ParameterInfo[] parameters = constructor.GetParameters();
+					if (parameters.Length == 1 && parameters[0].ParameterType == paramType)
+					{
+						ParameterExpression param = Expression.Parameter(paramType, "val");
+						Expression<Func<double, UnitBase>> lambda = Expression.Lambda<Func<double, UnitBase>>(
+							Expression.New(constructor, param), param);
+						Func<double, UnitBase> func = lambda.Compile();
+						try
+						{
+							UnitBase unit = func.Invoke(0);
+							registeredUnitConstructors[unit.Symbol] = func;
+						}
+						catch (Exception e)
+						{
+							//TODO log exception
+						}
+						break;
+					}
+				}
+			}
+			registeredUnitSymbols.AddRange(registeredUnitConstructors.Keys);
+		}
+
+		public static UnitBase Parse(this string text)
+		{
+			text = text.Trim();
+			string unit = registeredUnitSymbols.FirstOrDefault(text.EndsWith);
+			if (unit == null) throw new Exception($"Unknown unit for input: '{text}'");
+
+			double value = double.Parse(text.Replace(unit, ""), CultureInfo.InvariantCulture);
+			return registeredUnitConstructors[unit].Invoke(value);
+		}
+
 		#region Length Units
 		public static Feet Feet(this double d)
 		{
@@ -206,5 +261,13 @@ namespace MmiSoft.Core.Math.Units
 		}
 		#endregion
 
+
+		#region Mass
+
+		public static Kilogram Kilogram(this int kg) => new Kilogram(kg);
+		public static Kilogram Kilogram(this float kg) => new Kilogram(kg);
+		public static Kilogram Kilogram(this double kg) => new Kilogram(kg);
+
+		#endregion
 	}
 }

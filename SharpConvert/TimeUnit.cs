@@ -3,7 +3,7 @@
 namespace MmiSoft.Core.Math.Units
 {
 	[Serializable]
-	public class TimeUnit : UnitBase, IComparable<TimeUnit>
+	public abstract class TimeUnit : UnitBase, IComparable<TimeUnit>
 	{
 		protected TimeUnit(double time, double toSiFactor)
 			: base(time, toSiFactor)

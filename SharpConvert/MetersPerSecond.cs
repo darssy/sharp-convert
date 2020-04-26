@@ -23,5 +23,7 @@ namespace MmiSoft.Core.Math.Units
 		{
 			return new Seconds();
 		}
+
+		public override string Symbol => "m/s";
 	}
 }

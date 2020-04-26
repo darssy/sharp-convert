@@ -12,5 +12,7 @@ namespace MmiSoft.Core.Math.Units
 		public Minutes(double minutes)
 			: base(minutes, 60)
 		{ }
+
+		public override string Symbol => "min";
 	}
 }

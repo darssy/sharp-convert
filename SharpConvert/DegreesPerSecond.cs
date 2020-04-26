@@ -46,5 +46,7 @@ namespace MmiSoft.Core.Math.Units
 		{
 			return (a / (AngularVelocity)omega).To<Seconds>();
 		}
+
+		public override string Symbol => "\u00B0/s";
 	}
 }

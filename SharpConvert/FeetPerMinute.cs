@@ -24,5 +24,7 @@ namespace MmiSoft.Core.Math.Units
 		{
 			return new Minutes();
 		}
+
+		public override string Symbol => "fpm";
 	}
 }

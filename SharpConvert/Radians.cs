@@ -12,5 +12,17 @@ namespace MmiSoft.Core.Math.Units
 			: base(unitValue, 1)
 		{
 		}
+
+		public static Radians operator -(Radians x, AngleUnit y)
+		{
+			return Subtract<Radians>(x, y);
+		}
+
+		public static Radians operator +(Radians x, AngleUnit y)
+		{
+			return Add<Radians>(x, y);
+		}
+
+		public override string Symbol => "rad";
 	}
 }

@@ -21,5 +21,7 @@ namespace MmiSoft.Core.Math.Units
 		{
 			return new Hours(t);
 		}
+
+		public override string Symbol => "hour";
 	}
 }

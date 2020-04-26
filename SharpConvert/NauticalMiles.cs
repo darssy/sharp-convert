@@ -22,5 +22,7 @@ namespace MmiSoft.Core.Math.Units
 		{
 			return Add<NauticalMiles>(x, y);
 		}
+
+		public override string Symbol => "NM";
 	}
 }

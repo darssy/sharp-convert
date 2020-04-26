@@ -112,5 +112,7 @@ namespace MmiSoft.Core.Math.Units
 		{
 			return ToSi().CompareTo(other.ToSi());
 		}
+
+		public override string ToString() => $"{unitValue} {GetType().Name}";
 	}
 }

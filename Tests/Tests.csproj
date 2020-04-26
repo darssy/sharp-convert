@@ -12,6 +12,7 @@
     <AssemblyName>UnitTests.MmiSoft.Core.Math.Units</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <LangVersion>7.2</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
     <DebugSymbols>true</DebugSymbols>
@@ -44,12 +45,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MassTest.cs" />
+    <Compile Include="ParseTest.cs" />
+    <Compile Include="Performance.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="AngleUnitTest.cs" />
     <Compile Include="AngularVelocityTest.cs" />
     <Compile Include="DegreesTest.cs" />
     <Compile Include="LengthUnitTest.cs" />
     <Compile Include="NauticalMilesTest.cs" />
+    <Compile Include="RadiansPerSecondTest.cs" />
     <Compile Include="SpeedUnitTest.cs" />
     <Compile Include="TimeUnitTest.cs" />
     <Compile Include="UnitsTest.cs" />

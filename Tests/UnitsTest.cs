@@ -50,10 +50,22 @@ namespace UnitTests.MmiSoft.Core.Math.Units
 		}
 
 		[Test]
-		public void StringAndFormating()
+		public void ToStringIncludesUnitSymbol()
 		{
-			Assert.AreEqual(new Meters(34).ToString(), "34");
-			Assert.AreEqual(new Meters(0.8934).ToString("0.00"), 0.89.ToString("0.00"));
+			Assert.AreEqual(new Meters(34).ToString(), "34m");
+		}
+
+		[Test]
+		public void ToStringWithFormatting_FormatIsIdenticalToDouble_IncludesUnitSymbol()
+		{
+			Assert.AreEqual(0.89.ToString("0.00") + "m", 0.89.Meters().ToString("0.00"));
+		}
+
+		[Test]
+		public void ToStringWithFormatting_AppliesRounding()
+		{
+			Assert.AreEqual("0,89m", 0.8934.Meters().ToString("0.00"));
+			Assert.AreEqual("0,90m", 0.8958.Meters().ToString("0.00"));
 		}
 
 		[Test]
@@ -101,6 +113,8 @@ namespace UnitTests.MmiSoft.Core.Math.Units
 			public RogueLength(double length) : base(length, -7)
 			{
 			}
+
+			public override string Symbol => "rogue";
 		}
 	}
 }
