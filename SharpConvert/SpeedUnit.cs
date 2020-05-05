@@ -22,7 +22,7 @@ namespace MmiSoft.Core.Math.Units
 
 		protected bool Equals(SpeedUnit other)
 		{
-			return other.ToSi() == ToSi();
+			return EqualsImpl(other);
 		}
 
 		public override bool Equals(object obj)
