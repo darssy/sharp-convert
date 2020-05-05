@@ -11,10 +11,11 @@ namespace UnitTests.MmiSoft.Core.Math.Units
 	public class DegreesTest
 	{
 		[Test]
-		public void VerifyConversion()
+		public void VerifyConversion_FromDegreesToRadians()
 		{
+			double oneDegreeRad = System.Math.PI / 180;
 			Degrees halfTurn = new Degrees(180);
-			Assert.AreEqual(halfTurn.ToSiFactor, 0.017453292519943295); // π/180
+			Assert.AreEqual(oneDegreeRad, halfTurn.ToSiFactor, 0.000000001); // π/180
 			Assert.AreEqual(halfTurn.To<Radians>().UnitValue, new Radians(System.Math.PI).UnitValue);
 		}
 	}

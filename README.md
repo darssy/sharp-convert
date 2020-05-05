@@ -30,7 +30,6 @@ And for conversions you can use:
 
 `Feet ft = distance.To<Feet>();`
 
-
 ### Type safety
 SharpConvert is type safe. Each unit type is a class by itself. Each time you know that you are handling distance or angle and not some cryptic double or float value. You won't end up adding up acceleration to temperature by mistake.
 

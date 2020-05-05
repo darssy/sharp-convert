@@ -54,7 +54,7 @@ namespace MmiSoft.Core.Math.Units
 		{
 			text = text.Trim();
 			string unit = registeredUnitSymbols.FirstOrDefault(text.EndsWith);
-			if (unit == null) throw new Exception($"Unknown unit for input: '{text}'");
+			if (unit == null) throw new FormatException($"Unknown unit for input: '{text}'");
 
 			double value = double.Parse(text.Replace(unit, ""), CultureInfo.InvariantCulture);
 			return registeredUnitConstructors[unit].Invoke(value);
