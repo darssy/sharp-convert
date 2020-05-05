@@ -7,13 +7,13 @@ The purpose of this library is to handle conversions between [units of measureme
 ## Introduction
 I realized the importance of an object oriented units conversion library while I was developing [DARSSY](http://darssy.com/). There I had to deal with nautical miles, feet, knots and feet per minute all at the same time. That was easy at first, but when the project scaled up, I was searching for bugs the root of which was units conversion.
 For example, when calculating ILS glide paths I had to calculate the tangent of the glide triangle, and that was altitude in feet divided by distance in nautical miles. Before I had to do:
-```
+```cs
 double distance = ...;
 double tan = aircraft.Altitude * 0.3048 / (distance * 1852);
 double glideSlopeDegrees = Math.Atan(tan) / Math.PI * 180;
 ```
 Now I can do:
-```
+```cs
 LengthUnit distance = ...;
 double tan = aircraft.Altitude / distance;
 Degrees = glideSlope = Math.Atan(tan).Radians.To<Degrees>();
@@ -39,7 +39,7 @@ Type safety comes at a cost. New object allocation is expensive and this is what
 
 `30.Meters() < 2.Meters();`
 
-is twice as slow as checking for
+is (approximately) twice as slow as checking for
 
 `30.Meters().UnitValue < 2;`
 
