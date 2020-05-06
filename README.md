@@ -1,4 +1,5 @@
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/9fd842845e954fa1a4036088002b5b1c)](https://www.codacy.com/manual/adamstyl/sharp-convert?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=adamstyl/sharp-convert&amp;utm_campaign=Badge_Grade)
+[![Build status](https://img.shields.io/appveyor/ci/adamstyl/sharp-convert.svg)](https://ci.appveyor.com/project/adamstyl/sharp-convert)
 
 # Sharp Units
 ## Purpose - disclaimer
