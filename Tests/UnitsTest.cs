@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics.CodeAnalysis;
+using System.Globalization;
 using MmiSoft.Core.Math.Units;
 using NUnit.Framework;
 
@@ -19,7 +20,7 @@ namespace UnitTests.MmiSoft.Core.Math.Units
 			FeetPerMinute fpm = new FeetPerMinute(1800);
 			TimeUnit min = new Feet(9000) / fpm;
 			Expect(min is Minutes);
-			Expect(min.UnitValue == 5);
+			Assert.AreEqual(5, min.UnitValue, 0.00001);
 		}
 
 		[Test]
@@ -28,7 +29,7 @@ namespace UnitTests.MmiSoft.Core.Math.Units
 			Meters m = new Meters(1852);
 			NauticalMiles nm = new NauticalMiles(12);
 			Meters sum = (nm + m).To<Meters>();
-			Expect(sum.UnitValue == 13 * 1852);
+			Assert.AreEqual(13 * 1852, sum.UnitValue, 0.00001);
 		}
 
 		[Test]
@@ -50,9 +51,11 @@ namespace UnitTests.MmiSoft.Core.Math.Units
 		}
 
 		[Test]
-		public void ToStringIncludesUnitSymbol()
+		public void ToStringIncludesUnitSymbol_UsesCurrentCulture()
 		{
 			Assert.AreEqual(new Meters(34).ToString(), "34m");
+			string decimalSeparator = CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator;
+			Assert.AreEqual(new Meters(34.05).ToString(), $"34{decimalSeparator}05m");
 		}
 
 		[Test]
@@ -62,10 +65,11 @@ namespace UnitTests.MmiSoft.Core.Math.Units
 		}
 
 		[Test]
-		public void ToStringWithFormatting_AppliesRounding()
+		public void ToStringWithFormatting_AppliesRounding_UsesCurrentCulture()
 		{
-			Assert.AreEqual("0,89m", 0.8934.Meters().ToString("0.00"));
-			Assert.AreEqual("0,90m", 0.8958.Meters().ToString("0.00"));
+			string ds = CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator;
+			Assert.AreEqual($"0{ds}89m", 0.8934.Meters().ToString("0.00"));
+			Assert.AreEqual($"0{ds}90m", 0.8958.Meters().ToString("0.00"));
 		}
 
 		[Test]
