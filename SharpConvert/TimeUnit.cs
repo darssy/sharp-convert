@@ -36,6 +36,36 @@ namespace MmiSoft.Core.Math.Units
 			return ToSi().CompareTo(other.ToSi());
 		}
 
+		public static bool operator ==(TimeUnit left, TimeUnit right)
+		{
+			return Equals(left, right);
+		}
+
+		public static bool operator !=(TimeUnit left, TimeUnit right)
+		{
+			return !Equals(left, right);
+		}
+
+		public static bool operator <(TimeUnit x, TimeUnit y)
+		{
+			return x.ToSi() < y.ToSi();
+		}
+
+		public static bool operator >(TimeUnit x, TimeUnit y)
+		{
+			return x.ToSi() > y.ToSi();
+		}
+
+		public static bool operator <=(TimeUnit x, TimeUnit y)
+		{
+			return x.ToSi() <= y.ToSi();
+		}
+
+		public static bool operator >=(TimeUnit x, TimeUnit y)
+		{
+			return x.ToSi() >= y.ToSi();
+		}
+
 		public static TimeUnit operator -(TimeUnit l, TimeUnit r)
 		{
 			return new Seconds(System.Math.Abs(l.ToSi() - r.ToSi()));
