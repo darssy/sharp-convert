@@ -3,7 +3,7 @@
 
 # Sharp Units
 ## Purpose - disclaimer
-The purpose of this library is to handle conversions between [units of measurement](https://en.wikipedia.org/wiki/Conversion_of_units) in an object oriented manner. Although I recognize the library is not complete, the intention of this library is neither to describe every know unit, nor describe all possible physics equations that involve units.
+The purpose of this library is to handle conversions between [units of measurement](https://en.wikipedia.org/wiki/Conversion_of_units) in an object oriented manner. Although I recognize the library is not complete, the intention is neither to describe every know unit, nor describe all possible physics equations that involve units.
 
 ## Introduction
 I realized the importance of an object oriented units conversion library while I was developing [DARSSY](http://darssy.com/). There I had to deal with nautical miles, feet, knots and feet per minute all at the same time. That was easy at first, but when the project scaled up, I was searching for bugs the root of which was units conversion.
@@ -17,7 +17,7 @@ Now I can do:
 ```cs
 LengthUnit distance = ...;
 double tan = aircraft.Altitude / distance;
-Degrees = glideSlope = Math.Atan(tan).Radians.To<Degrees>();
+Degrees = glideSlope = Math.Atan(tan).Radians().To<Degrees>();
 ```
 and the library takes care of the rest.
 

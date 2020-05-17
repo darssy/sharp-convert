@@ -5,6 +5,8 @@ namespace MmiSoft.Core.Math.Units
 	[Serializable]
 	public abstract class TimeUnit : UnitBase, IComparable<TimeUnit>
 	{
+		public static readonly TimeUnit Zero = 0.Seconds();
+
 		protected TimeUnit(double time, double toSiFactor)
 			: base(time, toSiFactor)
 		{ }
@@ -14,10 +16,7 @@ namespace MmiSoft.Core.Math.Units
 			return ConvertTo<T, TimeUnit>(this);
 		}
 
-		public TimeSpan TimeSpan
-		{
-			get { return this; }
-		}
+		public TimeSpan TimeSpan => this;
 
 		public override bool Equals(object obj)
 		{
@@ -35,6 +34,16 @@ namespace MmiSoft.Core.Math.Units
 		public int CompareTo(TimeUnit other)
 		{
 			return ToSi().CompareTo(other.ToSi());
+		}
+
+		public static TimeUnit operator -(TimeUnit l, TimeUnit r)
+		{
+			return new Seconds(System.Math.Abs(l.ToSi() - r.ToSi()));
+		}
+
+		public static TimeUnit operator +(TimeUnit l, TimeUnit r)
+		{
+			return new Seconds(l.ToSi() + r.ToSi());
 		}
 
 		public static implicit operator double(TimeUnit t)

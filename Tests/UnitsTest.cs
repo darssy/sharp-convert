@@ -7,19 +7,19 @@ using NUnit.Framework;
 namespace UnitTests.MmiSoft.Core.Math.Units
 {
 	[TestFixture]
-	public class UnitsTest : AssertionHelper
+	public class UnitsTest
 	{
 		[Test(Description="Valid values tests, no symbols, no decimals")]
 		public void SpeedValidation()
 		{
 			Knots kts = new Knots(345);
 			LengthUnit m = kts * new Minutes(1);
-			Expect(m is NauticalMiles);
-			Expect(m.UnitValue == 5.75);
+			Assert.True(m is NauticalMiles);
+			Assert.AreEqual(5.75, m.UnitValue, 0.00001);
 
 			FeetPerMinute fpm = new FeetPerMinute(1800);
 			TimeUnit min = new Feet(9000) / fpm;
-			Expect(min is Minutes);
+			Assert.True(min is Minutes);
 			Assert.AreEqual(5, min.UnitValue, 0.00001);
 		}
 
@@ -36,6 +36,7 @@ namespace UnitTests.MmiSoft.Core.Math.Units
 		public void ExtensionMethods()
 		{
 			Feet f = 14.5.Feet();
+			Assert.AreEqual(14.5, f.UnitValue, 0.00001);
 
 			Knots speed = 450.Knots();
 			Knots speed2 = new Knots(450);

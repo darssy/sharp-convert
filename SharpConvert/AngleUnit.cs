@@ -5,6 +5,8 @@ namespace MmiSoft.Core.Math.Units
 	[Serializable]
 	public abstract class AngleUnit : UnitBase, IComparable<AngleUnit>
 	{
+		public static readonly AngleUnit Zero = 0.Radians();
+
 		protected AngleUnit(double unitValue, double toSiFactor)
 			: base(unitValue, toSiFactor)
 		{
@@ -70,6 +72,30 @@ namespace MmiSoft.Core.Math.Units
 			A dif = new A();
 			dif.FromSi(System.Math.Abs(x.ToSi() - y.ToSi()));
 			return dif;
+		}
+
+		public static AngleUnit operator -(AngleUnit l, AngleUnit r)
+		{
+			return new Radians(System.Math.Abs(l.ToSi() - r.ToSi()));
+		}
+
+		public static AngleUnit operator +(AngleUnit l, AngleUnit r)
+		{
+			return new Radians(l.ToSi() + r.ToSi());
+		}
+
+		public static AngleUnit operator *(AngleUnit t, double f)
+		{
+			AngleUnit copy = (AngleUnit)t.MemberwiseClone();
+			copy.unitValue *= System.Math.Abs(f);
+			return copy;
+		}
+
+		public static AngleUnit operator *(double f, AngleUnit t)
+		{
+			AngleUnit copy = (AngleUnit)t.MemberwiseClone();
+			copy.unitValue *= System.Math.Abs(f);
+			return copy;
 		}
 
 		public static AngleUnit operator /(AngleUnit x, int y)

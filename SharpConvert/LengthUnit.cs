@@ -5,6 +5,8 @@ namespace MmiSoft.Core.Math.Units
 	[Serializable]
 	public abstract class LengthUnit : UnitBase, IComparable<LengthUnit>
 	{
+		public static readonly LengthUnit Zero = 0.Meters();
+
 		protected LengthUnit(double length, double toSiFactor)
 			: base (length, toSiFactor)
 		{
