@@ -86,15 +86,13 @@ namespace MmiSoft.Core.Math.Units
 
 		public static AngleUnit operator *(AngleUnit t, double f)
 		{
-			AngleUnit copy = (AngleUnit)t.MemberwiseClone();
-			copy.unitValue *= System.Math.Abs(f);
-			return copy;
+			return f * t;
 		}
 
-		public static AngleUnit operator *(double f, AngleUnit t)
+		public static AngleUnit operator *(double factor, AngleUnit t)
 		{
 			AngleUnit copy = (AngleUnit)t.MemberwiseClone();
-			copy.unitValue *= System.Math.Abs(f);
+			copy.unitValue *= factor;
 			return copy;
 		}
 

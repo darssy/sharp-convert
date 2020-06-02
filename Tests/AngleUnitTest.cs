@@ -53,11 +53,34 @@ namespace UnitTests.MmiSoft.Core.Math.Units
 		}
 
 		[Test]
+		public void TrigonometricFunctions_Minus60Degrees()
+		{
+			double sin60 = -System.Math.Sqrt(3) / 2;
+			double cos60 = 0.5;
+			double tan60 = sin60/cos60;
+			Assert.AreEqual(sin60, (-60).Degrees().Sin(), 0.0001);
+			Assert.AreEqual(cos60, (-60).Degrees().Cos(), 0.0001);
+			Assert.AreEqual(tan60, (-60).Degrees().Tan(), 0.0001);
+		}
+
+		[Test]
 		public void DivisionOperator_PositiveValue_ReturnsAngle()
 		{
 			Assert.AreEqual(30.Degrees() / 2, 15.Degrees());
 			Assert.AreEqual(45.Degrees() / 1.5, 30.Degrees());
 			Assert.AreEqual(45.Degrees() / 1.5f, 30.Degrees());
+		}
+
+		[Test]
+		public void StarOperator_MultiplyWithMinus1_ReturnsNegatedAngle()
+		{
+			Assert.AreEqual(30.Degrees() * -1, (-30).Degrees());
+		}
+
+		[Test]
+		public void StarOperator_Multiply45With2_Returns90()
+		{
+			Assert.AreEqual(45.Degrees() * 2, 90.Degrees());
 		}
 
 		[Test]
