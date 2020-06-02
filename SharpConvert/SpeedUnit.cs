@@ -3,7 +3,7 @@
 namespace MmiSoft.Core.Math.Units
 {
 	[Serializable]
-	public abstract class SpeedUnit : UnitBase
+	public abstract class SpeedUnit : UnitBase, IComparable<SpeedUnit>
 	{
 
 		protected SpeedUnit(double speed, double siFactor)
@@ -23,6 +23,13 @@ namespace MmiSoft.Core.Math.Units
 		protected bool Equals(SpeedUnit other)
 		{
 			return EqualsImpl(other);
+		}
+
+		public int CompareTo(SpeedUnit other)
+		{
+			return other.GetType() == GetType()
+				? unitValue.CompareTo(other.unitValue)
+				: ToSi().CompareTo(other.ToSi());
 		}
 
 		public override bool Equals(object obj)
