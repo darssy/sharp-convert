@@ -6,6 +6,7 @@ namespace MmiSoft.Core.Math.Units
 	public class Degrees : AngleUnit
 	{
 		public static readonly Degrees FullCircle = new Degrees(360);
+		public static readonly Degrees RightAngle = new Degrees(90);
 
 		public Degrees() :this(0f)
 		{ }
