@@ -70,13 +70,13 @@ namespace MmiSoft.Core.Math.Units
 		public static A Subtract<A>(AngleUnit x, AngleUnit y) where A : AngleUnit, new()
 		{
 			A dif = new A();
-			dif.FromSi(System.Math.Abs(x.ToSi() - y.ToSi()));
+			dif.FromSi(x.ToSi() - y.ToSi());
 			return dif;
 		}
 
 		public static AngleUnit operator -(AngleUnit l, AngleUnit r)
 		{
-			return new Radians(System.Math.Abs(l.ToSi() - r.ToSi()));
+			return new Radians(l.ToSi() - r.ToSi());
 		}
 
 		public static AngleUnit operator +(AngleUnit l, AngleUnit r)

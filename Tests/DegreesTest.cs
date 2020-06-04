@@ -18,5 +18,13 @@ namespace UnitTests.MmiSoft.Core.Math.Units
 			Assert.AreEqual(oneDegreeRad, halfTurn.ToSiFactor, 0.000000001); // π/180
 			Assert.AreEqual(halfTurn.To<Radians>().UnitValue, new Radians(System.Math.PI).UnitValue);
 		}
+
+		[Test]
+		public void NegateOperator()
+		{
+			Degrees expected = new Degrees(-30);
+			Degrees toNegate = new Degrees(30);
+			Assert.AreEqual(expected, -toNegate);
+		}
 	}
 }
