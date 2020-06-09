@@ -69,5 +69,12 @@ namespace UnitTests.MmiSoft.Core.Math.Units
 			Assert.AreNotEqual(11.MetersPerSecond().GetHashCode(), 11.Meters().GetHashCode());
 			Assert.AreNotEqual(11.MetersPerSecond().GetHashCode(), 11.Seconds().GetHashCode());
 		}
+
+		[Test]
+		public void MultiplyOperator_WithNegativeSpeed_ReturnsPositiveLength()
+		{
+			LengthUnit distance = (-5).MetersPerSecond() * 2.Seconds();
+			Assert.AreEqual(distance, 10.Meters());
+		}
 	}
 }

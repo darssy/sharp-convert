@@ -75,11 +75,25 @@ namespace MmiSoft.Core.Math.Units
 			return x.ToSi() >= y.ToSi();
 		}
 
+		public static SpeedUnit operator *(SpeedUnit u, double factor)
+		{
+			SpeedUnit copy = (SpeedUnit)u.MemberwiseClone();
+			copy.unitValue *= factor;
+			return copy;
+		}
+
+		public static SpeedUnit operator /(SpeedUnit u, double factor)
+		{
+			SpeedUnit copy = (SpeedUnit)u.MemberwiseClone();
+			copy.unitValue /= factor;
+			return copy;
+		}
+
 		public static LengthUnit operator *(SpeedUnit u, TimeUnit t)
 		{
 			double s = u.ToSi() * t.ToSi();
 			LengthUnit distanceTraveled = u.GetLengthUnit();
-			distanceTraveled.FromSi(s);
+			distanceTraveled.FromSi(System.Math.Abs(s));
 			return distanceTraveled;
 		}
 
@@ -92,7 +106,7 @@ namespace MmiSoft.Core.Math.Units
 		{
 			double t = s.ToSi() / u.ToSi();
 			TimeUnit timeToTravel = u.GetTimeUnit();
-			timeToTravel.FromSi(t);
+			timeToTravel.FromSi(System.Math.Abs(t));
 			return timeToTravel;
 		}
 
