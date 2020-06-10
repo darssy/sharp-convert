@@ -29,21 +29,9 @@ namespace MmiSoft.Core.Math.Units
 			return Subtract<Feet>(x, y);
 		}
 
-		public static Feet operator -(LengthUnit x, Feet y)
-		{
-			if (x is Feet feet) return feet - y;
-			return Subtract<Feet>(x, y);
-		}
-
 		public static Feet operator +(Feet x, LengthUnit y)
 		{
 			if (y is Feet feet) return x + feet;
-			return Add<Feet>(x, y);
-		}
-
-		public static Feet operator +(LengthUnit x, Feet y)
-		{
-			if (x is Feet feet) return feet + y;
 			return Add<Feet>(x, y);
 		}
 
