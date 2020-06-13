@@ -24,6 +24,11 @@ namespace MmiSoft.Core.Math.Units
 			return new Seconds();
 		}
 
+		public static MetersPerSecond operator -(MetersPerSecond x)
+		{
+			return new MetersPerSecond(-x.unitValue);
+		}
+
 		public override string Symbol => "m/s";
 	}
 }

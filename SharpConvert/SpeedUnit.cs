@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 namespace MmiSoft.Core.Math.Units
 {
@@ -122,6 +122,13 @@ namespace MmiSoft.Core.Math.Units
 		{
 			double r = u.ToSi() / s.ToSi();
 			return r.Meters();
+		}
+
+		public static SpeedUnit operator -(SpeedUnit x)
+		{
+			SpeedUnit cloned = (SpeedUnit) x.MemberwiseClone();
+			cloned.unitValue *= -1;
+			return cloned;
 		}
 
 		public static U Get<U>(LengthUnit s, TimeUnit t)

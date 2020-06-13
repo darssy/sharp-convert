@@ -25,6 +25,11 @@ namespace MmiSoft.Core.Math.Units
 			return new Minutes();
 		}
 
+		public static FeetPerMinute operator -(FeetPerMinute x)
+		{
+			return new FeetPerMinute(-x.unitValue);
+		}
+
 		public override string Symbol => "fpm";
 	}
 }
