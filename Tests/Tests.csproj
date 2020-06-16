@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AccelerationUnitTest.cs" />
     <Compile Include="MassTest.cs" />
     <Compile Include="ParseTest.cs" />
     <Compile Include="Performance.cs" />

@@ -269,5 +269,17 @@ namespace MmiSoft.Core.Math.Units
 		public static Kilogram Kilogram(this double kg) => new Kilogram(kg);
 
 		#endregion
+
+		#region Acceleration
+
+		public static KnotsPerSecond KnotsPerSecond(this int ktsPerSec) => new KnotsPerSecond(ktsPerSec);
+		public static KnotsPerSecond KnotsPerSecond(this float ktsPerSec) => new KnotsPerSecond(ktsPerSec);
+		public static KnotsPerSecond KnotsPerSecond(this double ktsPerSec) => new KnotsPerSecond(ktsPerSec);
+
+		public static FeetPerMinutePerSecond FeetPerMinutePerSecond(this int fpsPerSec) => new FeetPerMinutePerSecond(fpsPerSec);
+		public static FeetPerMinutePerSecond FeetPerMinutePerSecond(this float fpsPerSec) => new FeetPerMinutePerSecond(fpsPerSec);
+		public static FeetPerMinutePerSecond FeetPerMinutePerSecond(this double fpsPerSec) => new FeetPerMinutePerSecond(fpsPerSec);
+
+		#endregion
 	}
 }

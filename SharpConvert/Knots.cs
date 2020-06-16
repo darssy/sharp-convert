@@ -5,12 +5,14 @@ namespace MmiSoft.Core.Math.Units
 	[Serializable]
 	public class Knots : SpeedUnit
 	{
+		private static readonly double SiConversionFactor = new NauticalMiles().ToSiFactor / new Hours().ToSiFactor;
+
 		public Knots()
 			: this(0)
 		{ }
 
 		public Knots(double knots)
-			: base(knots, new NauticalMiles().ToSiFactor / new Hours().ToSiFactor)
+			: base(knots, SiConversionFactor)
 		{ }
 
 		protected override LengthUnit GetLengthUnit()

@@ -41,9 +41,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AccelerationUnit.cs" />
     <Compile Include="FeetInterned.cs" />
+    <Compile Include="FeetPerMinutePerSecond.cs" />
     <Compile Include="Kilogram.cs" />
+    <Compile Include="KnotsPerSecond.cs" />
     <Compile Include="MassUnit.cs" />
+    <Compile Include="MeterPerSecondSquared.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="AngleUnit.cs" />
     <Compile Include="AngularVelocity.cs" />

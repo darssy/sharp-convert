@@ -17,8 +17,8 @@ namespace UnitTests.MmiSoft.Core.Math.Units
 		[Test]
 		public void ParseFeet_InvalidInput_ExceptionIsThrown()
 		{
-			Assert.Catch<Exception>(() => "garbage".Parse());
-			Assert.Catch<Exception>(() => "390.45garbage".Parse());
+			Assert.Catch<FormatException>(() => "garbage".Parse());
+			Assert.Catch<FormatException>(() => "390.45garbage".Parse());
 		}
 	}
 }
