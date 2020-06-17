@@ -44,6 +44,8 @@
     <Compile Include="AccelerationUnit.cs" />
     <Compile Include="FeetInterned.cs" />
     <Compile Include="FeetPerMinutePerSecond.cs" />
+    <Compile Include="FeetPerSecond.cs" />
+    <Compile Include="FeetPerSecondSquared.cs" />
     <Compile Include="Kilogram.cs" />
     <Compile Include="KnotsPerSecond.cs" />
     <Compile Include="MassUnit.cs" />

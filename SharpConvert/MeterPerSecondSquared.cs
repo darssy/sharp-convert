@@ -2,9 +2,9 @@ namespace MmiSoft.Core.Math.Units
 {
 	public class MeterPerSecondSquared : AccelerationUnit
 	{
-		public MeterPerSecondSquared(double unitValue) : base(unitValue, 1)
-		{
-		}
+		public MeterPerSecondSquared() : this(0) {}
+
+		public MeterPerSecondSquared(double unitValue) : base(unitValue, 1) { }
 
 		public override string Symbol => "m/s^2";
 

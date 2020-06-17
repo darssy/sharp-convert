@@ -4,6 +4,8 @@ namespace MmiSoft.Core.Math.Units
 	{
 		private static readonly double SiConversionFactor = new FeetPerMinute().ToSiFactor / new Seconds().ToSiFactor;
 
+		public FeetPerMinutePerSecond() : this(0) {}
+
 		public FeetPerMinutePerSecond(double unitValue) : base(unitValue, SiConversionFactor)
 		{
 		}

@@ -5,13 +5,15 @@ namespace MmiSoft.Core.Math.Units
 	[Serializable]
 	public class FeetPerMinute : SpeedUnit
 	{
+		private static readonly double SiConversionFactor = new Feet().ToSiFactor / new Minutes().ToSiFactor;
+
 		public FeetPerMinute()
 			: this(0)
 		{
 		}
 
 		public FeetPerMinute(double fpm)
-			: base(fpm, new Feet().ToSiFactor / new Minutes().ToSiFactor)
+			: base(fpm, SiConversionFactor)
 		{
 		}
 
