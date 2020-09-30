@@ -62,9 +62,7 @@ namespace MmiSoft.Core.Math.Units
 
 		public int CompareTo(MassUnit other)
 		{
-			return other.GetType() == GetType()
-				? other.unitValue.CompareTo(unitValue)
-				: other.ToSi().CompareTo(ToSi());
+			return CompareToImpl(other);
 		}
 
 		public override bool Equals(object obj)

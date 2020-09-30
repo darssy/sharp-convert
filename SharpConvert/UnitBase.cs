@@ -76,5 +76,20 @@ namespace MmiSoft.Core.Math.Units
 		{
 			return u1.ToSi() > u2.ToSi() ? u1 : u2;
 		}
+
+		// protected in order to avoid comparison between apples and oranges
+		protected int CompareToImpl(UnitBase other)
+		{
+			return other.toSiFactor - toSiFactor == 0
+				? Compare(unitValue - other.unitValue)
+				: Compare(ToSi() - other.ToSi());
+		}
+
+		private int Compare(double diff)
+		{
+			return diff < -Threshold
+				? -1
+				: diff > Threshold ? 1 : 0;
+		}
 	}
 }

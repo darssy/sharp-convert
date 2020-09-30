@@ -27,9 +27,7 @@ namespace MmiSoft.Core.Math.Units
 
 		public int CompareTo(LengthUnit other)
 		{
-			return other.GetType() == GetType()
-				? unitValue.CompareTo(other.unitValue)
-				: ToSi().CompareTo(other.ToSi());
+			return CompareToImpl(other);
 		}
 
 		public override bool Equals(object obj)

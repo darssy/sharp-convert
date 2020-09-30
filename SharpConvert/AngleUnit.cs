@@ -134,7 +134,7 @@ namespace MmiSoft.Core.Math.Units
 
 		public int CompareTo(AngleUnit other)
 		{
-			return ToSi().CompareTo(other.ToSi());
+			return CompareToImpl(other);
 		}
 
 		public override string ToString() => $"{unitValue} {GetType().Name}";
