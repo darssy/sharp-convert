@@ -2,6 +2,11 @@ using System;
 
 namespace MmiSoft.Core.Math.Units
 {
+	/// <summary>
+	/// An attempt to create an interned version of Feet. That will be helpful to represent altitude or depth, where the
+	/// fractional part is not important, allocations might have impact on performance and values are finite. This class
+	/// is experimental.
+	/// </summary>
 	[Serializable]
 	internal class FeetInterned : LengthUnit
 	{
@@ -36,7 +41,7 @@ namespace MmiSoft.Core.Math.Units
 
 		public static FeetInterned operator +(FeetInterned x, FeetInterned y)
 		{
-			int value = (int) System.Math.Abs(x.unitValue - y.unitValue);
+			int value = (int) (x.unitValue + y.unitValue);
 			return Get(value);
 		}
 
