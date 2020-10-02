@@ -5,7 +5,7 @@ namespace MmiSoft.Core.Math.Units
 	public class RadiansPerSecond : AngularVelocity
 	{
 		public RadiansPerSecond(double unitValue)
-			: base(unitValue, new Radians().ToSiFactor / new Seconds().ToSiFactor)
+			: base(unitValue, Conversion.RadianPerSecond)
 		{
 		}
 

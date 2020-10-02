@@ -10,7 +10,7 @@ namespace MmiSoft.Core.Math.Units
 		}
 
 		public FeetPerSecond(double fps)
-			: base(fps, SiConversionFactor)
+			: base(fps, Conversion.FootPerSecond)
 		{
 		}
 

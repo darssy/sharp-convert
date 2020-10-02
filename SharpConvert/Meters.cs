@@ -9,7 +9,7 @@ namespace MmiSoft.Core.Math.Units
 			: this(0)
 		{ }
 		public Meters(double meters)
-			:base (meters, 1)
+			:base (meters, Conversion.Meter)
 		{ }
 
 		public static Meters operator -(Meters x, LengthUnit y)

@@ -10,7 +10,7 @@ namespace MmiSoft.Core.Math.Units
 		{ }
 
 		public Feet(double unitValue)
-			: base(unitValue, 0.3048)
+			: base(unitValue, Conversion.Foot)
 		{ }
 
 		public static Feet operator -(Feet x, Feet y)

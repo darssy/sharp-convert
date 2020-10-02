@@ -7,8 +7,8 @@ namespace MmiSoft.Core.Math.Units
 	{
 		public static readonly LengthUnit Zero = 0.Meters();
 
-		protected LengthUnit(double length, double toSiFactor)
-			: base (length, toSiFactor)
+		protected LengthUnit(double length, Conversion conversion)
+			: base (length, conversion)
 		{
 			if (length < 0)
 			{

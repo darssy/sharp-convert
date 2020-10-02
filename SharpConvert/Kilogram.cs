@@ -5,7 +5,7 @@ namespace MmiSoft.Core.Math.Units
 
 		public Kilogram() : this(0){}
 
-		public Kilogram(double mass) : base(mass, 1)
+		public Kilogram(double mass) : base(mass, Conversion.Kilogram)
 		{
 		}
 

@@ -7,15 +7,15 @@ namespace MmiSoft.Core.Math.Units
 	{
 		private const double Threshold = 1e-14;
 		protected double unitValue;
-		protected readonly double toSiFactor;
+		private readonly Conversion conversion;
 
-		protected UnitBase(double unitValue, double toSiFactor)
+		protected UnitBase(double unitValue, Conversion conversion)
 		{
 			this.unitValue = unitValue;
-			this.toSiFactor = toSiFactor;
+			this.conversion = conversion;
 		}
 
-		protected internal double ToSiFactor => toSiFactor;
+		protected internal double ToSiFactor => conversion.toSiFactor;
 
 		public abstract string Symbol { get; }
 
@@ -30,12 +30,12 @@ namespace MmiSoft.Core.Math.Units
 
 		protected internal double ToSi()
 		{
-			return unitValue * toSiFactor;
+			return unitValue * conversion.toSiFactor;
 		}
 
 		protected internal double FromSi(double siValue)
 		{
-			return unitValue = siValue / toSiFactor;
+			return unitValue = siValue / conversion.toSiFactor;
 		}
 
 		/// <summary>
@@ -80,7 +80,7 @@ namespace MmiSoft.Core.Math.Units
 		// protected in order to avoid comparison between apples and oranges
 		protected int CompareToImpl(UnitBase other)
 		{
-			return other.toSiFactor - toSiFactor == 0
+			return other.conversion == conversion
 				? Compare(unitValue - other.unitValue)
 				: Compare(ToSi() - other.ToSi());
 		}

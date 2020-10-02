@@ -2,7 +2,7 @@ namespace MmiSoft.Core.Math.Units
 {
 	public abstract class AccelerationUnit : UnitBase
 	{
-		protected AccelerationUnit(double unitValue, double toSiFactor) : base(unitValue, toSiFactor)
+		protected AccelerationUnit(double unitValue, Conversion conversion) : base(unitValue, conversion)
 		{
 		}
 

@@ -9,7 +9,7 @@ namespace MmiSoft.Core.Math.Units
 		{ }
 
 		public Radians(double unitValue)
-			: base(unitValue, 1)
+			: base(unitValue, Conversion.Radian)
 		{
 		}
 

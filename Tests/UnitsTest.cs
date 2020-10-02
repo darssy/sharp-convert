@@ -115,11 +115,19 @@ namespace UnitTests.MmiSoft.Core.Math.Units
 
 		private class RogueLength : LengthUnit
 		{
-			public RogueLength(double length) : base(length, -7)
+			public RogueLength(double length) : base(length, ConversionExtension.Rogue)
 			{
 			}
 
 			public override string Symbol => "rogue";
+		}
+
+		private class ConversionExtension : Conversion
+		{
+			private ConversionExtension(double toSiFactor) : base(toSiFactor) {}
+
+			public static readonly Conversion Rogue = new ConversionExtension(-7);
+
 		}
 	}
 }

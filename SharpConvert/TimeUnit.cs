@@ -7,8 +7,8 @@ namespace MmiSoft.Core.Math.Units
 	{
 		public static readonly TimeUnit Zero = 0.Seconds();
 
-		protected TimeUnit(double time, double toSiFactor)
-			: base(time, toSiFactor)
+		protected TimeUnit(double time, Conversion conversion)
+			: base(time, conversion)
 		{ }
 
 		public T To<T>() where T : TimeUnit, new()

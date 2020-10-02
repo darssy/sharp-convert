@@ -10,7 +10,7 @@ namespace MmiSoft.Core.Math.Units
 			
 		}
 		public MetersPerSecond(double speed)
-			: base(speed, 1)
+			: base(speed, Conversion.MeterPerSecond)
 		{
 		}
 

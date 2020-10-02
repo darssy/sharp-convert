@@ -7,8 +7,8 @@ namespace MmiSoft.Core.Math.Units
 	{
 		public static readonly AngleUnit Zero = 0.Radians();
 
-		protected AngleUnit(double unitValue, double toSiFactor)
-			: base(unitValue, toSiFactor)
+		protected AngleUnit(double unitValue, Conversion conversion)
+			: base(unitValue, conversion)
 		{
 		}
 

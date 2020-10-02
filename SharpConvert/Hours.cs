@@ -10,7 +10,7 @@ namespace MmiSoft.Core.Math.Units
 		{ }
 
 		public Hours(double hours)
-			: base(hours, 3600)
+			: base(hours, Conversion.Hour)
 		{ }
 
 		public Hours(TimeSpan time)

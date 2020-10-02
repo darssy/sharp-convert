@@ -18,7 +18,7 @@ namespace UnitTests.MmiSoft.Core.Math.Units
 		[Test]
 		public void MultiplyOperator_MeterPerSecondSquaredTimesSeconds_ReturnsDeltaVeInSpeedUnit()
 		{
-			var knotsPerSecond = new MeterPerSecondSquared(0.3);
+			var knotsPerSecond = new MetersPerSecondSquared(0.3);
 			SpeedUnit du = knotsPerSecond * new Seconds(12);
 
 			Assert.AreEqual(new MetersPerSecond(3.6), du);

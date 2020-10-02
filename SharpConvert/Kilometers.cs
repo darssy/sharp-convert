@@ -10,7 +10,7 @@ namespace MmiSoft.Core.Math.Units
 		{ }
 
 		public Kilometers(double km)
-			: base(km, 1000)
+			: base(km, Conversion.Kilometer)
 		{ }
 
 		public static Kilometers operator -(Kilometers x, LengthUnit y)

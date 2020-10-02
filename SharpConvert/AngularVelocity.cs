@@ -4,8 +4,8 @@ namespace MmiSoft.Core.Math.Units
 {
 	public abstract class AngularVelocity : UnitBase
 	{
-		protected AngularVelocity(double unitValue, double siFactor)
-			: base(unitValue, siFactor)
+		protected AngularVelocity(double unitValue, Conversion conversion)
+			: base(unitValue, conversion)
 		{
 		}
 

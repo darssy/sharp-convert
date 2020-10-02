@@ -10,7 +10,7 @@ namespace MmiSoft.Core.Math.Units
 		{ }
 
 		public Seconds(double seconds)
-			: base(seconds, 1)
+			: base(seconds, Conversion.Second)
 		{ }
 
 		public Seconds(TimeSpan time)

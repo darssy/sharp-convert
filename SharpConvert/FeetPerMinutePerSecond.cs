@@ -2,11 +2,10 @@ namespace MmiSoft.Core.Math.Units
 {
 	public class FeetPerMinutePerSecond : AccelerationUnit
 	{
-		private static readonly double SiConversionFactor = new FeetPerMinute().ToSiFactor / new Seconds().ToSiFactor;
 
 		public FeetPerMinutePerSecond() : this(0) {}
 
-		public FeetPerMinutePerSecond(double unitValue) : base(unitValue, SiConversionFactor)
+		public FeetPerMinutePerSecond(double unitValue) : base(unitValue, Conversion.FootPerMinutePerSecond)
 		{
 		}
 

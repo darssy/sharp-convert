@@ -12,7 +12,7 @@ namespace MmiSoft.Core.Math.Units
 		{ }
 
 		public Degrees(double unitValue)
-			: base(unitValue, System.Math.PI / 180)
+			: base(unitValue, Conversion.Degree)
 		{
 		}
 

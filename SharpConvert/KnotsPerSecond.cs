@@ -2,11 +2,10 @@ namespace MmiSoft.Core.Math.Units
 {
 	public class KnotsPerSecond : AccelerationUnit
 	{
-		private static readonly double SiConversionFactor = new Knots().ToSiFactor / new Seconds().ToSiFactor;
 
 		public KnotsPerSecond() : this(0) { }
 
-		public KnotsPerSecond(double unitValue) : base(unitValue, SiConversionFactor)
+		public KnotsPerSecond(double unitValue) : base(unitValue, Conversion.KnotPerSecond)
 		{
 		}
 

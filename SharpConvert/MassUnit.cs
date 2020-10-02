@@ -4,7 +4,7 @@ namespace MmiSoft.Core.Math.Units
 {
 	public abstract class MassUnit : UnitBase, IComparable<MassUnit>
 	{
-		protected MassUnit(double mass, double toSiFactor) : base(mass, toSiFactor)
+		protected MassUnit(double mass, Conversion conversion) : base(mass, conversion)
 		{
 			if (mass < 0)
 			{

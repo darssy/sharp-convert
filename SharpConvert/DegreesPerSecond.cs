@@ -8,7 +8,7 @@ namespace MmiSoft.Core.Math.Units
 		{ }
 
 		public DegreesPerSecond(double unitValue)
-			: base(unitValue, new Degrees().ToSiFactor / new Seconds().ToSiFactor)
+			: base(unitValue, Conversion.DegreePerSecond)
 		{
 		}
 

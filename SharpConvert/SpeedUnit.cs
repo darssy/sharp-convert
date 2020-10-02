@@ -6,8 +6,8 @@ namespace MmiSoft.Core.Math.Units
 	public abstract class SpeedUnit : UnitBase, IComparable<SpeedUnit>
 	{
 
-		protected SpeedUnit(double speed, double siFactor)
-			: base(speed, siFactor)
+		protected SpeedUnit(double speed, Conversion conversion)
+			: base(speed, conversion)
 		{
 		}
 

@@ -10,7 +10,7 @@ namespace MmiSoft.Core.Math.Units
 		{ }
 
 		public NauticalMiles(double mile)
-			: base(mile, 1852)
+			: base(mile, Conversion.NauticalMile)
 		{ }
 
 		public static NauticalMiles operator -(NauticalMiles x, LengthUnit y)

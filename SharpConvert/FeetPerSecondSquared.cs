@@ -2,11 +2,9 @@ namespace MmiSoft.Core.Math.Units
 {
 	public class FeetPerSecondSquared : AccelerationUnit
 	{
-		private static readonly double SiConversionFactor = new FeetPerSecond().ToSiFactor / new Seconds().ToSiFactor;
-
 		public FeetPerSecondSquared() : this(0) {}
 
-		public FeetPerSecondSquared(double unitValue) : base(unitValue, SiConversionFactor)
+		public FeetPerSecondSquared(double unitValue) : base(unitValue, Conversion.FootPerSecondSquared)
 		{
 		}
 
@@ -18,6 +16,17 @@ namespace MmiSoft.Core.Math.Units
 		{
 			double du = a.UnitValue * t.To<Seconds>().UnitValue;
 			return new FeetPerSecond(du);
+		}
+
+		public static Seconds operator /(FeetPerSecondSquared a, FeetPerSecond u)
+		{
+			return new Seconds(a.UnitValue / u.UnitValue);
+		}
+
+		public static Seconds operator /(FeetPerSecondSquared a, SpeedUnit u)
+		{
+			if (u is FeetPerSecond fps) return a / fps;
+			return new Seconds(a.UnitValue / u.To<FeetPerSecond>().UnitValue);
 		}
 
 		public static FeetPerSecondSquared operator -(FeetPerSecondSquared x)
