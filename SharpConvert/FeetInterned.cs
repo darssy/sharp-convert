@@ -29,7 +29,8 @@ namespace MmiSoft.Core.Math.Units
 			return value >= interned.Length ? new FeetInterned() : interned[value];
 		}
 
-		public FeetInterned(double unitValue)
+		//declared private to avoid
+		private FeetInterned(double unitValue)
 			: base(unitValue, Conversion.Foot)
 		{ }
 

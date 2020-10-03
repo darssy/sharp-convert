@@ -46,6 +46,11 @@ namespace MmiSoft.Core.Math.Units
 		/// <returns></returns>
 		protected bool EqualsImpl(UnitBase other)
 		{
+			//if units are the same, avoid unnecessary math
+			if (other.conversion == conversion)
+			{
+				return System.Math.Abs(unitValue - other.unitValue) <= Threshold;
+			}
 			double otherSi = other.ToSi();
 			double si = ToSi();
 			double diff = System.Math.Abs(otherSi - si);
