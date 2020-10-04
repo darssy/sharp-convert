@@ -2,7 +2,6 @@ namespace MmiSoft.Core.Math.Units
 {
 	public class FeetPerSecond : SpeedUnit
 	{
-		private static readonly double SiConversionFactor = new Feet().ToSiFactor / new Seconds().ToSiFactor;
 
 		public FeetPerSecond()
 			: this(0)

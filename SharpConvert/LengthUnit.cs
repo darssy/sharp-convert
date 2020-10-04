@@ -14,10 +14,6 @@ namespace MmiSoft.Core.Math.Units
 			{
 				throw new ArgumentOutOfRangeException("Length should be positive value: " + length);
 			}
-			if (ToSiFactor <= 0)
-			{
-				throw new ArgumentOutOfRangeException("SI Factor should be positive value: " + ToSiFactor);
-			}
 		}
 
 		public L To<L>() where L : LengthUnit, new()

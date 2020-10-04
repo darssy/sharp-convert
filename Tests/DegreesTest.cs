@@ -13,10 +13,10 @@ namespace UnitTests.MmiSoft.Core.Math.Units
 		[Test]
 		public void VerifyConversion_FromDegreesToRadians()
 		{
-			double oneDegreeRad = System.Math.PI / 180;
 			Degrees halfTurn = new Degrees(180);
-			Assert.AreEqual(oneDegreeRad, halfTurn.ToSiFactor, 0.000000001); // π/180
-			Assert.AreEqual(halfTurn.To<Radians>().UnitValue, new Radians(System.Math.PI).UnitValue);
+			Radians expected = new Radians(System.Math.PI);
+			Assert.AreEqual(expected, halfTurn.To<Radians>());
+			Assert.AreEqual(expected, halfTurn);
 		}
 
 		[Test]

@@ -45,10 +45,10 @@ namespace UnitTests.MmiSoft.Core.Math.Units
 
 		[Test]
 		[SuppressMessage("ReSharper", "ObjectCreationAsStatement")]
-		public void Exceptions()
+		public void NegativeLengthAndSiFactorsAreNotAllowed_ResultsInExceptions()
 		{
 			Assert.Catch<ArgumentOutOfRangeException>(() => new Meters(-10));
-			Assert.Catch<ArgumentOutOfRangeException>(() => new RogueLength(1));
+			Assert.Catch<ArgumentOutOfRangeException>(() => new Conversion(-7));
 		}
 
 		[Test]
@@ -111,23 +111,6 @@ namespace UnitTests.MmiSoft.Core.Math.Units
 
 			Assert.AreEqual(2.5.Kilometers() - 2.Kilometers(), 500.Meters());
 			Assert.AreEqual(2.5.Kilometers() - 2.Kilometers(), 2.Kilometers() - 2.5.Kilometers());
-		}
-
-		private class RogueLength : LengthUnit
-		{
-			public RogueLength(double length) : base(length, ConversionExtension.Rogue)
-			{
-			}
-
-			public override string Symbol => "rogue";
-		}
-
-		private class ConversionExtension : Conversion
-		{
-			private ConversionExtension(double toSiFactor) : base(toSiFactor) {}
-
-			public static readonly Conversion Rogue = new ConversionExtension(-7);
-
 		}
 	}
 }

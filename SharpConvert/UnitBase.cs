@@ -15,8 +15,6 @@ namespace MmiSoft.Core.Math.Units
 			this.conversion = conversion;
 		}
 
-		protected internal double ToSiFactor => conversion.toSiFactor;
-
 		public abstract string Symbol { get; }
 
 		public double UnitValue => unitValue;
@@ -30,12 +28,12 @@ namespace MmiSoft.Core.Math.Units
 
 		protected internal double ToSi()
 		{
-			return unitValue * conversion.toSiFactor;
+			return unitValue * conversion.ToSiFactor;
 		}
 
 		protected internal double FromSi(double siValue)
 		{
-			return unitValue = siValue / conversion.toSiFactor;
+			return unitValue = siValue / conversion.ToSiFactor;
 		}
 
 		/// <summary>

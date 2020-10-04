@@ -10,10 +10,6 @@ namespace MmiSoft.Core.Math.Units
 			{
 				throw new ArgumentOutOfRangeException($"Mass should be positive value: {mass}");
 			}
-			if (ToSiFactor <= 0)
-			{
-				throw new ArgumentOutOfRangeException($"SI Factor should be positive value: {ToSiFactor}");
-			}
 		}
 
 		public static bool operator ==(MassUnit left, MassUnit right)

@@ -1,12 +1,18 @@
+using System;
+
 namespace MmiSoft.Core.Math.Units
 {
 	public class Conversion
 	{
-		public readonly double toSiFactor;
+		public double ToSiFactor { get; }
 
-		protected Conversion(double toSiFactor)
+		protected internal Conversion(double toSiFactor)
 		{
-			this.toSiFactor = toSiFactor;
+			if (toSiFactor <= 0)
+			{
+				throw new ArgumentOutOfRangeException($"SI Factor should be positive value: {toSiFactor}");
+			}
+			ToSiFactor = toSiFactor;
 		}
 
 		// Length
@@ -22,15 +28,15 @@ namespace MmiSoft.Core.Math.Units
 
 		//Speed
 		public static readonly Conversion MeterPerSecond = new Conversion(1);
-		public static readonly Conversion FootPerSecond = new Conversion(Foot.toSiFactor/* / Second.toSiFactor*/);
-		public static readonly Conversion FootPerMinute = new Conversion(Foot.toSiFactor / Minute.toSiFactor);
-		public static readonly Conversion Knot = new Conversion(NauticalMile.toSiFactor / Hour.toSiFactor);
+		public static readonly Conversion FootPerSecond = new Conversion(Foot.ToSiFactor/* / Second.ToSiFactor*/);
+		public static readonly Conversion FootPerMinute = new Conversion(Foot.ToSiFactor / Minute.ToSiFactor);
+		public static readonly Conversion Knot = new Conversion(NauticalMile.ToSiFactor / Hour.ToSiFactor);
 
 		// Acceleration
 		public static readonly Conversion MeterPerSecondSquared = new Conversion(1);
-		public static readonly Conversion FootPerSecondSquared = new Conversion(FootPerSecond.toSiFactor/* / Second.toSiFactor*/);
-		public static readonly Conversion FootPerMinutePerSecond = new Conversion(FootPerMinute.toSiFactor /* / Second.toSiFactor*/);
-		public static readonly Conversion KnotPerSecond = new Conversion(Knot.toSiFactor/* / Second.toSiFactor*/);
+		public static readonly Conversion FootPerSecondSquared = new Conversion(FootPerSecond.ToSiFactor/* / Second.ToSiFactor*/);
+		public static readonly Conversion FootPerMinutePerSecond = new Conversion(FootPerMinute.ToSiFactor /* / Second.ToSiFactor*/);
+		public static readonly Conversion KnotPerSecond = new Conversion(Knot.ToSiFactor/* / Second.ToSiFactor*/);
 
 		//Angle
 		public static readonly Conversion Radian = new Conversion(1);
@@ -38,7 +44,7 @@ namespace MmiSoft.Core.Math.Units
 
 		//Angular velocity
 		public static readonly Conversion RadianPerSecond = new Conversion(1);
-		public static readonly Conversion DegreePerSecond = new Conversion(Degree.toSiFactor);
+		public static readonly Conversion DegreePerSecond = new Conversion(Degree.ToSiFactor);
 
 		//Mass
 		public static readonly Conversion Kilogram = new Conversion(1);
