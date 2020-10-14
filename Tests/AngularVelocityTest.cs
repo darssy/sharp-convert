@@ -14,6 +14,7 @@ namespace UnitTests.MmiSoft.Core.Math.Units
 		public void MultiplyOperator_VelocityTimesSecond_ReturnsArc()
 		{
 			Assert.AreEqual(5.DegreesPerSecond() * 32.Seconds(), 160.Degrees());
+			Assert.AreEqual(new DegreesPerSecond(5m) * TimeSpan.FromSeconds(32), 160.Degrees());
 		}
 
 		[Test]

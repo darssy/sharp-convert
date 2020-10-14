@@ -48,6 +48,24 @@ namespace UnitTests.MmiSoft.Core.Math.Units
 		}
 
 		[Test]
+		public void DivisionOperator_DivideSpeedByZeroLength_ReturnsNull()
+		{
+			Assert.IsNull(3.Knots() / LengthUnit.Zero);
+		}
+
+		[Test]
+		public void DivisionOperator_DivideSpeedByZeroAngularVelocity_ReturnsNull()
+		{
+			Assert.IsNull(3.Knots() / 0.DegreesPerSecond());
+		}
+
+		[Test]
+		public void DivisionOperator_DivideLengthByZeroSpeed_ReturnsNull()
+		{
+			Assert.IsNull(10.Meters() / 0.MetersPerSecond());
+		}
+
+		[Test]
 		public void MultiplyOperator_SpeedMultipliedWithTimeSpan_EqualsDistanceTraveled()
 		{
 			Assert.AreEqual(50.Knots() * TimeSpan.FromMinutes(10), new NauticalMiles(50.0 / 60 * 10));

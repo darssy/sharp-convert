@@ -114,32 +114,36 @@ namespace MmiSoft.Core.Math.Units
 
 		public static LengthUnit operator /(LengthUnit x, double y)
 		{
+			if (y == 0) return null;
 			LengthUnit l = (LengthUnit) x.MemberwiseClone();
-			l.FromSi(System.Math.Abs(x.ToSi() / System.Math.Abs(y)));
+			double result = x.ToSi() / System.Math.Abs(y);
+			l.FromSi(System.Math.Abs(result));
 			return l;
 		}
 
 		public static LengthUnit operator /(LengthUnit x, float y)
 		{
-			LengthUnit l = (LengthUnit)x.MemberwiseClone();
-			l.FromSi(System.Math.Abs(x.ToSi() / System.Math.Abs(y)));
-			return l;
+			return x / (double) y;
 		}
 
 		public static LengthUnit operator /(LengthUnit x, int y)
 		{
-			LengthUnit l = (LengthUnit)x.MemberwiseClone();
-			l.FromSi(System.Math.Abs(x.ToSi() / System.Math.Abs(y)));
-			return l;
+			return x / (double) y;
 		}
 
 		[Obsolete("That's needed for angular velocity calculations")]
 		public static LengthUnit operator /(LengthUnit x, AngleUnit y)
 		{
-			return new Meters(x.ToSi() / System.Math.Abs(y.ToSi()));
+			double meters = x.ToSi() / System.Math.Abs(y.ToSi());
+			return double.IsInfinity(meters) ? null : new Meters(meters);
 		}
 
-		public static implicit operator float(LengthUnit x)
+		public static implicit operator double(LengthUnit x)
+		{
+			return x.unitValue;
+		}
+
+		public static explicit operator float(LengthUnit x)
 		{
 			return (float)x.unitValue;
 		}

@@ -98,20 +98,17 @@ namespace MmiSoft.Core.Math.Units
 
 		public static AngleUnit operator /(AngleUnit x, int y)
 		{
-			AngleUnit a = (AngleUnit) x.MemberwiseClone();
-			a.FromSi(x.ToSi() / y);
-			return a;
+			return x / (double) y;
 		}
 
 		public static AngleUnit operator /(AngleUnit x, float y)
 		{
-			AngleUnit a = (AngleUnit) x.MemberwiseClone();
-			a.FromSi(x.ToSi() / y);
-			return a;
+			return x / (double) y;
 		}
 
 		public static AngleUnit operator /(AngleUnit x, double y)
 		{
+			if (y == 0) return null;
 			AngleUnit a = (AngleUnit) x.MemberwiseClone();
 			a.FromSi(x.ToSi() / y);
 			return a;
@@ -131,6 +128,8 @@ namespace MmiSoft.Core.Math.Units
 		{
 			return System.Math.Tan(ToSi());
 		}
+
+		public bool IsNegative => unitValue < 0;
 
 		public int CompareTo(AngleUnit other)
 		{

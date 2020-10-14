@@ -13,10 +13,14 @@ namespace UnitTests.MmiSoft.Core.Math.Units
 		}
 
 		[Test]
-		public void Equals_WithSameReference_ReturnsFalse()
+		public void Equals_WithSameReference_ReturnsTrue()
 		{
 			Degrees degrees = 30.Degrees();
 			Assert.AreEqual(degrees, degrees);
+
+			var feet = 8.Feet();
+			Feet sameFoot = feet;
+			Assert.True(feet.Equals(sameFoot));
 		}
 
 		[Test]
@@ -75,6 +79,14 @@ namespace UnitTests.MmiSoft.Core.Math.Units
 		{
 			LengthUnit distance = (-5).MetersPerSecond() * 2.Seconds();
 			Assert.AreEqual(distance, 10.Meters());
+		}
+
+		[Test]
+		public void CastOperators_ReturnsTheUnitValue()
+		{
+			Assert.AreEqual(2, (int)2.Kilometers());
+			Assert.AreEqual(1.3, (float)1.3.Feet(), 1e-7);
+			Assert.AreEqual(1.3f, 1.3.NauticalMiles(), 1e-7);
 		}
 	}
 }

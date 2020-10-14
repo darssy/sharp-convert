@@ -49,6 +49,9 @@ namespace UnitTests.MmiSoft.Core.Math.Units
 		{
 			Hours h = TimeSpan.FromHours(2.5);
 			Assert.AreEqual(h, 2.5.Hours());
+
+			Seconds s = new TimeSpan(0, 2, 12);
+			Assert.AreEqual(132.Seconds(), s);
 		}
 
 		[Test]

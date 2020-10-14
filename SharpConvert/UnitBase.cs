@@ -75,11 +75,6 @@ namespace MmiSoft.Core.Math.Units
 			return converted;
 		}
 
-		public static T Max<T>(T u1, T u2) where T : UnitBase
-		{
-			return u1.ToSi() > u2.ToSi() ? u1 : u2;
-		}
-
 		// protected in order to avoid comparison between apples and oranges
 		protected int CompareToImpl(UnitBase other)
 		{

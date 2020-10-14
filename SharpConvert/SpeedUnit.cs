@@ -82,6 +82,7 @@ namespace MmiSoft.Core.Math.Units
 
 		public static SpeedUnit operator /(SpeedUnit u, double factor)
 		{
+			if (factor == 0) return null;
 			SpeedUnit copy = (SpeedUnit)u.MemberwiseClone();
 			copy.unitValue /= factor;
 			return copy;
@@ -103,6 +104,7 @@ namespace MmiSoft.Core.Math.Units
 		public static TimeUnit operator /(LengthUnit s, SpeedUnit u)
 		{
 			double t = s.ToSi() / u.ToSi();
+			if (double.IsInfinity(t)) return null;
 			TimeUnit timeToTravel = u.GetTimeUnit();
 			timeToTravel.FromSi(System.Math.Abs(t));
 			return timeToTravel;
@@ -111,6 +113,7 @@ namespace MmiSoft.Core.Math.Units
 		public static AngularVelocity operator /(SpeedUnit u, LengthUnit s)
 		{
 			double aV = u.ToSi() / s.ToSi();
+			if (double.IsInfinity(aV)) return null;
 			AngularVelocity angular = new RadiansPerSecond(aV);
 			angular.FromSi(aV);
 			return angular;
@@ -119,7 +122,7 @@ namespace MmiSoft.Core.Math.Units
 		public static LengthUnit operator /(SpeedUnit u, AngularVelocity s)
 		{
 			double r = u.ToSi() / s.ToSi();
-			return r.Meters();
+			return double.IsInfinity(r) ? null : r.Meters();
 		}
 
 		public static SpeedUnit operator -(SpeedUnit x)

@@ -2,7 +2,7 @@
 
 namespace MmiSoft.Core.Math.Units
 {
-	public abstract class AngularVelocity : UnitBase
+	public abstract class AngularVelocity : UnitBase, IComparable<AngularVelocity>
 	{
 		protected AngularVelocity(double unitValue, Conversion conversion)
 			: base(unitValue, conversion)
@@ -17,6 +17,36 @@ namespace MmiSoft.Core.Math.Units
 			where U : AngularVelocity, new()
 		{
 			return ConvertTo<U, AngularVelocity>(this);
+		}
+
+		public static bool operator <(AngularVelocity x, AngularVelocity y)
+		{
+			return x.ToSi() < y.ToSi();
+		}
+
+		public static bool operator >(AngularVelocity x, AngularVelocity y)
+		{
+			return x.ToSi() > y.ToSi();
+		}
+
+		public static bool operator <=(AngularVelocity x, AngularVelocity y)
+		{
+			return x.ToSi() <= y.ToSi();
+		}
+
+		public static bool operator >=(AngularVelocity x, AngularVelocity y)
+		{
+			return x.ToSi() >= y.ToSi();
+		}
+
+		public static AngularVelocity operator -(AngularVelocity l, AngularVelocity r)
+		{
+			return new RadiansPerSecond(l.ToSi() - r.ToSi());
+		}
+
+		public static AngularVelocity operator +(AngularVelocity l, AngularVelocity r)
+		{
+			return new RadiansPerSecond(l.ToSi() + r.ToSi());
 		}
 
 		public static AngleUnit operator *(AngularVelocity omega, TimeUnit t)
@@ -47,6 +77,11 @@ namespace MmiSoft.Core.Math.Units
 			U speed = new U();
 			speed.FromSi(u);
 			return speed;
+		}
+
+		public int CompareTo(AngularVelocity other)
+		{
+			return CompareToImpl(other);
 		}
 	}
 }

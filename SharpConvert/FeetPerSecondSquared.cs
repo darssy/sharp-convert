@@ -20,7 +20,7 @@ namespace MmiSoft.Core.Math.Units
 
 		public static Seconds operator /(FeetPerSecondSquared a, FeetPerSecond u)
 		{
-			return new Seconds(a.UnitValue / u.UnitValue);
+			return u.UnitValue == 0 ? null : new Seconds(a.UnitValue / u.UnitValue);
 		}
 
 		public static Seconds operator /(FeetPerSecondSquared a, SpeedUnit u)

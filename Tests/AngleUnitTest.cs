@@ -19,6 +19,7 @@ namespace UnitTests.MmiSoft.Core.Math.Units
 			Degrees angle = 100.Degrees();
 			Assert.True(angle.Equals(angle));
 		}
+
 		[Test]
 		public void TrigonometricFunctions_30Degrees()
 		{
@@ -74,7 +75,9 @@ namespace UnitTests.MmiSoft.Core.Math.Units
 		[Test]
 		public void StarOperator_MultiplyWithMinus1_ReturnsNegatedAngle()
 		{
-			Assert.AreEqual(30.Degrees() * -1, (-30).Degrees());
+			Degrees expected = (-30).Degrees();
+			Assert.AreEqual(expected, 30.Degrees() * -1);
+			Assert.AreEqual(expected, -30.Degrees());
 		}
 
 		[Test]
@@ -89,6 +92,13 @@ namespace UnitTests.MmiSoft.Core.Math.Units
 			Assert.IsTrue(30.Degrees() == new Degrees(30));
 			Assert.IsTrue(80.Degrees() != 30.Degrees());
 			Assert.IsTrue(90.Degrees() == (System.Math.PI / 2).Radians());
+		}
+
+		[Test]
+		public void IsNegative()
+		{
+			Assert.IsTrue((60.Degrees() / -2).IsNegative);
+			Assert.IsFalse(Degrees.Zero.IsNegative);
 		}
 	}
 }

@@ -36,7 +36,7 @@ namespace MmiSoft.Core.Math.Units
 
 		public static Hours operator /(LengthUnit s, Knots u)
 		{
-			return (s / (SpeedUnit)u).To<Hours>();
+			return u.unitValue == 0 ? null : (s / (SpeedUnit)u).To<Hours>();
 		}
 
 		public override string Symbol => "kt";

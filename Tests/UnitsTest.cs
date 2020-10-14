@@ -111,6 +111,14 @@ namespace UnitTests.MmiSoft.Core.Math.Units
 
 			Assert.AreEqual(2.5.Kilometers() - 2.Kilometers(), 500.Meters());
 			Assert.AreEqual(2.5.Kilometers() - 2.Kilometers(), 2.Kilometers() - 2.5.Kilometers());
+			Assert.AreEqual(2.5.Kilometers() + 500.Meters(), 3.Kilometers());
+		}
+
+
+		[Test]
+		public void DivisionOperator_DivideLengthByZero_ReturnsNull()
+		{
+			Assert.Null(5.Meters() / System.Math.Sin(0));
 		}
 	}
 }
