@@ -124,48 +124,19 @@ namespace UnitTests.MmiSoft.Core.Math.Units
 		}
 
 		[Test]
-		public void EqualityPerformance()
+		public void MaxUtilityMethod()
 		{
-			int tests = 100_000_000;
-			List<UnitBase> distances = new List<UnitBase>(tests);
-			Random r = new Random(1);
-			for (int i = 0; i < tests; i++)
-			{
-				switch (r.Next(0, 4))
-				{
-					case 0:
-						distances.Add(new Meters(r.Next(1, 1000)));
-						break;
-					case 1:
-						distances.Add(new Feet(r.Next(1, 1000)));
-						break;
-					case 2:
-						distances.Add(new Kilometers(r.Next(1, 1000)));
-						break;
-					case 3:
-						distances.Add(new NauticalMiles(r.Next(1, 1000)));
-						break;
-					case 4:
-						distances.Add(new Degrees(r.Next(0, 360)));
-						break;
-					case 5:
-						distances.Add(new Radians(r.NextDouble() * 2));
-						break;
-				}
-			}
+			LengthUnit d1 = 2000.Meters();
+			LengthUnit d2 = 2.NauticalMiles();
+			Assert.AreEqual(LengthUnit.Max(d1, d2), d2);
+		}
 
-			int consecutiveEqual = 0;
-			Stopwatch sw = Stopwatch.StartNew();
-			for (int i = 0; i < distances.Count - 1; i++)
-			{
-				if (distances[i].Equals(distances[i + 1]))
-				{
-					consecutiveEqual++;
-				}
-			}
-			sw.Stop();
-			Console.WriteLine(consecutiveEqual);
-			Console.WriteLine(sw.Elapsed);
+		[Test]
+		public void MinUtilityMethod()
+		{
+			LengthUnit d1 = 2000.Meters();
+			LengthUnit d2 = 2.NauticalMiles();
+			Assert.AreEqual(LengthUnit.Min(d1, d2), d1);
 		}
 	}
 }

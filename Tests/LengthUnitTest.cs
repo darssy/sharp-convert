@@ -1,4 +1,5 @@
-﻿using MmiSoft.Core.Math.Units;
+﻿using System;
+using MmiSoft.Core.Math.Units;
 using NUnit.Framework;
 
 namespace UnitTests.MmiSoft.Core.Math.Units
@@ -79,6 +80,40 @@ namespace UnitTests.MmiSoft.Core.Math.Units
 		{
 			LengthUnit distance = (-5).MetersPerSecond() * 2.Seconds();
 			Assert.AreEqual(distance, 10.Meters());
+		}
+
+		[Test]
+		public void MultiplyOperator_WithNegativeSpeedUsingTimeSpan_ReturnsPositiveLength()
+		{
+			LengthUnit distance = (-1500).FeetPerMinute() * TimeSpan.FromSeconds(2);
+			Assert.AreEqual(distance, 50.Feet());
+		}
+
+		[Test]
+		public void UnaryNegationOperator_CreatesNewObjectOldRemainsTheSame()
+		{
+			FeetPerMinute positive = 1500.FeetPerMinute();
+			FeetPerMinute negated = -positive;
+			Assert.AreEqual(positive.UnitValue + negated.UnitValue, 0);
+			Assert.AreNotEqual(positive, negated);
+		}
+
+		[Test]
+		public void SubtractionOperator_ReturnsMeters()
+		{
+			LengthUnit kilometers = 1.5.Kilometers();
+			LengthUnit distance = kilometers - 3280.839895013123.Feet();
+			Assert.True(distance is Meters);
+			Assert.AreEqual(500.Meters(), distance);
+		}
+
+		[Test]
+		public void AdditionOperator_ReturnsMeters()
+		{
+			LengthUnit kilometers = 1.5.Kilometers();
+			LengthUnit distance = kilometers + 3280.839895013123.Feet();
+			Assert.True(distance is Meters);
+			Assert.AreEqual(2500.Meters(), distance);
 		}
 
 		[Test]

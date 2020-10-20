@@ -129,5 +129,16 @@ namespace MmiSoft.Core.Math.Units
 		{
 			return (int)System.Math.Round(x.unitValue);
 		}
+
+		//Restored min and max, this time only for length
+		public static T Max<T>(T u1, T u2) where T : LengthUnit
+		{
+			return u1.ToSi() > u2.ToSi() ? u1 : u2;
+		}
+
+		public static T Min<T>(T u1, T u2) where T : LengthUnit
+		{
+			return u1.ToSi() < u2.ToSi() ? u1 : u2;
+		}
 	}
 }

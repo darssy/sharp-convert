@@ -30,5 +30,24 @@ namespace UnitTests.MmiSoft.Core.Math.Units
 			Assert.AreEqual(1.Degrees() / 3.DegreesPerSecond(), 0.33333333333333333333.Seconds());
 			Assert.AreEqual(300.Degrees() / 5.DegreesPerSecond(), 60.Seconds());
 		}
+
+		[Test]
+		public void EqualsMethodOverload()
+		{
+			object ob1 = 0.DegreesPerSecond();
+			object ob2 = 0.RadiansPerSecond();
+			Assert.AreEqual(ob1, ob2);
+		}
+
+		[Test]
+		public void EqualityOperatorOverload()
+		{
+			AngularVelocity ob1 = 0.DegreesPerSecond();
+			AngularVelocity ob2 = 0.RadiansPerSecond();
+			Assert.True(ob1 == ob2);
+
+			ob1 = ob2;
+			Assert.True(ob1 == ob2);
+		}
 	}
 }
