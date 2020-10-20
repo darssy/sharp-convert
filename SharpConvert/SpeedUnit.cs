@@ -20,37 +20,9 @@ namespace MmiSoft.Core.Math.Units
 			return ConvertTo<U, SpeedUnit>(this);
 		}
 
-		protected bool Equals(SpeedUnit other)
-		{
-			return EqualsImpl(other);
-		}
-
 		public int CompareTo(SpeedUnit other)
 		{
 			return CompareToImpl(other);
-		}
-
-		public override bool Equals(object obj)
-		{
-			var other = obj as SpeedUnit;
-			if (ReferenceEquals(null, other)) return false;
-			if (ReferenceEquals(this, other)) return true;
-			return Equals(other);
-		}
-
-		public override int GetHashCode()
-		{
-			return ToSi().GetHashCode() * 1000000009;
-		}
-
-		public static bool operator ==(SpeedUnit left, SpeedUnit right)
-		{
-			return Equals(left, right);
-		}
-
-		public static bool operator !=(SpeedUnit left, SpeedUnit right)
-		{
-			return !Equals(left, right);
 		}
 
 		public static bool operator <(SpeedUnit x, SpeedUnit y)

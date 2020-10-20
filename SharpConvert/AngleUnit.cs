@@ -17,29 +17,6 @@ namespace MmiSoft.Core.Math.Units
 			return ConvertTo<A, AngleUnit>(this);
 		}
 
-		public override bool Equals(object obj)
-		{
-			var other = obj as AngleUnit;
-			if (ReferenceEquals(null, other)) return false;
-			if (ReferenceEquals(this, other)) return true;
-			return EqualsImpl(other);
-		}
-
-		public override int GetHashCode()
-		{
-			return ToSi().GetHashCode() * 1000000021;
-		}
-
-		public static bool operator ==(AngleUnit left, AngleUnit right)
-		{
-			return Equals(left, right);
-		}
-
-		public static bool operator !=(AngleUnit left, AngleUnit right)
-		{
-			return !Equals(left, right);
-		}
-
 		public static bool operator <(AngleUnit x, AngleUnit y)
 		{
 			return x.ToSi() < y.ToSi();

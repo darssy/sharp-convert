@@ -36,23 +36,41 @@ namespace MmiSoft.Core.Math.Units
 			return unitValue = siValue / conversion.ToSiFactor;
 		}
 
-		/// <summary>
-		/// Should be used wisely and from subclasses only; it does not support type checking,
-		/// therefore it might be comparing distance to time or anything else
-		/// </summary>
-		/// <param name="other"></param>
-		/// <returns></returns>
-		protected bool EqualsImpl(UnitBase other)
+		private bool EqualsImpl(UnitBase other)
 		{
 			//if units are the same, avoid unnecessary math
 			if (other.conversion == conversion)
 			{
 				return System.Math.Abs(unitValue - other.unitValue) <= Threshold;
 			}
+			if (other.conversion.UnitType != conversion.UnitType) return false;
 			double otherSi = other.ToSi();
 			double si = ToSi();
 			double diff = System.Math.Abs(otherSi - si);
 			return diff <= Threshold;
+		}
+
+		public override bool Equals(object obj)
+		{
+			var other = obj as UnitBase;
+			if (ReferenceEquals(null, other)) return false;
+			if (ReferenceEquals(this, other)) return true;
+			return EqualsImpl(other);
+		}
+
+		public override int GetHashCode()
+		{
+			return ToSi().GetHashCode() * conversion.GetHashCode();
+		}
+
+		public static bool operator ==(UnitBase left, UnitBase right)
+		{
+			return Equals(left, right);
+		}
+
+		public static bool operator !=(UnitBase left, UnitBase right)
+		{
+			return !Equals(left, right);
 		}
 
 		public override string ToString()

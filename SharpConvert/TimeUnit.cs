@@ -18,32 +18,9 @@ namespace MmiSoft.Core.Math.Units
 
 		public TimeSpan TimeSpan => this;
 
-		public override bool Equals(object obj)
-		{
-			var other = obj as TimeUnit;
-			if (ReferenceEquals(null, other)) return false;
-			if (ReferenceEquals(this, other)) return true;
-			return EqualsImpl(other);
-		}
-
-		public override int GetHashCode()
-		{
-			return ToSi().GetHashCode() * 1000000017;
-		}
-
 		public int CompareTo(TimeUnit other)
 		{
 			return ToSi().CompareTo(other.ToSi());
-		}
-
-		public static bool operator ==(TimeUnit left, TimeUnit right)
-		{
-			return Equals(left, right);
-		}
-
-		public static bool operator !=(TimeUnit left, TimeUnit right)
-		{
-			return !Equals(left, right);
 		}
 
 		public static bool operator <(TimeUnit x, TimeUnit y)

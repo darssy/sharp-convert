@@ -12,16 +12,6 @@ namespace MmiSoft.Core.Math.Units
 			}
 		}
 
-		public static bool operator ==(MassUnit left, MassUnit right)
-		{
-			return Equals(left, right);
-		}
-
-		public static bool operator !=(MassUnit left, MassUnit right)
-		{
-			return !Equals(left, right);
-		}
-
 		public static bool operator <(MassUnit x, MassUnit y)
 		{
 			return x.ToSi() < y.ToSi();
@@ -59,18 +49,6 @@ namespace MmiSoft.Core.Math.Units
 		public int CompareTo(MassUnit other)
 		{
 			return CompareToImpl(other);
-		}
-
-		public override bool Equals(object obj)
-		{
-			if (!(obj is MassUnit other)) return false;
-			if (ReferenceEquals(this, other)) return true;
-			return EqualsImpl(other);
-		}
-
-		public override int GetHashCode()
-		{
-			return ToSi().GetHashCode() * 17;
 		}
 	}
 }

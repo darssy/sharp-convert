@@ -26,29 +26,6 @@ namespace MmiSoft.Core.Math.Units
 			return CompareToImpl(other);
 		}
 
-		public override bool Equals(object obj)
-		{
-			var other = obj as LengthUnit;
-			if (ReferenceEquals(null, other)) return false;
-			if (ReferenceEquals(this, other)) return true;
-			return EqualsImpl(other);
-		}
-
-		public override int GetHashCode()
-		{
-			return ToSi().GetHashCode() * 1000000007;
-		}
-
-		public static bool operator ==(LengthUnit left, LengthUnit right)
-		{
-			return Equals(left, right);
-		}
-
-		public static bool operator !=(LengthUnit left, LengthUnit right)
-		{
-			return !Equals(left, right);
-		}
-
 		public static bool operator <(LengthUnit x, LengthUnit y)
 		{
 			return x.ToSi() < y.ToSi();

@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using MmiSoft.Core.Math.Units;
@@ -48,7 +50,7 @@ namespace UnitTests.MmiSoft.Core.Math.Units
 		public void NegativeLengthAndSiFactorsAreNotAllowed_ResultsInExceptions()
 		{
 			Assert.Catch<ArgumentOutOfRangeException>(() => new Meters(-10));
-			Assert.Catch<ArgumentOutOfRangeException>(() => new Conversion(-7));
+			Assert.Catch<ArgumentOutOfRangeException>(() => new Conversion(-7, UnitType.Length));
 		}
 
 		[Test]
@@ -119,6 +121,51 @@ namespace UnitTests.MmiSoft.Core.Math.Units
 		public void DivisionOperator_DivideLengthByZero_ReturnsNull()
 		{
 			Assert.Null(5.Meters() / System.Math.Sin(0));
+		}
+
+		[Test]
+		public void EqualityPerformance()
+		{
+			int tests = 100_000_000;
+			List<UnitBase> distances = new List<UnitBase>(tests);
+			Random r = new Random(1);
+			for (int i = 0; i < tests; i++)
+			{
+				switch (r.Next(0, 4))
+				{
+					case 0:
+						distances.Add(new Meters(r.Next(1, 1000)));
+						break;
+					case 1:
+						distances.Add(new Feet(r.Next(1, 1000)));
+						break;
+					case 2:
+						distances.Add(new Kilometers(r.Next(1, 1000)));
+						break;
+					case 3:
+						distances.Add(new NauticalMiles(r.Next(1, 1000)));
+						break;
+					case 4:
+						distances.Add(new Degrees(r.Next(0, 360)));
+						break;
+					case 5:
+						distances.Add(new Radians(r.NextDouble() * 2));
+						break;
+				}
+			}
+
+			int consecutiveEqual = 0;
+			Stopwatch sw = Stopwatch.StartNew();
+			for (int i = 0; i < distances.Count - 1; i++)
+			{
+				if (distances[i].Equals(distances[i + 1]))
+				{
+					consecutiveEqual++;
+				}
+			}
+			sw.Stop();
+			Console.WriteLine(consecutiveEqual);
+			Console.WriteLine(sw.Elapsed);
 		}
 	}
 }

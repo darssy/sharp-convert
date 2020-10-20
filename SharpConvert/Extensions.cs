@@ -259,6 +259,26 @@ namespace MmiSoft.Core.Math.Units
 		{
 			return new DegreesPerSecond(d);
 		}
+
+		public static DegreesPerSecond DegreesPerSecond(this double d)
+		{
+			return new DegreesPerSecond(d);
+		}
+
+		public static RadiansPerSecond RadiansPerSecond(this int d)
+		{
+			return new RadiansPerSecond(d);
+		}
+
+		public static RadiansPerSecond RadiansPerSecond(this float d)
+		{
+			return new RadiansPerSecond(d);
+		}
+
+		public static RadiansPerSecond RadiansPerSecond(this double d)
+		{
+			return new RadiansPerSecond(d);
+		}
 		#endregion
 
 

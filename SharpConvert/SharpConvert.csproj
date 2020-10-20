@@ -73,6 +73,7 @@
     <Compile Include="SpeedUnit.cs" />
     <Compile Include="TimeUnit.cs" />
     <Compile Include="UnitBase.cs" />
+    <Compile Include="UnitType.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
