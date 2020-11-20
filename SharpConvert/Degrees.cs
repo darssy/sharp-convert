@@ -40,7 +40,5 @@ namespace MmiSoft.Core.Math.Units
 		{
 			return Add<Degrees>(x, y);
 		}
-
-		public override string Symbol => "\u00B0";
 	}
 }

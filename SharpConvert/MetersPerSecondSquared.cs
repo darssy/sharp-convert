@@ -9,8 +9,6 @@ namespace MmiSoft.Core.Math.Units
 
 		public MetersPerSecondSquared(double unitValue) : base(unitValue, Conversion.MeterPerSecondSquared) { }
 
-		public override string Symbol => "m/s^2";
-
 		protected override SpeedUnit GetSpeedUnit() => new MetersPerSecond();
 
 		public static MetersPerSecondSquared operator -(MetersPerSecondSquared x)

@@ -50,7 +50,7 @@ namespace UnitTests.MmiSoft.Core.Math.Units
 		public void NegativeLengthAndSiFactorsAreNotAllowed_ResultsInExceptions()
 		{
 			Assert.Catch<ArgumentOutOfRangeException>(() => new Meters(-10));
-			Assert.Catch<ArgumentOutOfRangeException>(() => new Conversion(-7, UnitType.Length));
+			Assert.Catch<ArgumentOutOfRangeException>(() => new Conversion(-7, "inv", UnitType.Length));
 		}
 
 		[Test]

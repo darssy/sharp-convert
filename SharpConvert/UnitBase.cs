@@ -15,7 +15,7 @@ namespace MmiSoft.Core.Math.Units
 			this.conversion = conversion;
 		}
 
-		public abstract string Symbol { get; }
+		public string Symbol => conversion.Symbol;
 
 		public double UnitValue => unitValue;
 

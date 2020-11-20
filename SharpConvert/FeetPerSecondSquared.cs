@@ -13,8 +13,6 @@ namespace MmiSoft.Core.Math.Units
 
 		protected override SpeedUnit GetSpeedUnit() => new FeetPerSecond();
 
-		public override string Symbol => "ft/s^2";
-
 		public static FeetPerSecond operator *(FeetPerSecondSquared a, TimeUnit t)
 		{
 			double du = a.UnitValue * t.To<Seconds>().UnitValue;

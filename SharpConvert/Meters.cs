@@ -21,7 +21,5 @@ namespace MmiSoft.Core.Math.Units
 		{
 			return Add<Meters>(x, y);
 		}
-
-		public override string Symbol => "m";
 	}
 }

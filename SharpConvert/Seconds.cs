@@ -32,6 +32,5 @@ namespace MmiSoft.Core.Math.Units
 			return new Seconds(t);
 		}
 
-		public override string Symbol => "s";
 	}
 }

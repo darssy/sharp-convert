@@ -14,8 +14,6 @@ namespace MmiSoft.Core.Math.Units
 
 		protected override SpeedUnit GetSpeedUnit() => new FeetPerMinute();
 
-		public override string Symbol => "fpm/s";
-
 		public static FeetPerMinute operator *(FeetPerMinutePerSecond a, TimeUnit t)
 		{
 			double du = a.UnitValue * t.To<Seconds>().UnitValue;

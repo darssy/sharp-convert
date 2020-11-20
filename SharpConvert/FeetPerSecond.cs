@@ -31,7 +31,5 @@ namespace MmiSoft.Core.Math.Units
 		{
 			return new FeetPerSecond(-x.unitValue);
 		}
-
-		public override string Symbol => "ft/s";
 	}
 }

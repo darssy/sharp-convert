@@ -112,7 +112,5 @@ namespace MmiSoft.Core.Math.Units
 		{
 			return CompareToImpl(other);
 		}
-
-		public override string ToString() => $"{unitValue} {GetType().Name}";
 	}
 }

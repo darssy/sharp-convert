@@ -22,7 +22,5 @@ namespace MmiSoft.Core.Math.Units
 		{
 			return Add<Kilometers>(x, y);
 		}
-
-		public override string Symbol => "Km";
 	}
 }

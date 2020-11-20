@@ -12,8 +12,6 @@ namespace MmiSoft.Core.Math.Units
 		{
 		}
 
-		public override string Symbol => "Kg";
-
 		public static Kilogram operator -(Kilogram x, Kilogram y)
 		{
 			return new Kilogram(System.Math.Abs(x.unitValue - y.unitValue));

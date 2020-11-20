@@ -28,6 +28,5 @@ namespace MmiSoft.Core.Math.Units
 			return Add<Radians>(x, y);
 		}
 
-		public override string Symbol => "rad";
 	}
 }

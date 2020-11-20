@@ -14,8 +14,6 @@ namespace MmiSoft.Core.Math.Units
 
 		protected override SpeedUnit GetSpeedUnit() => new Knots();
 
-		public override string Symbol => "kt/s";
-
 		public static Knots operator *(KnotsPerSecond a, TimeUnit t)
 		{
 			double du = a.UnitValue * t.To<Seconds>().UnitValue;

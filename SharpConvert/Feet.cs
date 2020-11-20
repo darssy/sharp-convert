@@ -34,7 +34,5 @@ namespace MmiSoft.Core.Math.Units
 			if (y is Feet feet) return x + feet;
 			return Add<Feet>(x, y);
 		}
-
-		public override string Symbol => "ft";
 	}
 }
