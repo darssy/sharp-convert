@@ -50,13 +50,13 @@ namespace MmiSoft.Core.Math.Units
 			registeredUnitSymbols.AddRange(registeredUnitConstructors.Keys);
 		}
 
-		public static UnitBase Parse(this string text)
+		public static UnitBase Parse(this string text, CultureInfo culture = null)
 		{
 			text = text.Trim();
 			string unit = registeredUnitSymbols.FirstOrDefault(text.EndsWith);
 			if (unit == null) throw new FormatException($"Unknown unit for input: '{text}'");
 
-			double value = double.Parse(text.Replace(unit, ""), CultureInfo.InvariantCulture);
+			double value = double.Parse(text.Replace(unit, ""), culture ?? CultureInfo.CurrentCulture);
 			return registeredUnitConstructors[unit].Invoke(value);
 		}
 
