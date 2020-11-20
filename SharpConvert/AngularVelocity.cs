@@ -1,7 +1,9 @@
-﻿using System;
-
+﻿
 namespace MmiSoft.Core.Math.Units
 {
+	using System;
+
+	[Serializable]
 	public abstract class AngularVelocity : UnitBase, IComparable<AngularVelocity>
 	{
 		protected AngularVelocity(double unitValue, Conversion conversion)
@@ -53,7 +55,7 @@ namespace MmiSoft.Core.Math.Units
 		{
 			double s = omega.ToSi() * t.ToSi();
 			AngleUnit distanceTraveled = omega.GetAngleUnit();
-			distanceTraveled.FromSi(s);
+			distanceTraveled.FromSi(Math.Abs(s));
 			return distanceTraveled;
 		}
 
@@ -66,7 +68,7 @@ namespace MmiSoft.Core.Math.Units
 		{
 			double t = a.ToSi() / omega.ToSi();
 			TimeUnit timeToTravel = omega.GetTimeUnit();
-			timeToTravel.FromSi(t);
+			timeToTravel.FromSi(Math.Abs(t));
 			return timeToTravel;
 		}
 
