@@ -121,7 +121,7 @@ namespace UnitTests.MmiSoft.Core.Math.Units
 		{
 			Assert.AreEqual(2, (int)2.Kilometers());
 			Assert.AreEqual(1.3, (float)1.3.Feet(), 1e-7);
-			Assert.AreEqual(1.3f, 1.3.NauticalMiles(), 1e-7);
+			Assert.AreEqual(1.3f, (double)1.3.NauticalMiles(), 1e-7);
 		}
 	}
 }

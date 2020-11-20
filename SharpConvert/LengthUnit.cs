@@ -115,7 +115,7 @@ namespace MmiSoft.Core.Math.Units
 			return double.IsInfinity(meters) ? null : new Meters(meters);
 		}
 
-		public static implicit operator double(LengthUnit x)
+		public static explicit operator double(LengthUnit x)
 		{
 			return x.unitValue;
 		}
