@@ -2,6 +2,7 @@
 
 namespace MmiSoft.Core.Math.Units
 {
+	[Serializable]
 	public class DegreesPerSecond : AngularVelocity
 	{
 		public DegreesPerSecond() : this(0d)

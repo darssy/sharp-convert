@@ -1,5 +1,8 @@
+using System;
+
 namespace MmiSoft.Core.Math.Units
 {
+	[Serializable]
 	public class KnotsPerSecond : AccelerationUnit
 	{
 

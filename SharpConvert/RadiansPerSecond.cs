@@ -2,6 +2,7 @@
 
 namespace MmiSoft.Core.Math.Units
 {
+	[Serializable]
 	public class RadiansPerSecond : AngularVelocity
 	{
 		public RadiansPerSecond(double unitValue)

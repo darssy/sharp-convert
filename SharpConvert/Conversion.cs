@@ -2,6 +2,7 @@ using System;
 
 namespace MmiSoft.Core.Math.Units
 {
+	[Serializable]
 	public class Conversion
 	{
 		private readonly int hashCode;

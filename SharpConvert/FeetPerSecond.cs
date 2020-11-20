@@ -1,5 +1,9 @@
+using System;
+
 namespace MmiSoft.Core.Math.Units
 {
+
+	[Serializable]
 	public class FeetPerSecond : SpeedUnit
 	{
 

@@ -2,6 +2,7 @@ using System;
 
 namespace MmiSoft.Core.Math.Units
 {
+	[Serializable]
 	public abstract class MassUnit : UnitBase, IComparable<MassUnit>
 	{
 		protected MassUnit(double mass, Conversion conversion) : base(mass, conversion)

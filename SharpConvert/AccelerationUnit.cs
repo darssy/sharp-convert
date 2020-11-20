@@ -1,5 +1,8 @@
+using System;
+
 namespace MmiSoft.Core.Math.Units
 {
+	[Serializable]
 	public abstract class AccelerationUnit : UnitBase
 	{
 		protected AccelerationUnit(double unitValue, Conversion conversion) : base(unitValue, conversion)
