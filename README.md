@@ -47,3 +47,6 @@ Problem is that 2 can be anything and you won't always know what's on the left s
 
 ### Accuracy
 As it's already known, floating point arithmetic has rounding errors. For example 0.1 is not stored as exactly 0.1. To deal with the problem, Sharp Convert has an error margin of 10<sup>-15</sup> when performing equality operations.
+
+### Parsing
+Parsing is based on the unit symbol and is case sensitive. For example `12NM` will result in 12 nautical miles while `12nm` will be 12 nanometers. Clearly, several orders of magnitude different. You don't have to worry for now as I don't have any nanometers in the library. But future can be unpredictable. Space is allowed between the number and the unit symbol, but it's not advised as this might change in the future.
