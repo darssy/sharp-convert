@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AccelerationUnit.cs" />
+    <Compile Include="ComponentModel\UnitsConverter.cs" />
     <Compile Include="Conversion.cs" />
     <Compile Include="FeetInterned.cs" />
     <Compile Include="FeetPerMinutePerSecond.cs" />
