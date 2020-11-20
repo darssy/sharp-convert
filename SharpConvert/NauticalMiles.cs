@@ -13,13 +13,25 @@ namespace MmiSoft.Core.Math.Units
 			: base(mile, Conversion.NauticalMile)
 		{ }
 
+		public static NauticalMiles operator -(NauticalMiles x, NauticalMiles y)
+		{
+			return new NauticalMiles(System.Math.Abs(x.unitValue - y.unitValue));
+		}
+
+		public static NauticalMiles operator +(NauticalMiles x, NauticalMiles y)
+		{
+			return new NauticalMiles(x.unitValue + y.unitValue);
+		}
+
 		public static NauticalMiles operator -(NauticalMiles x, LengthUnit y)
 		{
+			if (y is NauticalMiles miles) return x - miles;
 			return Subtract<NauticalMiles>(x, y);
 		}
 
 		public static NauticalMiles operator +(NauticalMiles x, LengthUnit y)
 		{
+			if (y is NauticalMiles miles) return x + miles;
 			return Add<NauticalMiles>(x, y);
 		}
 	}
