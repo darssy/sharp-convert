@@ -13,9 +13,11 @@ namespace MmiSoft.Core.Math.Units
 
 		protected override SpeedUnit GetSpeedUnit() => new FeetPerSecond();
 
+		protected override TimeUnit GetTimeUnit() => new Seconds();
+
 		public static FeetPerSecond operator *(FeetPerSecondSquared a, TimeUnit t)
 		{
-			double du = a.UnitValue * t.To<Seconds>().UnitValue;
+			double du = a.unitValue * t.To<Seconds>().UnitValue;
 			return new FeetPerSecond(du);
 		}
 

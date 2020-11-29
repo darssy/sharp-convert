@@ -53,7 +53,7 @@ namespace MmiSoft.Core.Math.Units
 			return new Seconds(l.ToSi() + r.ToSi());
 		}
 
-		public static implicit operator double(TimeUnit t)
+		public static explicit operator double(TimeUnit t)
 		{
 			return t.unitValue;
 		}

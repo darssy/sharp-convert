@@ -292,6 +292,10 @@ namespace MmiSoft.Core.Math.Units
 
 		#region Acceleration
 
+		public static MetersPerSecondSquared MetersPerSecondSquared(this int mpsPerSec) => new MetersPerSecondSquared(mpsPerSec);
+		public static MetersPerSecondSquared MetersPerSecondSquared(this float mpsPerSec) => new MetersPerSecondSquared(mpsPerSec);
+		public static MetersPerSecondSquared MetersPerSecondSquared(this double mpsPerSec) => new MetersPerSecondSquared(mpsPerSec);
+
 		public static KnotsPerSecond KnotsPerSecond(this int ktsPerSec) => new KnotsPerSecond(ktsPerSec);
 		public static KnotsPerSecond KnotsPerSecond(this float ktsPerSec) => new KnotsPerSecond(ktsPerSec);
 		public static KnotsPerSecond KnotsPerSecond(this double ktsPerSec) => new KnotsPerSecond(ktsPerSec);

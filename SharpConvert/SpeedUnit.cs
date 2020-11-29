@@ -3,7 +3,8 @@ using System;
 namespace MmiSoft.Core.Math.Units
 {
 	[Serializable]
-	public abstract class SpeedUnit : UnitBase, IComparable<SpeedUnit>
+	public abstract class
+		SpeedUnit : UnitBase, IComparable<SpeedUnit>
 	{
 
 		protected SpeedUnit(double speed, Conversion conversion)

@@ -26,6 +26,11 @@ namespace MmiSoft.Core.Math.Units
 			return new Minutes();
 		}
 
+		public static FeetPerMinute operator *(FeetPerMinute u, double factor)
+		{
+			return new FeetPerMinute(u.unitValue * factor);
+		}
+
 		public static FeetPerMinute operator -(FeetPerMinute x)
 		{
 			return new FeetPerMinute(-x.unitValue);
