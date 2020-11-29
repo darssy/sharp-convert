@@ -49,5 +49,32 @@ namespace UnitTests.MmiSoft.Core.Math.Units
 			ob1 = ob2;
 			Assert.True(ob1 == ob2);
 		}
+
+		[Test]
+		public void CompareTo_SameNumberDifferentInstances_ReturnsZero()
+		{
+			DegreesPerSecond a1 = (-0.1).DegreesPerSecond();
+			DegreesPerSecond a2 = (-0.1).DegreesPerSecond();
+
+			Assert.AreEqual(0, a1.CompareTo(a2));
+		}
+
+		[Test]
+		public void CompareTo_SameAbsoluteValuesDifferentInstances_Returns1()
+		{
+			DegreesPerSecond a1 = 0.1.DegreesPerSecond();
+			DegreesPerSecond a2 = (-0.1).DegreesPerSecond();
+
+			Assert.AreEqual(1, a1.CompareTo(a2));
+		}
+
+		[Test]
+		public void CompareTo_SameAbsoluteValuesDifferentInstances_ReturnsMinus1()
+		{
+			DegreesPerSecond a1 = (-0.1).DegreesPerSecond();
+			DegreesPerSecond a2 = 0.1.DegreesPerSecond();
+
+			Assert.AreEqual(-1, a1.CompareTo(a2));
+		}
 	}
 }

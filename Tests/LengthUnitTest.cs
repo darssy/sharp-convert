@@ -27,13 +27,13 @@ namespace UnitTests.MmiSoft.Core.Math.Units
 		[Test]
 		public void CompareTo_DifferentTypes_ComparesSiValues()
 		{
-			Assert.AreEqual(5.2.NauticalMiles().CompareTo(5.2.Kilometers()), 1);
-			Assert.AreEqual(5.2.NauticalMiles().CompareTo(8.Kilometers()), 1);
-			Assert.AreEqual(5.2.NauticalMiles().CompareTo(8.Kilometers()), 1);
+			Assert.AreEqual(1, 5.2.NauticalMiles().CompareTo(5.2.Kilometers()));
+			Assert.AreEqual(1, 5.2.NauticalMiles().CompareTo(8.Kilometers()));
+			Assert.AreEqual(1, 5.2.NauticalMiles().CompareTo(8.Kilometers()));
 
-			Assert.AreEqual(1000.Meters().CompareTo(3800.Feet()), -1);
+			Assert.AreEqual(-1, 1000.Meters().CompareTo(3800.Feet()));
 
-			Assert.AreEqual(1000.Meters().CompareTo(1000.Meters().To<Feet>()), 0);
+			Assert.AreEqual(0, 1000.Meters().CompareTo(1000.Meters().To<Feet>()));
 		}
 
 		[Test]

@@ -33,6 +33,12 @@ namespace UnitTests.MmiSoft.Core.Math.Units
 		}
 
 		[Test]
+		public void EqualityOperator_ApplesWithOranges_ReturnsFalse()
+		{
+			Assert.AreNotEqual(1000.FeetPerMinute(), 3.Kilogram());
+		}
+
+		[Test]
 		public void EqualityOperator_WithNull()
 		{
 			Assert.False(1000.FeetPerMinute() == null);
@@ -43,8 +49,9 @@ namespace UnitTests.MmiSoft.Core.Math.Units
 		public void EqualityOperator_WithSelf()
 		{
 			FeetPerMinute fpm = 1000.FeetPerMinute();
-			Assert.True(fpm == fpm);
-			Assert.False(fpm != fpm);
+			FeetPerMinute fpmAgain = fpm;
+			Assert.True(fpm == fpmAgain);
+			Assert.False(fpm != fpmAgain);
 		}
 
 		[Test]
