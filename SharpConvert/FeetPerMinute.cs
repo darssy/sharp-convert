@@ -5,6 +5,7 @@ namespace MmiSoft.Core.Math.Units
 	[Serializable]
 	public class FeetPerMinute : SpeedUnit
 	{
+		public static readonly FeetPerMinute Zero = 0.FeetPerMinute();
 
 		public FeetPerMinute()
 			: this(0)
