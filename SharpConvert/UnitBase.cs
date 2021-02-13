@@ -3,7 +3,7 @@
 namespace MmiSoft.Core.Math.Units
 {
 	[Serializable]
-	public abstract class UnitBase
+	public abstract class UnitBase : IFormattable
 	{
 		private const double Threshold = 1e-14;
 		protected double unitValue;
@@ -81,6 +81,11 @@ namespace MmiSoft.Core.Math.Units
 		public string ToString(string format)
 		{
 			return $"{unitValue.ToString(format)}{Symbol}";
+		}
+
+		public string ToString(string format, IFormatProvider formatProvider)
+		{
+			return $"{unitValue.ToString(format, formatProvider)}{Symbol}";
 		}
 
 		public static U1 ConvertTo<U1, U2>(U2 l)

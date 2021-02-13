@@ -68,6 +68,13 @@ namespace UnitTests.MmiSoft.Core.Math.Units
 		}
 
 		[Test]
+		public void StringInterpolation_CallsToStringOfIFormattable_FormatAfterColonIsRespected()
+		{
+			Assert.AreEqual(4.178.ToString("0.00") + "\u00B0", $"{4.178.Degrees():0.00}");
+			Assert.AreEqual(1.2345678.ToString("0.0") + "m", $"{1.2345678.Meters():0.0}");
+		}
+
+		[Test]
 		public void ToStringWithFormatting_AppliesRounding_UsesCurrentCulture()
 		{
 			string ds = CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator;
