@@ -108,6 +108,13 @@ namespace MmiSoft.Core.Math.Units
 			return x / (double) y;
 		}
 
+		public static SpeedUnit operator / (LengthUnit x, TimeUnit t)
+		{
+			if (t == TimeUnit.Zero) return null;
+			double result = x.ToSi() / t.ToSi();
+			return new MetersPerSecond(result);
+		}
+
 		[Obsolete("That's needed for angular velocity calculations")]
 		public static LengthUnit operator /(LengthUnit x, AngleUnit y)
 		{

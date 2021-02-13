@@ -34,5 +34,10 @@ namespace MmiSoft.Core.Math.Units
 			if (y is Feet feet) return x + feet;
 			return Add<Feet>(x, y);
 		}
+
+		public static FeetPerMinute operator /(Feet x, Minutes y)
+		{
+			return y.UnitValue == 0 ? null : new FeetPerMinute(x.unitValue / y.UnitValue);
+		}
 	}
 }
