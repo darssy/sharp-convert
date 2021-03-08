@@ -117,6 +117,18 @@ namespace UnitTests.MmiSoft.Core.Math.Units
 		}
 
 		[Test]
+		public void DivideOperator_DivisionByZeroTime_ReturnsNull()
+		{
+			Assert.AreEqual(null, 2500.Meters() / TimeUnit.Zero);
+		}
+
+		[Test]
+		public void DivideOperator_DivisionByTime_ReturnsSpeed()
+		{
+			Assert.AreEqual(3.Knots(), 5556.Meters() / 1.Hours());
+		}
+
+		[Test]
 		public void CastOperators_ReturnsTheUnitValue()
 		{
 			Assert.AreEqual(2, (int)2.Kilometers());

@@ -53,15 +53,20 @@ namespace MmiSoft.Core.Math.Units
 
 		public static AngleUnit operator *(AngularVelocity omega, TimeUnit t)
 		{
-			double s = omega.ToSi() * t.ToSi();
-			AngleUnit distanceTraveled = omega.GetAngleUnit();
-			distanceTraveled.FromSi(Math.Abs(s));
-			return distanceTraveled;
+			return DivideByTimeImpl(omega, t.ToSi());
 		}
 
 		public static AngleUnit operator *(AngularVelocity omega, TimeSpan t)
 		{
-			return omega * new Seconds(t);
+			return DivideByTimeImpl(omega, t.TotalSeconds);
+		}
+
+		private static AngleUnit DivideByTimeImpl(AngularVelocity omega, double tInSeconds)
+		{
+			double s = omega.ToSi() * tInSeconds;
+			AngleUnit distanceTraveled = omega.GetAngleUnit();
+			distanceTraveled.FromSi(Math.Abs(s));
+			return distanceTraveled;
 		}
 
 		public static TimeUnit operator /(AngleUnit a, AngularVelocity omega)

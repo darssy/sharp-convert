@@ -61,5 +61,11 @@ namespace UnitTests.MmiSoft.Core.Math.Units
 			Assert.AreEqual(s * 1.5, 3.75.Hours());
 			Assert.AreEqual(s * 1.5, 1.5 * s);
 		}
+
+		[Test]
+		public void DivideOperator_TimeUnit_ReturnsSiRatio()
+		{
+			Assert.AreEqual(1, 3600.Seconds() / 1.Hours(), 1e-10);
+		}
 	}
 }
