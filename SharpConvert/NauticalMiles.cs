@@ -26,13 +26,13 @@ namespace MmiSoft.Core.Math.Units
 		public static NauticalMiles operator -(NauticalMiles x, LengthUnit y)
 		{
 			if (y is NauticalMiles miles) return x - miles;
-			return Subtract<NauticalMiles>(x, y);
+			return new NauticalMiles(x.SubtractAbs(y));
 		}
 
 		public static NauticalMiles operator +(NauticalMiles x, LengthUnit y)
 		{
 			if (y is NauticalMiles miles) return x + miles;
-			return Add<NauticalMiles>(x, y);
+			return new NauticalMiles(x.Add(y));
 		}
 	}
 }

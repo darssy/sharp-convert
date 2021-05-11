@@ -38,5 +38,27 @@ namespace MmiSoft.Core.Math.Units
 		{
 			return u.unitValue == 0 ? null : (s / (SpeedUnit)u).To<Hours>();
 		}
+
+		public static Knots operator -(Knots l, SpeedUnit r)
+		{
+			if (r is Knots fpm) return l - fpm;
+			return new Knots(l.Subtract(r));
+		}
+
+		public static Knots operator -(Knots l, Knots r)
+		{
+			return new Knots(l.unitValue - r.unitValue);
+		}
+
+		public static Knots operator +(Knots l, SpeedUnit r)
+		{
+			if (r is Knots fpm) return l - fpm;
+			return new Knots(l.Add(r));
+		}
+
+		public static Knots operator +(Knots l, Knots r)
+		{
+			return new Knots(l.unitValue + r.unitValue);
+		}
 	}
 }

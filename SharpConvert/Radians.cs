@@ -18,14 +18,24 @@ namespace MmiSoft.Core.Math.Units
 			return new Radians(-x.unitValue);
 		}
 
+		public static Radians operator -(Radians x, Radians y)
+		{
+			return new Radians(x.unitValue - y.unitValue);
+		}
+
+		public static Radians operator +(Radians x, Radians y)
+		{
+			return new Radians(x.unitValue + y.unitValue);
+		}
+
 		public static Radians operator -(Radians x, AngleUnit y)
 		{
-			return Subtract<Radians>(x, y);
+			return new Radians(x.unitValue - y.ToSi());
 		}
 
 		public static Radians operator +(Radians x, AngleUnit y)
 		{
-			return Add<Radians>(x, y);
+			return new Radians(x.unitValue + y.ToSi());
 		}
 
 	}

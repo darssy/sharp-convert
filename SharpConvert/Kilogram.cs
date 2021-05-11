@@ -25,13 +25,13 @@ namespace MmiSoft.Core.Math.Units
 		public static Kilogram operator -(Kilogram x, MassUnit y)
 		{
 			if (y is Kilogram k) return x - k;
-			return Subtract<Kilogram>(x, y);
+			return new Kilogram(x.unitValue - y.ToSi());
 		}
 
 		public static Kilogram operator +(Kilogram x, MassUnit y)
 		{
 			if (y is Kilogram k) return x + k;
-			return Add<Kilogram>(x, y);
+			return new Kilogram(x.unitValue + y.ToSi());
 		}
 	}
 }

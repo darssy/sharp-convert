@@ -88,6 +88,39 @@ namespace MmiSoft.Core.Math.Units
 			return $"{unitValue.ToString(format, formatProvider)}{Symbol}";
 		}
 
+		protected double Subtract(UnitBase other)
+		{
+#if DEBUG
+			if (conversion.UnitType != other.conversion.UnitType)
+			{
+				throw new ArgumentException($"{other} and {this} are not of the same unit type");
+			}
+#endif
+			return (ToSi() - other.ToSi()) / conversion.ToSiFactor;
+		}
+
+		protected double SubtractAbs(UnitBase other)
+		{
+#if DEBUG
+			if (conversion.UnitType != other.conversion.UnitType)
+			{
+				throw new ArgumentException($"{other} and {this} are not of the same unit type");
+			}
+#endif
+			return System.Math.Abs(ToSi() - other.ToSi()) / conversion.ToSiFactor;
+		}
+
+		protected double Add(UnitBase other)
+		{
+#if DEBUG
+			if (conversion.UnitType != other.conversion.UnitType)
+			{
+				throw new ArgumentException($"{other} and {this} are not of the same unit type");
+			}
+#endif
+			return (ToSi() + other.ToSi()) / conversion.ToSiFactor;
+		}
+
 		public static T Abs<T>(T unit) where T : UnitBase
 		{
 			if (unit.unitValue >= 0) return unit;

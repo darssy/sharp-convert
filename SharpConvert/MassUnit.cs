@@ -33,20 +33,6 @@ namespace MmiSoft.Core.Math.Units
 			return x.ToSi() >= y.ToSi();
 		}
 
-		public static M Add<M>(MassUnit x, MassUnit y) where M : MassUnit, new()
-		{
-			M dif = new M();
-			dif.FromSi(x.ToSi() + y.ToSi());
-			return dif;
-		}
-
-		public static M Subtract<M>(MassUnit x, MassUnit y) where M : MassUnit, new()
-		{
-			M dif = new M();
-			dif.FromSi(System.Math.Abs(x.ToSi() - y.ToSi()));
-			return dif;
-		}
-
 		public int CompareTo(MassUnit other)
 		{
 			return CompareToImpl(other);

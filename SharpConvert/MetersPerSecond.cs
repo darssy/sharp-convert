@@ -28,5 +28,27 @@ namespace MmiSoft.Core.Math.Units
 		{
 			return new MetersPerSecond(-x.unitValue);
 		}
+
+		public static MetersPerSecond operator -(MetersPerSecond l, SpeedUnit r)
+		{
+			if (r is MetersPerSecond mps) return l - mps;
+			return new MetersPerSecond(l.unitValue - r.ToSi());
+		}
+
+		public static MetersPerSecond operator -(MetersPerSecond l, MetersPerSecond r)
+		{
+			return new MetersPerSecond(l.unitValue - r.unitValue);
+		}
+
+		public static MetersPerSecond operator +(MetersPerSecond l, SpeedUnit r)
+		{
+			if (r is MetersPerSecond mps) return l - mps;
+			return new MetersPerSecond(l.unitValue + r.ToSi());
+		}
+
+		public static MetersPerSecond operator +(MetersPerSecond l, MetersPerSecond r)
+		{
+			return new MetersPerSecond(l.unitValue + r.unitValue);
+		}
 	}
 }

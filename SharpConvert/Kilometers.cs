@@ -15,12 +15,12 @@ namespace MmiSoft.Core.Math.Units
 
 		public static Kilometers operator -(Kilometers x, LengthUnit y)
 		{
-			return Subtract<Kilometers>(x, y);
+			return new Kilometers(x.SubtractAbs(y));
 		}
 
 		public static Kilometers operator +(Kilometers x, LengthUnit y)
 		{
-			return Add<Kilometers>(x, y);
+			return new Kilometers(x.Add(y));
 		}
 	}
 }

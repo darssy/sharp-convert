@@ -36,5 +36,27 @@ namespace MmiSoft.Core.Math.Units
 		{
 			return new FeetPerMinute(-x.unitValue);
 		}
+
+		public static FeetPerMinute operator -(FeetPerMinute l, SpeedUnit r)
+		{
+			if (r is FeetPerMinute fpm) return l - fpm;
+			return new FeetPerMinute(l.Subtract(r));
+		}
+
+		public static FeetPerMinute operator -(FeetPerMinute l, FeetPerMinute r)
+		{
+			return new FeetPerMinute(l.unitValue - r.unitValue);
+		}
+
+		public static FeetPerMinute operator +(FeetPerMinute l, SpeedUnit r)
+		{
+			if (r is FeetPerMinute fpm) return l - fpm;
+			return new FeetPerMinute(l.Add(r));
+		}
+
+		public static FeetPerMinute operator +(FeetPerMinute l, FeetPerMinute r)
+		{
+			return new FeetPerMinute(l.unitValue + r.unitValue);
+		}
 	}
 }

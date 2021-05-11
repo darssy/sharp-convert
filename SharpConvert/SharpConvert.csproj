@@ -44,7 +44,6 @@
     <Compile Include="AccelerationUnit.cs" />
     <Compile Include="ComponentModel\UnitsConverter.cs" />
     <Compile Include="Conversion.cs" />
-    <Compile Include="FeetInterned.cs" />
     <Compile Include="FeetPerMinutePerSecond.cs" />
     <Compile Include="FeetPerSecond.cs" />
     <Compile Include="FeetPerSecondSquared.cs" />

@@ -46,6 +46,16 @@ namespace MmiSoft.Core.Math.Units
 			return x.ToSi() >= y.ToSi();
 		}
 
+		public static SpeedUnit operator -(SpeedUnit l, SpeedUnit r)
+		{
+			return new MetersPerSecond(l.ToSi() - r.ToSi());
+		}
+
+		public static SpeedUnit operator +(SpeedUnit l, SpeedUnit r)
+		{
+			return new MetersPerSecond(l.ToSi() + r.ToSi());
+		}
+
 		public static SpeedUnit operator *(SpeedUnit u, double factor)
 		{
 			SpeedUnit copy = (SpeedUnit)u.MemberwiseClone();

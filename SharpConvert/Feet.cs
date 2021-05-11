@@ -26,13 +26,13 @@ namespace MmiSoft.Core.Math.Units
 		public static Feet operator -(Feet x, LengthUnit y)
 		{
 			if (y is Feet feet) return x - feet;
-			return Subtract<Feet>(x, y);
+			return new Feet(x.SubtractAbs(y));
 		}
 
 		public static Feet operator +(Feet x, LengthUnit y)
 		{
 			if (y is Feet feet) return x + feet;
-			return Add<Feet>(x, y);
+			return new Feet(x.Add(y));
 		}
 
 		public static FeetPerMinute operator /(Feet x, Minutes y)

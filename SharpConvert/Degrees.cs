@@ -31,14 +31,24 @@ namespace MmiSoft.Core.Math.Units
 			return new Degrees(-x.unitValue);
 		}
 
+		public static Degrees operator -(Degrees x, Degrees y)
+		{
+			return new Degrees(x.unitValue - y.unitValue);
+		}
+
+		public static Degrees operator +(Degrees x, Degrees y)
+		{
+			return new Degrees(x.unitValue + y.unitValue);
+		}
+
 		public static Degrees operator -(Degrees x, AngleUnit y)
 		{
-			return Subtract<Degrees>(x, y);
+			return new Degrees(x.Subtract(y));
 		}
 
 		public static Degrees operator +(Degrees x, AngleUnit y)
 		{
-			return Add<Degrees>(x, y);
+			return new Degrees(x.Add(y));
 		}
 	}
 }

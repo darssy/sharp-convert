@@ -12,14 +12,24 @@ namespace MmiSoft.Core.Math.Units
 			:base (meters, Conversion.Meter)
 		{ }
 
+		public static Meters operator -(Meters x, Meters y)
+		{
+			return new Meters(System.Math.Abs(x.unitValue - y.unitValue));
+		}
+
+		public static Meters operator +(Meters x, Meters y)
+		{
+			return new Meters(x.unitValue + y.unitValue);
+		}
+
 		public static Meters operator -(Meters x, LengthUnit y)
 		{
-			return Subtract<Meters>(x, y);
+			return new Meters(System.Math.Abs(x.unitValue - y.ToSi()));
 		}
 
 		public static Meters operator +(Meters x, LengthUnit y)
 		{
-			return Add<Meters>(x, y);
+			return new Meters(x.unitValue + y.ToSi());
 		}
 	}
 }

@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using MmiSoft.Core.Math.Units;
 using NUnit.Framework;
@@ -13,15 +14,26 @@ namespace UnitTests.MmiSoft.Core.Math.Units
 		public void InternedUnitPerformance()
 		{
 			Random random = new Random(1);
-			Stopwatch sw = Stopwatch.StartNew();
-			for (int i = 0; i < 10000000; i++)
+
+			const int capacity = 10000000;
+			List<Meters> resultsList = new List<Meters>(capacity);
+			List<Meters> metersList = new List<Meters>(capacity);
+			List<Feet> feetList = new List<Feet>(capacity);
+
+			for (int i = 0; i < capacity; i++)
 			{
-				Feet unit1 = random.Next(50000).Feet();
-				Feet unit2 = random.Next(50000).Feet();
-				LengthUnit feet = (unit1 - unit2);
+				metersList.Add(random.Next(50000).Meters());
+				feetList.Add(random.Next(50000).Feet());
+			}
+
+			Stopwatch sw = Stopwatch.StartNew();
+			for (int i = 0; i < capacity; i++)
+			{
+				resultsList.Add(metersList[i] - feetList[i]);
 			}
 			sw.Stop();
 			Console.WriteLine(sw.Elapsed);
+			Console.WriteLine(resultsList.Count);
 		}
 	}
 }

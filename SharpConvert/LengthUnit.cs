@@ -46,20 +46,6 @@ namespace MmiSoft.Core.Math.Units
 			return x.ToSi() >= y.ToSi();
 		}
 
-		public static L Add<L>(LengthUnit x, LengthUnit y) where L : LengthUnit, new()
-		{
-			L dif = new L();
-			dif.FromSi(x.ToSi() + y.ToSi());
-			return dif;
-		}
-
-		public static L Subtract<L>(LengthUnit x, LengthUnit y) where L : LengthUnit, new()
-		{
-			L dif = new L();
-			dif.FromSi(System.Math.Abs(x.ToSi() - y.ToSi()));
-			return dif;
-		}
-
 		public static LengthUnit operator -(LengthUnit l, LengthUnit r)
 		{
 			return new Meters(System.Math.Abs(l.ToSi() - r.ToSi()));
