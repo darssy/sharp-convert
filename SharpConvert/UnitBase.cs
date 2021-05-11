@@ -7,7 +7,7 @@ namespace MmiSoft.Core.Math.Units
 	{
 		private const double Threshold = 1e-14;
 		protected double unitValue;
-		private readonly Conversion conversion;
+		protected readonly Conversion conversion;
 
 		protected UnitBase(double unitValue, Conversion conversion)
 		{
@@ -60,7 +60,7 @@ namespace MmiSoft.Core.Math.Units
 
 		public override int GetHashCode()
 		{
-			return ToSi().GetHashCode() * conversion.GetHashCode();
+			return ToSi().GetHashCode() + 1000000007 * conversion.GetHashCode();
 		}
 
 		public static bool operator ==(UnitBase left, UnitBase right)
@@ -86,6 +86,14 @@ namespace MmiSoft.Core.Math.Units
 		public string ToString(string format, IFormatProvider formatProvider)
 		{
 			return $"{unitValue.ToString(format, formatProvider)}{Symbol}";
+		}
+
+		public static T Abs<T>(T unit) where T : UnitBase
+		{
+			if (unit.unitValue >= 0) return unit;
+			T abs = (T) unit.MemberwiseClone();
+			abs.unitValue = -abs.unitValue;
+			return abs;
 		}
 
 		public static U1 ConvertTo<U1, U2>(U2 l)
