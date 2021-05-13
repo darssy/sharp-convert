@@ -1,7 +1,7 @@
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/9fd842845e954fa1a4036088002b5b1c)](https://www.codacy.com/manual/adamstyl/sharp-convert?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=adamstyl/sharp-convert&amp;utm_campaign=Badge_Grade)
 [![Build status](https://img.shields.io/appveyor/ci/adamstyl/sharp-convert.svg)](https://ci.appveyor.com/project/adamstyl/sharp-convert)
 
-# Sharp Units
+# Sharp Convert
 ## Purpose - disclaimer
 The purpose of this library is to handle conversions between [units of measurement](https://en.wikipedia.org/wiki/Conversion_of_units) in an object oriented manner. Although I recognize the library is not complete, the intention is neither to describe every know unit, nor describe all possible physics equations that involve units.
 
@@ -50,3 +50,39 @@ As it's already known, floating point arithmetic has rounding errors. For exampl
 
 ### Parsing
 Parsing is based on the unit symbol and is case sensitive. For example `12NM` will result in 12 nautical miles while `12nm` will be 12 nanometers. Clearly, several orders of magnitude different. You don't have to worry for now as I don't have any nanometers in the library. But future can be unpredictable. Space is allowed between the number and the unit symbol, but it's not advised as this might change in the future.
+
+### Available units
+
+#### Length
+* `Meters`
+* `Feet`
+* `Kilometers`
+* `NauticalMiles`
+
+#### Time
+* `Second`
+* `Minute`
+* `Hour`
+
+#### Speed
+* `MetersPerSecond`
+* `FeetPerSecond`
+* `FeetPerMinute`
+* `Knots`
+
+####  Acceleration
+* `MetersPerSecondSquared`
+* `FeetPerSecondSquared`
+* `FeetPerMinutePerSecond`
+* `KnotsPerSecond`
+
+#### Angle
+* `Radians`
+* `Degrees`
+
+#### Angular velocity
+* `RadiansPerSecond`
+* `DegreesPerSecond`
+
+#### Mass
+* `Kilograms`
