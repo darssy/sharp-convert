@@ -16,7 +16,7 @@ namespace MmiSoft.Core.Math.Units
 			}
 		}
 
-		public L To<L>() where L : LengthUnit, new()
+		public L To<L>() where L : LengthUnit
 		{
 			return ConvertTo<L, LengthUnit>(this);
 		}

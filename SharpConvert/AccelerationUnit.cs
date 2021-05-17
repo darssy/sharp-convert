@@ -16,7 +16,7 @@ namespace MmiSoft.Core.Math.Units
 
 		protected abstract TimeUnit GetTimeUnit();
 
-		public A To<A>() where A : AccelerationUnit, new()
+		public A To<A>() where A : AccelerationUnit
 		{
 			return ConvertTo<A, AccelerationUnit>(this);
 		}

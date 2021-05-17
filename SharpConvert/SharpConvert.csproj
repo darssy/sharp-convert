@@ -69,6 +69,7 @@
     <Compile Include="NauticalMiles.cs" />
     <Compile Include="Radians.cs" />
     <Compile Include="RadiansPerSecond.cs" />
+    <Compile Include="ReflectionHelper.cs" />
     <Compile Include="Seconds.cs" />
     <Compile Include="SpeedUnit.cs" />
     <Compile Include="TimeUnit.cs" />

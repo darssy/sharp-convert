@@ -16,7 +16,7 @@ namespace MmiSoft.Core.Math.Units
 		protected abstract TimeUnit GetTimeUnit();
 
 		public U To<U>()
-			where U : AngularVelocity, new()
+			where U : AngularVelocity
 		{
 			return ConvertTo<U, AngularVelocity>(this);
 		}
@@ -78,10 +78,10 @@ namespace MmiSoft.Core.Math.Units
 		}
 
 		public static U Get<U>(AngleUnit s, TimeUnit t)
-			where U : AngularVelocity, new()
+			where U : AngularVelocity
 		{
 			double u = s.ToSi() / t.ToSi();
-			U speed = new U();
+			U speed = (U) ReflectionHelper.GetConstructor<U>().Invoke(0);
 			speed.FromSi(u);
 			return speed;
 		}

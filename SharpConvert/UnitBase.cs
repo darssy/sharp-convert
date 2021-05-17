@@ -131,12 +131,13 @@ namespace MmiSoft.Core.Math.Units
 
 		public static U1 ConvertTo<U1, U2>(U2 l)
 			where U2 : UnitBase
-			where U1 : U2, new()
+			where U1 : U2
 		{
 			if (l is U1 u2) return u2;
-			U1 converted = new U1();
-			converted.FromSi(l.ToSi());
-			return converted;
+			Func<double, UnitBase> func = ReflectionHelper.GetConstructor<U1>();
+			UnitBase unitBase = func.Invoke(0);
+			unitBase.FromSi(l.ToSi());
+			return (U1) unitBase;
 		}
 
 		// protected in order to avoid comparison between apples and oranges

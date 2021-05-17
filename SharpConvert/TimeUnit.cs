@@ -11,7 +11,7 @@ namespace MmiSoft.Core.Math.Units
 			: base(time, conversion)
 		{ }
 
-		public T To<T>() where T : TimeUnit, new()
+		public T To<T>() where T : TimeUnit
 		{
 			return ConvertTo<T, TimeUnit>(this);
 		}

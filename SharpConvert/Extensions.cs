@@ -1,10 +1,7 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using System.Linq.Expressions;
-using System.Reflection;
 
 namespace MmiSoft.Core.Math.Units
 {
@@ -16,36 +13,10 @@ namespace MmiSoft.Core.Math.Units
 
 		static Extensions()
 		{
-			var type = typeof(UnitBase);
-			List<Type> types = AppDomain.CurrentDomain.GetAssemblies()
-				.SelectMany(a => a.GetTypes())
-				.Where(t => type.IsAssignableFrom(t) && !t.IsAbstract)
-				.ToList();
-
-			Type paramType = typeof(double);
-			foreach (Type t in types)
+			foreach (Func<double,UnitBase> ctor in ReflectionHelper.All())
 			{
-				foreach (ConstructorInfo constructor in t.GetConstructors())
-				{
-					ParameterInfo[] parameters = constructor.GetParameters();
-					if (parameters.Length == 1 && parameters[0].ParameterType == paramType)
-					{
-						ParameterExpression param = Expression.Parameter(paramType, "val");
-						Expression<Func<double, UnitBase>> lambda = Expression.Lambda<Func<double, UnitBase>>(
-							Expression.New(constructor, param), param);
-						Func<double, UnitBase> func = lambda.Compile();
-						try
-						{
-							UnitBase unit = func.Invoke(0);
-							registeredUnitConstructors[unit.Symbol] = func;
-						}
-						catch (Exception e)
-						{
-							//TODO log exception
-						}
-						break;
-					}
-				}
+				UnitBase unit = ctor.Invoke(0);
+				registeredUnitConstructors[unit.Symbol] = ctor;
 			}
 			registeredUnitSymbols.AddRange(registeredUnitConstructors.Keys);
 		}

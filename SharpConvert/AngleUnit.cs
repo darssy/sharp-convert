@@ -12,7 +12,7 @@ namespace MmiSoft.Core.Math.Units
 		{
 		}
 
-		public A To<A>() where A : AngleUnit, new()
+		public A To<A>() where A : AngleUnit
 		{
 			return ConvertTo<A, AngleUnit>(this);
 		}

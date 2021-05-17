@@ -16,7 +16,7 @@ namespace MmiSoft.Core.Math.Units
 
 		protected abstract TimeUnit GetTimeUnit();
 
-		public U To<U>() where U : SpeedUnit, new()
+		public U To<U>() where U : SpeedUnit
 		{
 			return ConvertTo<U, SpeedUnit>(this);
 		}
@@ -116,10 +116,10 @@ namespace MmiSoft.Core.Math.Units
 		}
 
 		public static U Get<U>(LengthUnit s, TimeUnit t)
-			where U : SpeedUnit, new()
+			where U : SpeedUnit
 		{
 			double u = s.ToSi() / t.ToSi();
-			U speed = new U();
+			U speed = (U) ReflectionHelper.GetConstructor<U>().Invoke(0);
 			speed.FromSi(u);
 			return speed;
 		}
