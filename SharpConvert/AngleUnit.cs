@@ -37,6 +37,22 @@ namespace MmiSoft.Core.Math.Units
 			return x.ToSi() >= y.ToSi();
 		}
 
+		[Obsolete("Superseded by operator overloading; will be removed in 2.0")]
+		public static A Add<A>(AngleUnit x, AngleUnit y) where A : AngleUnit, new()
+		{
+			A dif = new A();
+			dif.FromSi(x.ToSi() + y.ToSi());
+			return dif;
+		}
+
+		[Obsolete("Superseded by operator overloading; will be removed in 2.0")]
+		public static A Subtract<A>(AngleUnit x, AngleUnit y) where A : AngleUnit, new()
+		{
+			A dif = new A();
+			dif.FromSi(x.ToSi() - y.ToSi());
+			return dif;
+		}
+
 		public static AngleUnit operator -(AngleUnit l, AngleUnit r)
 		{
 			return new Radians(l.ToSi() - r.ToSi());

@@ -33,6 +33,22 @@ namespace MmiSoft.Core.Math.Units
 			return x.ToSi() >= y.ToSi();
 		}
 
+		[Obsolete("Superseded by operator overloading; will be removed in 2.0")]
+		public static M Add<M>(MassUnit x, MassUnit y) where M : MassUnit, new()
+		{
+			M dif = new M();
+			dif.FromSi(x.ToSi() + y.ToSi());
+			return dif;
+		}
+
+		[Obsolete("Superseded by operator overloading; will be removed in 2.0")]
+		public static M Subtract<M>(MassUnit x, MassUnit y) where M : MassUnit, new()
+		{
+			M dif = new M();
+			dif.FromSi(System.Math.Abs(x.ToSi() - y.ToSi()));
+			return dif;
+		}
+
 		public int CompareTo(MassUnit other)
 		{
 			return CompareToImpl(other);
