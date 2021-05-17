@@ -31,6 +31,11 @@ namespace MmiSoft.Core.Math.Units
 			return registeredUnitConstructors[unit].Invoke(value);
 		}
 
+		public static T Abs<T>(this T unit) where T : UnitBase
+		{
+			return UnitBase.Abs(unit);
+		}
+
 		#region Length Units
 		public static Feet Feet(this double d)
 		{
