@@ -21,7 +21,14 @@ namespace MmiSoft.Core.Math.Units
 			registeredUnitSymbols.AddRange(registeredUnitConstructors.Keys);
 		}
 
+		[Obsolete("Replaced by ParseUnit. Imagine what would happen if everyone was providing a Parse extension " +
+		          "method on string. Exactly. Chaos. Will be deprecated in 2.0")]
 		public static UnitBase Parse(this string text, CultureInfo culture = null)
+		{
+			return ParseUnit(text, culture);
+		}
+
+		public static UnitBase ParseUnit(this string text, CultureInfo culture = null)
 		{
 			text = text.Trim();
 			string unit = registeredUnitSymbols.FirstOrDefault(text.EndsWith);

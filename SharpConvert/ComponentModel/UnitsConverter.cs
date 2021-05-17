@@ -13,7 +13,7 @@ namespace MmiSoft.Core.Math.Units.ComponentModel
 			{
 				throw new ArgumentException($"'null' is not a valid value for {context.PropertyDescriptor?.PropertyType.FullName}");
 			}
-			return unitStr.Parse(culture);
+			return unitStr.ParseUnit(culture);
 		}
 
 		public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType)
