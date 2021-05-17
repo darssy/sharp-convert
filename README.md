@@ -5,6 +5,14 @@
 ## Purpose - disclaimer
 The purpose of this library is to handle conversions between [units of measurement](https://en.wikipedia.org/wiki/Conversion_of_units) in an object oriented manner. Although I recognize the library is not complete, the intention is neither to describe every know unit, nor describe all possible physics equations that involve units.
 
+For some background for the inspiration, you can have a look at this [relevant question in stackoverflow](https://stackoverflow.com/questions/348853/units-of-measure-in-c-sharp-almost). Basically the goal was to have something similar to F# units of measure which unfortunately is not even remotely possible. There is no way to get dimensional analysis in compile time and creating derivative units (like the example right below) is simply impossible. 
+
+```fs
+[<Measure>] type N = kg m/sec^2
+```
+
+Regardless if you are still interested and find some value into knowing _what_ is the number you see in your code then read on.
+
 ## Introduction
 I realized the importance of an object oriented units conversion library while I was developing [DARSSY](http://darssy.com/). There I had to deal with nautical miles, feet, knots and feet per minute all at the same time. That was easy at first, but when the project scaled up, I was searching for bugs the root of which was units conversion.
 For example, when calculating ILS glide paths I had to calculate the tangent of the glide triangle, and that was altitude in feet divided by distance in nautical miles. Before I had to do:
