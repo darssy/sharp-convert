@@ -78,7 +78,7 @@ Parsing is based on the unit symbol and is case sensitive. For example `12NM` wi
 * `FeetPerMinute`
 * `Knots`
 
-####  Acceleration
+#### Acceleration
 * `MetersPerSecondSquared`
 * `FeetPerSecondSquared`
 * `FeetPerMinutePerSecond`
