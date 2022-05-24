@@ -83,6 +83,20 @@ namespace UnitTests.MmiSoft.Core.Math.Units
 		}
 
 		[Test]
+		public void MultiplyOperator_WithZeroSpeed_ReturnsZero()
+		{
+			LengthUnit distance = 0.FeetPerMinute() * 2.Seconds();
+			Assert.AreEqual(distance, 0.Meters());
+		}
+
+		[Test]
+		public void MultiplyOperator_WithZeroTime_ReturnsZero()
+		{
+			LengthUnit distance = 1200.FeetPerMinute() * 0.Seconds();
+			Assert.AreEqual(distance, 0.Meters());
+		}
+
+		[Test]
 		public void MultiplyOperator_WithNegativeSpeedUsingTimeSpan_ReturnsPositiveLength()
 		{
 			LengthUnit distance = (-1500).FeetPerMinute() * TimeSpan.FromSeconds(2);
