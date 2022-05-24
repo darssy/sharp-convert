@@ -5,6 +5,8 @@ namespace MmiSoft.Core.Math.Units
 	[Serializable]
 	public class Meters : LengthUnit
 	{
+		public new static readonly Meters Zero = 0.Meters();
+
 		public Meters()
 			: this(0)
 		{ }
