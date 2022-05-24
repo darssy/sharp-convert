@@ -58,6 +58,20 @@ namespace MmiSoft.Core.Math.Units
 			return l.ToSi() / r.ToSi();
 		}
 
+		public static TimeUnit operator *(TimeUnit t, double f)
+		{
+			TimeUnit copy = (TimeUnit)t.MemberwiseClone();
+			copy.unitValue *= System.Math.Abs(f);
+			return copy;
+		}
+
+		public static TimeUnit operator *(double f, TimeUnit t)
+		{
+			TimeUnit copy = (TimeUnit)t.MemberwiseClone();
+			copy.unitValue *= System.Math.Abs(f);
+			return copy;
+		}
+
 		public static explicit operator double(TimeUnit t)
 		{
 			return t.unitValue;
