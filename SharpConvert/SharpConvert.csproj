@@ -1,87 +1,31 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>8.0.30703</ProductVersion>
-    <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{EBF81BE7-3CEC-4CD3-9623-BA1C96D47712}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <TargetFramework>net48</TargetFramework>
+    <LangVersion>8.0</LangVersion>
     <RootNamespace>MmiSoft.Core.Math.Units</RootNamespace>
-    <AssemblyName>SharpConvert</AssemblyName>
-    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <LangVersion>9</LangVersion>
+    <Authors>adamstyl</Authors>
+    <PackageId>SharpConvert</PackageId>
+    <Product>SharpConvert</Product>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    <BuildCount>$([System.IO.File]::ReadAllText('$(MSBuildProjectDirectory)\Properties\build.txt').Trim())</BuildCount>
+    <VersionPrefix>1.2.0.$(BuildCount)</VersionPrefix>
+    <!--<AssemblyVersion>1.2.0</AssemblyVersion>
+    <FileVersion>$(AssemblyVersion)</FileVersion>
+    <InformationalVersion>$(AssemblyVersion)</InformationalVersion>
+    <PackageVersion>$(AssemblyVersion)</PackageVersion>-->
+    <Description>(Yet another) Library to handle conversions between units of measurement in an object oriented manner.</Description>
+    <ThisYear>$([System.DateTime]::Now.ToString("yyyy"))</ThisYear>
+    <Copyright>Copyright © adamstyl 2016-$(ThisYear)</Copyright>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
+  
   <ItemGroup>
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
+    <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleToAttribute">
+      <_Parameter1>UnitTests.MmiSoft.Core.Math.Units</_Parameter1>
+    </AssemblyAttribute>
   </ItemGroup>
-  <ItemGroup>
-    <Compile Include="AccelerationUnit.cs" />
-    <Compile Include="ComponentModel\UnitsConverter.cs" />
-    <Compile Include="Conversion.cs" />
-    <Compile Include="FeetPerMinutePerSecond.cs" />
-    <Compile Include="FeetPerSecond.cs" />
-    <Compile Include="FeetPerSecondSquared.cs" />
-    <Compile Include="Kilogram.cs" />
-    <Compile Include="KnotsPerSecond.cs" />
-    <Compile Include="MassUnit.cs" />
-    <Compile Include="MetersPerSecondSquared.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="AngleUnit.cs" />
-    <Compile Include="AngularVelocity.cs" />
-    <Compile Include="Degrees.cs" />
-    <Compile Include="DegreesPerSecond.cs" />
-    <Compile Include="Extensions.cs" />
-    <Compile Include="Feet.cs" />
-    <Compile Include="FeetPerMinute.cs" />
-    <Compile Include="Hours.cs" />
-    <Compile Include="Kilometers.cs" />
-    <Compile Include="Knots.cs" />
-    <Compile Include="LengthUnit.cs" />
-    <Compile Include="Meters.cs" />
-    <Compile Include="MetersPerSecond.cs" />
-    <Compile Include="Minutes.cs" />
-    <Compile Include="NauticalMiles.cs" />
-    <Compile Include="Radians.cs" />
-    <Compile Include="RadiansPerSecond.cs" />
-    <Compile Include="ReflectionHelper.cs" />
-    <Compile Include="Seconds.cs" />
-    <Compile Include="SpeedUnit.cs" />
-    <Compile Include="TimeUnit.cs" />
-    <Compile Include="UnitBase.cs" />
-    <Compile Include="UnitType.cs" />
-  </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
+  
 </Project>
