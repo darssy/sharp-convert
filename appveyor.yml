@@ -3,6 +3,7 @@ branches:
   only:
     - master
     - develop
+image: Visual Studio 2022
 environment:
   token:
     secure: dhzlgD6HLoHEQheUEe2ejpED6DATY1Y4XuKeEo6g6j8=
