@@ -12,8 +12,8 @@
     <IncludeSymbols>true</IncludeSymbols>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
     <BuildCount>$([System.IO.File]::ReadAllText('$(MSBuildProjectDirectory)\Properties\build.txt').Trim())</BuildCount>
-    <VersionPrefix>1.2.1.$(BuildCount)</VersionPrefix>
-    <!--<AssemblyVersion>1.2.1</AssemblyVersion>
+    <VersionPrefix>1.2.2.$(BuildCount)</VersionPrefix>
+    <!--<AssemblyVersion>1.2.2</AssemblyVersion>
     <FileVersion>$(AssemblyVersion)</FileVersion>
     <InformationalVersion>$(AssemblyVersion)</InformationalVersion>
     <PackageVersion>$(AssemblyVersion)</PackageVersion>-->

@@ -1,4 +1,4 @@
-version: 1.2.1
+version: 1.2.2
 branches:
   only:
     - master
@@ -58,4 +58,4 @@ for:
     branches:
       only:
         - develop
-    version: 1.2.1-dev{build}
+    version: 1.2.2-dev{build}
