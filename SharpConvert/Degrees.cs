@@ -5,16 +5,21 @@ namespace MmiSoft.Core.Math.Units
 	[Serializable]
 	public class Degrees : AngleUnit
 	{
+		public new static readonly Degrees Zero = new Degrees(0);
+
+		public static readonly Degrees _30 = new Degrees(30);
+		public static readonly Degrees _45 = new Degrees(45);
+		public static readonly Degrees _60 = new Degrees(60);
 		public static readonly Degrees _90 = new Degrees(90);
 		public static readonly Degrees _180 = new Degrees(180);
 		public static readonly Degrees _360 = new Degrees(360);
+
 		public static readonly Degrees FullCircle = _360;
 		public static readonly Degrees HalfCircle = _180;
 		public static readonly Degrees RightAngle = _90;
-		public new static readonly Degrees Zero = new Degrees(0);
-		public static readonly Degrees Thirty = new Degrees(30);
-		public static readonly Degrees FortyFive = new Degrees(45);
-		public static readonly Degrees Sixty = new Degrees(60);
+		public static readonly Degrees Thirty = _30;
+		public static readonly Degrees FortyFive = _45;
+		public static readonly Degrees Sixty = _60;
 
 		public Degrees() :this(0f)
 		{ }
