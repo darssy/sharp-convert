@@ -5,6 +5,8 @@ namespace MmiSoft.Core.Math.Units
 	[Serializable]
 	public class NauticalMiles : LengthUnit
 	{
+		public new static readonly NauticalMiles Zero = 0.NauticalMiles();
+
 		public NauticalMiles()
 			:this(0)
 		{ }
