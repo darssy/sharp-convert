@@ -1,5 +1,6 @@
 using System;
 using System.ComponentModel;
+using System.ComponentModel.Design.Serialization;
 using System.Globalization;
 
 namespace MmiSoft.Core.Math.Units.ComponentModel
@@ -21,11 +22,23 @@ namespace MmiSoft.Core.Math.Units.ComponentModel
 			return sourceType == typeof(string) && typeof(UnitBase).IsAssignableFrom(context.PropertyDescriptor?.PropertyType);
 		}
 
+		public override bool CanConvertTo(ITypeDescriptorContext context, Type destinationType)
+		{
+			return destinationType == typeof(string) || destinationType == typeof(InstanceDescriptor);
+		}
+
 		public override object ConvertTo(ITypeDescriptorContext context, CultureInfo culture, object value, Type destinationType)
 		{
-			return destinationType == typeof(string)
-				? ((UnitBase)value).ToString("0.##")
-				: base.ConvertTo(context, culture, value, destinationType);
+			if (destinationType == typeof(string))
+			{
+				return ((UnitBase)value).ToString("0.##");
+			}
+			if (destinationType == typeof(InstanceDescriptor))
+			{
+				return new InstanceDescriptor(value.GetType().GetConstructor(new[] { typeof(double) }),
+					new[] { ((UnitBase)value).UnitValue });
+			}
+			return base.ConvertTo(context, culture, value, destinationType);
 		}
 	}
 }
