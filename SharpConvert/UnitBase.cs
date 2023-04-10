@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Runtime.CompilerServices;
 
 namespace MmiSoft.Core.Math.Units
 {
@@ -26,11 +27,13 @@ namespace MmiSoft.Core.Math.Units
 				: System.Math.Round(unitValue, decimals);
 		}
 
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		protected internal double ToSi()
 		{
 			return unitValue * conversion.ToSiFactor;
 		}
 
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		protected internal double FromSi(double siValue)
 		{
 			return unitValue = siValue / conversion.ToSiFactor;
