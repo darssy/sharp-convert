@@ -28,6 +28,20 @@ namespace MmiSoft.Core.Math.Units
 			return ParseUnit(text, culture);
 		}
 
+		/// <summary>
+		/// Parsing is based on the unit symbol and is case sensitive. For example 12NM will result in 12 nautical miles while
+		/// 12nm will be 12 nanometers. Clearly, several orders of magnitude different. Space is allowed between the number and
+		/// the unit symbol, but it's not advised as this might change in the future.
+		/// <para>
+		/// If your assembly specifies its own unit(s) that you want to be recognized by ParseUnit, consider marking it with the
+		/// <see cref="UnitContainerAttribute"/>.
+		/// </para>
+		/// </summary>
+		/// <param name="text">The text containing the unit and its magnitude to be parsed. Whitespaces are trimmed.</param>
+		/// <param name="culture">The culture to use in order to parse the magnitude. If null then <see cref="CultureInfo.CurrentCulture"/>
+		/// will be used which might affect parsing across machines with different locale.</param>
+		/// <returns></returns>
+		/// <exception cref="FormatException">Will be thrown when an unknown unit is be encountered.</exception>
 		public static UnitBase ParseUnit(this string text, CultureInfo culture = null)
 		{
 			text = text.Trim();
