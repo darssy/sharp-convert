@@ -1,8 +1,11 @@
 ﻿using System;
+using System.ComponentModel;
+using MmiSoft.Core.Math.Units.ComponentModel;
 
 namespace MmiSoft.Core.Math.Units
 {
 	[Serializable]
+	[TypeConverter(typeof(UnitsConverter))]
 	public abstract class AngleUnit : UnitBase, IComparable<AngleUnit>
 	{
 		public static readonly AngleUnit Zero = 0.Radians();
