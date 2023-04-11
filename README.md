@@ -1,4 +1,4 @@
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/9fd842845e954fa1a4036088002b5b1c)](https://www.codacy.com/manual/adamstyl/sharp-convert?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=adamstyl/sharp-convert&amp;utm_campaign=Badge_Grade)
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/9fd842845e954fa1a4036088002b5b1c)](https://app.codacy.com/gh/adamstyl/sharp-convert/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
 [![Build status](https://img.shields.io/appveyor/ci/adamstyl/sharp-convert.svg)](https://ci.appveyor.com/project/adamstyl/sharp-convert)
 
 # Sharp Convert
