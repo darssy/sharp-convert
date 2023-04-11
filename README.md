@@ -39,8 +39,8 @@ And for conversions you can use:
 
 `Feet ft = distance.To<Feet>();`
 
-### Type safety
-SharpConvert is type safe. Each unit type is a class by itself. Each time you know that you are handling distance or angle and not some cryptic double or float value. You won't end up adding up acceleration to temperature by mistake.
+### Compile time type safety
+SharpConvert is type safe. This isn't implied unfortunately as there are libraries out there handling the checks in runtime. Unfortunately. In SharpConvert, every unit type is a class by itself. Each time you know that you are handling distance or angle and not some cryptic double or float value. You won't end up adding up acceleration to temperature by mistake.
 
 ### Performance
 Type safety comes at a cost. New object allocation is expensive and this is what you do each time you create a unit. In fact this
@@ -53,11 +53,22 @@ is (approximately) twice as slow as checking for
 
 Problem is that 2 can be anything and you won't always know what's on the left side of the operator.
 
+#### Benchmarking
+The only *realistic* answer to the "how fast (or slow) is it?" question can be **"Measure it!"**. The first benchmarks (as of April 2023) run with Benchmark.net are quite interesting and they prove that well optimized **classes can be faster than non optimized structs.** Once the benchmarks are quite mature they will be committed along with the rest of the code.
+
 ### Accuracy
 As it's already known, floating point arithmetic has rounding errors. For example 0.1 is not stored as exactly 0.1. To deal with the problem, Sharp Convert has an error margin of 10<sup>-15</sup> when performing equality operations.
 
 ### Parsing
 Parsing is based on the unit symbol and is case sensitive. For example `12NM` will result in 12 nautical miles while `12nm` will be 12 nanometers. Clearly, several orders of magnitude different. You don't have to worry for it now as I don't have any nanometers in the library. But future can be unpredictable. Space is allowed between the number and the unit symbol, but it's not advised as this might change in the future.
+
+### Preparation for 2.0
+
+After some years of maintaining this library and some quick research on other "competing" libraries, I realized that when it comes to a units system modeling in C#, there is a tradeoff between the speed of structs and the "reusability through inheritance" of classes.
+
+In order to evaluate the two approaches, I added a new `Structs` namespace that will mirror the existing functionality with value types. **This should be considered experimental until further notice.**
+
+One other important aspect is the _pluralism_ of the library. If you have a look into the next section you will immediately realize that this library is quite poor in terms of supported units when compared to other libraries. This is because each unit has **a lot** of boilerplate code that a) it has to be copied and tested by hand all the time (and we know how error prone could that be) and b) this boilerplate **can't be reduced with metaprogramming.** Unfortunately. As a result, the evolution of SharpConvert to a source generated library looks a oneway road at the moment.
 
 ### Available units
 
