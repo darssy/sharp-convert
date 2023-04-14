@@ -11,6 +11,7 @@ public readonly struct Meters : ILength
 
 	public Meters(double meters)
 	{
+		if (meters < 0) throw new ArgumentException("Cowardly refusing to create a negative length unit");
 		unitValue = meters;
 	}
 
@@ -102,7 +103,7 @@ public readonly struct Meters : ILength
 	{
 		return obj switch
 		{
-			Meters kts => Equals(kts),
+			Meters m => Equals(m),
 			ILength length => Equals(length.To(LengthConversions.Meter)),
 			_ => false
 		};
@@ -126,6 +127,15 @@ public readonly struct Meters : ILength
 	public static bool operator !=(Meters l, NauticalMiles r) => !l.Equals(r.To(LengthConversions.Meter));
 
 	#endregion
+
+	public static Meters operator *(Meters m, double f) => new Meters(m.unitValue * f);
+	public static Meters operator *(double f, Meters m) => new Meters(m.unitValue * f);
+
+	public static double operator /(Meters x, Meters y) => x.unitValue / y.unitValue;
+
+	public static Meters operator /(Meters x, double y) => new Meters(x.unitValue / y);
+	public static Meters operator /(Meters x, float y) => new Meters(x.unitValue / y);
+	public static Meters operator /(Meters x, int y) => new Meters(x.unitValue / y);
 
 	public double UnitValue => unitValue;
 
@@ -170,6 +180,7 @@ public readonly struct Inches : ILength
 
 	public Inches(double inches)
 	{
+		if (inches < 0) throw new ArgumentException("Cowardly refusing to create a negative length unit");
 		unitValue = inches;
 	}
 
@@ -261,7 +272,7 @@ public readonly struct Inches : ILength
 	{
 		return obj switch
 		{
-			Inches kts => Equals(kts),
+			Inches i => Equals(i),
 			ILength length => Equals(length.To(LengthConversions.Inch)),
 			_ => false
 		};
@@ -285,6 +296,15 @@ public readonly struct Inches : ILength
 	public static bool operator !=(Inches l, NauticalMiles r) => !l.Equals(r.To(LengthConversions.Inch));
 
 	#endregion
+
+	public static Inches operator *(Inches m, double f) => new Inches(m.unitValue * f);
+	public static Inches operator *(double f, Inches m) => new Inches(m.unitValue * f);
+
+	public static double operator /(Inches x, Inches y) => x.unitValue / y.unitValue;
+
+	public static Inches operator /(Inches x, double y) => new Inches(x.unitValue / y);
+	public static Inches operator /(Inches x, float y) => new Inches(x.unitValue / y);
+	public static Inches operator /(Inches x, int y) => new Inches(x.unitValue / y);
 
 	public double UnitValue => unitValue;
 
@@ -329,6 +349,7 @@ public readonly struct Feet : ILength
 
 	public Feet(double feet)
 	{
+		if (feet < 0) throw new ArgumentException("Cowardly refusing to create a negative length unit");
 		unitValue = feet;
 	}
 
@@ -420,7 +441,7 @@ public readonly struct Feet : ILength
 	{
 		return obj switch
 		{
-			Feet kts => Equals(kts),
+			Feet f => Equals(f),
 			ILength length => Equals(length.To(LengthConversions.Foot)),
 			_ => false
 		};
@@ -444,6 +465,15 @@ public readonly struct Feet : ILength
 	public static bool operator !=(Feet l, NauticalMiles r) => !l.Equals(r.To(LengthConversions.Foot));
 
 	#endregion
+
+	public static Feet operator *(Feet m, double f) => new Feet(m.unitValue * f);
+	public static Feet operator *(double f, Feet m) => new Feet(m.unitValue * f);
+
+	public static double operator /(Feet x, Feet y) => x.unitValue / y.unitValue;
+
+	public static Feet operator /(Feet x, double y) => new Feet(x.unitValue / y);
+	public static Feet operator /(Feet x, float y) => new Feet(x.unitValue / y);
+	public static Feet operator /(Feet x, int y) => new Feet(x.unitValue / y);
 
 	public double UnitValue => unitValue;
 
@@ -488,6 +518,7 @@ public readonly struct Kilometers : ILength
 
 	public Kilometers(double kilometers)
 	{
+		if (kilometers < 0) throw new ArgumentException("Cowardly refusing to create a negative length unit");
 		unitValue = kilometers;
 	}
 
@@ -579,7 +610,7 @@ public readonly struct Kilometers : ILength
 	{
 		return obj switch
 		{
-			Kilometers kts => Equals(kts),
+			Kilometers k => Equals(k),
 			ILength length => Equals(length.To(LengthConversions.Kilometer)),
 			_ => false
 		};
@@ -603,6 +634,15 @@ public readonly struct Kilometers : ILength
 	public static bool operator !=(Kilometers l, NauticalMiles r) => !l.Equals(r.To(LengthConversions.Kilometer));
 
 	#endregion
+
+	public static Kilometers operator *(Kilometers m, double f) => new Kilometers(m.unitValue * f);
+	public static Kilometers operator *(double f, Kilometers m) => new Kilometers(m.unitValue * f);
+
+	public static double operator /(Kilometers x, Kilometers y) => x.unitValue / y.unitValue;
+
+	public static Kilometers operator /(Kilometers x, double y) => new Kilometers(x.unitValue / y);
+	public static Kilometers operator /(Kilometers x, float y) => new Kilometers(x.unitValue / y);
+	public static Kilometers operator /(Kilometers x, int y) => new Kilometers(x.unitValue / y);
 
 	public double UnitValue => unitValue;
 
@@ -647,6 +687,7 @@ public readonly struct NauticalMiles : ILength
 
 	public NauticalMiles(double nauticalmiles)
 	{
+		if (nauticalmiles < 0) throw new ArgumentException("Cowardly refusing to create a negative length unit");
 		unitValue = nauticalmiles;
 	}
 
@@ -738,7 +779,7 @@ public readonly struct NauticalMiles : ILength
 	{
 		return obj switch
 		{
-			NauticalMiles kts => Equals(kts),
+			NauticalMiles n => Equals(n),
 			ILength length => Equals(length.To(LengthConversions.NauticalMile)),
 			_ => false
 		};
@@ -762,6 +803,15 @@ public readonly struct NauticalMiles : ILength
 	public static bool operator !=(NauticalMiles l, Kilometers r) => !l.Equals(r.To(LengthConversions.NauticalMile));
 
 	#endregion
+
+	public static NauticalMiles operator *(NauticalMiles m, double f) => new NauticalMiles(m.unitValue * f);
+	public static NauticalMiles operator *(double f, NauticalMiles m) => new NauticalMiles(m.unitValue * f);
+
+	public static double operator /(NauticalMiles x, NauticalMiles y) => x.unitValue / y.unitValue;
+
+	public static NauticalMiles operator /(NauticalMiles x, double y) => new NauticalMiles(x.unitValue / y);
+	public static NauticalMiles operator /(NauticalMiles x, float y) => new NauticalMiles(x.unitValue / y);
+	public static NauticalMiles operator /(NauticalMiles x, int y) => new NauticalMiles(x.unitValue / y);
 
 	public double UnitValue => unitValue;
 

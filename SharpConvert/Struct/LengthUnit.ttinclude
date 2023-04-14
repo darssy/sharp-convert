@@ -3,6 +3,7 @@
 <#+
     void GenerateLengthClass(string structName, string unitName, bool siUnit, List<string> otherUnits)
     {
+	    string ctorArg = structName.ToLower();
 #>
 [Serializable]
 public readonly struct <#= structName #> : ILength
@@ -11,9 +12,10 @@ public readonly struct <#= structName #> : ILength
 
 	private readonly double unitValue;
 
-	public <#= structName #>(double <#= structName.ToLower() #>)
+	public <#= structName #>(double <#= ctorArg #>)
 	{
-		unitValue = <#= structName.ToLower() #>;
+		if (<#= ctorArg #> < 0) throw new ArgumentException("Cowardly refusing to create a negative length unit");
+		unitValue = <#= ctorArg #>;
 	}
 
 	#region minus operators
@@ -77,7 +79,7 @@ public readonly struct <#= structName #> : ILength
 	{
 		return obj switch
 		{
-			<#= structName #> kts => Equals(kts),
+			<#= structName #> <#= structName.ToLower()[0] #> => Equals(<#= structName.ToLower()[0] #>),
 			ILength length => Equals(length.To(LengthConversions.<#= unitName #>)),
 			_ => false
 		};
@@ -107,6 +109,15 @@ public readonly struct <#= structName #> : ILength
 #>
 
 	#endregion
+
+	public static <#= structName #> operator *(<#= structName #> m, double f) => new <#= structName #>(m.unitValue * f);
+	public static <#= structName #> operator *(double f, <#= structName #> m) => new <#= structName #>(m.unitValue * f);
+
+	public static double operator /(<#= structName #> x, <#= structName #> y) => x.unitValue / y.unitValue;
+
+	public static <#= structName #> operator /(<#= structName #> x, double y) => new <#= structName #>(x.unitValue / y);
+	public static <#= structName #> operator /(<#= structName #> x, float y) => new <#= structName #>(x.unitValue / y);
+	public static <#= structName #> operator /(<#= structName #> x, int y) => new <#= structName #>(x.unitValue / y);
 
 	public double UnitValue => unitValue;
 
