@@ -1,0 +1,24 @@
+<#@ template language="C#" hostspecific="True"#>
+<#@ output extension="g.cs" #>
+<#@ include file="Conversion.ttinclude"#><##>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Linq" #>
+using System;
+using System.Runtime.CompilerServices;
+
+namespace MmiSoft.Core.Math.Units.Struct;
+
+<#
+    GenerateConversionClass("Length");
+#>
+
+<#
+    string absolutePath = Host.ResolvePath("length-units.txt");
+    string[] units = File.ReadAllLines(absolutePath);
+    List<UnitDecl> declaredUnits = new(units.Length);
+    declaredUnits.AddRange(units.Select(t => UnitDecl.FromText(t)));
+    
+    GenerateExtensionMethods("Length", declaredUnits);
+#>

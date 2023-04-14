@@ -1,8 +1,9 @@
 using System;
+using System.Runtime.CompilerServices;
 
 namespace MmiSoft.Core.Math.Units.Struct;
 
-/*[Serializable]
+[Serializable]
 public class LengthConversion<TUnit> : ILinearConversion where TUnit : ILength
 {
 	public double ToSiFactor { get; }
@@ -24,15 +25,17 @@ public class LengthConversion<TUnit> : ILinearConversion where TUnit : ILength
 		Symbol = symbol;
 	}
 
+	[MethodImpl(MethodImplOptions.AggressiveInlining)]
 	public TUnit Create(double value) => create(value);
-}*/
+}
 
-/*public static class LengthConversions
+public static class LengthConversions
 {
-	public static readonly LengthConversion<Meters> Meter = new(1, "m", d => new Meters(d));
-	public static readonly LengthConversion<Feet> Foot = new(0.3048, "ft", d => new Feet(d));
-	public static readonly LengthConversion<Kilometers> Kilometer = new (1000, "Km", km => new Kilometers(km));
-	public static readonly LengthConversion<NauticalMiles> NauticalMile = new (1852, "NM", nm => new NauticalMiles(nm));
+	public static readonly LengthConversion<Meters> Meter = new(1, "m", v => new Meters(v));
+	public static readonly LengthConversion<Inches> Inch = new(0.254, "in", v => new Inches(v));
+	public static readonly LengthConversion<Feet> Foot = new(0.3048, "ft", v => new Feet(v));
+	public static readonly LengthConversion<Kilometers> Kilometer = new(1000, "Km", v => new Kilometers(v));
+	public static readonly LengthConversion<NauticalMiles> NauticalMile = new(1852, "NM", v => new NauticalMiles(v));
 
 	public static TOut To<TOut, TIn>(this TIn toConvert, LengthConversion<TOut> conversion)
 		where TOut : struct, ILength
@@ -46,4 +49,4 @@ public class LengthConversion<TUnit> : ILinearConversion where TUnit : ILength
 	{
 		return conversion.Create(toConvert.SiValue / conversion.ToSiFactor);
 	}
-}*/
+}

@@ -1,0 +1,159 @@
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#+
+    void GenerateLengthClass(string structName, string unitName, bool siUnit, List<string> otherUnits)
+    {
+#>
+[Serializable]
+public readonly struct <#= structName #> : ILength
+{
+	public static readonly <#= structName #> Zero = new();
+
+	private readonly double unitValue;
+
+	public <#= structName #>(double <#= structName.ToLower() #>)
+	{
+		unitValue = <#= structName.ToLower() #>;
+	}
+
+	#region minus operators
+
+	public static <#= structName #> operator -(<#= structName #> x, <#= structName #> y)
+	{
+		return new <#= structName #>(System.Math.Abs(x.unitValue - y.unitValue));
+	}
+<#+
+		foreach (string otherUnit in otherUnits)
+		{#>
+
+	public static <#= structName #> operator -(<#= structName #> x, <#= otherUnit #> y)
+	{
+		return x - y.To(LengthConversions.<#= unitName #>);
+	}
+<#+
+		}
+#>
+	#endregion
+
+	#region plus operators
+
+	public static <#= structName #> operator +(<#= structName #> x, <#= structName #> y)
+	{
+		return new <#= structName #>(x.unitValue + y.unitValue);
+	}
+<#+
+		foreach (string otherUnit in otherUnits)
+		{#>
+
+	public static <#= structName #> operator +(<#= structName #> x, <#= otherUnit #> y)
+	{
+		return x + y.To(LengthConversions.<#= unitName #>);
+	}
+<#+
+		}
+#>
+
+	#endregion
+
+	#region conversion operators
+
+<#+
+		foreach (string otherUnit in otherUnits)
+		{#>
+
+	public static implicit operator <#= structName #>(<#= otherUnit #> other)
+	{
+		return other.To(LengthConversions.<#= unitName #>);
+	}
+<#+
+		}
+#>
+
+	#endregion
+
+	#region Equality overloads and operators
+
+	public override bool Equals(object obj)
+	{
+		return obj switch
+		{
+			<#= structName #> kts => Equals(kts),
+			ILength length => Equals(length.To(LengthConversions.<#= unitName #>)),
+			_ => false
+		};
+	}
+
+	public bool Equals(<#= structName #> other) => System.Math.Abs(UnitValue - other.UnitValue) <= 1e-14;
+
+	public override int GetHashCode() => 7 * UnitValue.GetHashCode();
+
+	public static bool operator ==(<#= structName #> l, <#= structName #> r) => l.Equals(r);
+
+<#+
+		foreach (string otherUnit in otherUnits)
+		{#>
+	public static bool operator ==(<#= structName #> l, <#= otherUnit #> r) => l.Equals(r.To(LengthConversions.<#= unitName #>));
+<#+
+		}
+#>
+
+	public static bool operator !=(<#= structName #> l, <#= structName #> r) => !l.Equals(r);
+<#+
+		foreach (string otherUnit in otherUnits)
+		{#>
+	public static bool operator !=(<#= structName #> l, <#= otherUnit #> r) => !l.Equals(r.To(LengthConversions.<#= unitName #>));
+<#+
+		}
+#>
+
+	#endregion
+
+	public double UnitValue => unitValue;
+
+	ILinearConversion ILength.Conversion => LengthConversions.<#= unitName #>;
+
+	double ILength.SiValue => unitValue <#+if (!siUnit) {#>* LengthConversions.<#= unitName #>.ToSiFactor<#+}#>;
+
+	public int CompareTo(ILength other) => UnitValue.CompareTo(other.To(LengthConversions.<#= unitName #>).UnitValue);
+
+	public static bool operator <(<#= structName #> l, <#= structName #> r) => l.UnitValue < r.UnitValue;
+<#+
+		foreach (string otherUnit in otherUnits)
+		{#>
+	public static bool operator <(<#= structName #> l, <#= otherUnit #> r) => l < r.To(LengthConversions.<#= unitName #>);
+<#+
+		}
+#>
+
+	public static bool operator <=(<#= structName #> l, <#= structName #> r) => l.UnitValue <= r.UnitValue;
+<#+
+		foreach (string otherUnit in otherUnits)
+		{#>
+	public static bool operator <=(<#= structName #> l, <#= otherUnit #> r) => l <= r.To(LengthConversions.<#= unitName #>);
+<#+
+		}
+#>
+
+	public static bool operator >(<#= structName #> l, <#= structName #> r) => l.UnitValue > r.UnitValue;
+<#+
+		foreach (string otherUnit in otherUnits)
+		{#>
+	public static bool operator >(<#= structName #> l, <#= otherUnit #> r) => l > r.To(LengthConversions.<#= unitName #>);
+<#+
+		}
+#>
+
+	public static bool operator >=(<#= structName #> l, <#= structName #> r) => l.UnitValue >= r.UnitValue;
+<#+
+		foreach (string otherUnit in otherUnits)
+		{#>
+	public static bool operator >=(<#= structName #> l, <#= otherUnit #> r) => l >= r.To(LengthConversions.<#= unitName #>);
+<#+
+		}
+#>
+
+}
+
+<#+
+    }
+#>

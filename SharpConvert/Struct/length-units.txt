@@ -1,0 +1,5 @@
+Meters Meter 1 m
+Inches Inch 0.254 in
+Feet Foot 0.3048 ft
+Kilometers Kilometer 1000 Km
+NauticalMiles NauticalMile 1852 NM

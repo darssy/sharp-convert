@@ -1,0 +1,30 @@
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Globalization" #>
+<#+
+    public class UnitDecl
+    {
+        public string StructName { get; }
+        public string UnitName { get; }
+        public double ConversionFactor { get; }
+        public string Symbol { get; }
+
+        public UnitDecl(string structName, string unitName, double conversionFactor, string symbol)
+        {
+            StructName = structName;
+            UnitName = unitName;
+            ConversionFactor = conversionFactor;
+            Symbol = symbol;
+        }
+
+        public static UnitDecl FromText(string text, char delim = ' ')
+        {
+            string[] fields = text.Split(delim);
+
+            if (fields.Length > 4) throw new FormatException("Too many arguments for unit declaration");
+            if (fields.Length < 4) throw new FormatException("Too few arguments for unit declaration");
+
+            return new UnitDecl(fields[0], fields[1], double.Parse(fields[2], NumberFormatInfo.InvariantInfo), fields[3]);
+        }
+    }
+#>

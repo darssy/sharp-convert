@@ -24,10 +24,31 @@
   </PropertyGroup>
   
   <ItemGroup>
-    <None Include="..\README.md" Pack="true" PackagePath=""/>
+    <None Include="..\README.md" Pack="true" PackagePath="" />
     <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleToAttribute">
       <_Parameter1>UnitTests.MmiSoft.Core.Math.Units</_Parameter1>
     </AssemblyAttribute>
+    <None Update="Struct\LengthUnit.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>LengthUnit.g.cs</LastGenOutput>
+    </None>
+    <None Update="Struct\LengthConversion.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>LengthConversion.g.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  
+  <ItemGroup>
+    <Compile Update="Struct\LengthConversion.g.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>LengthConversion.tt</DependentUpon>
+    </Compile>
+    <Compile Update="Struct\LengthUnit.g.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>LengthUnit.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
   
 </Project>

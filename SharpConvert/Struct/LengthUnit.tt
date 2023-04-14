@@ -1,0 +1,28 @@
+<#@ template language="C#" hostspecific="True"#>
+<#@ output extension="g.cs" #>
+<#@ include file="LengthUnit.ttinclude" once="true"#><##>
+<#@ include file="UnitDecl.ttinclude" once="true"#><##>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Linq" #>
+using System;
+
+namespace MmiSoft.Core.Math.Units.Struct;
+
+<#
+    string absolutePath = Host.ResolvePath("length-units.txt");
+    string[] units = File.ReadAllLines(absolutePath);
+    List<UnitDecl> declaredUnits = new(units.Length);
+    declaredUnits.AddRange(units.Select(t => UnitDecl.FromText(t)));
+    
+    
+    List<string> otherUnits = declaredUnits.Select(u => u.StructName).ToList();
+    for (int i = 0; i < declaredUnits.Count; i++)
+    {
+        UnitDecl declaredUnit = declaredUnits[i];
+        otherUnits.RemoveAt(i);
+        GenerateLengthClass(declaredUnit.StructName, declaredUnit.UnitName, declaredUnit.ConversionFactor == 1.0 , otherUnits);
+        otherUnits.Insert(i, declaredUnit.StructName);
+    }
+#>
