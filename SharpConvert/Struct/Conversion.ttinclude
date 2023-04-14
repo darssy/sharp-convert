@@ -43,8 +43,9 @@ public static class <#= magnitude #>Conversions
 <#+
         foreach (UnitDecl unit in declaredUnits)
         {
+	        char arg = unit.UnitName.ToLower()[0];
 #>
-	public static readonly <#= magnitude #>Conversion<<#= unit.StructName #>> <#= unit.UnitName #> = new(<#= unit.ConversionFactor #>, "<#= unit.Symbol #>", v => new <#= unit.StructName #>(v));
+	public static readonly <#= magnitude #>Conversion<<#= unit.StructName #>> <#= unit.UnitName #> = new(<#= unit.ConversionFactor #>, "<#= unit.Symbol #>", <#=arg#> => new <#= unit.StructName #>(<#=arg#>));
 <#+
         }
 #>
@@ -64,4 +65,12 @@ public static class <#= magnitude #>Conversions
 }
 <#+
     }
+    
+	List<UnitDecl> ParseUnits(string absolutePath)
+	{
+		string[] units = File.ReadAllLines(absolutePath);
+		List<UnitDecl> declaredUnits = new(units.Length);
+		declaredUnits.AddRange(units.Select(t => UnitDecl.FromText(t)));
+		return declaredUnits;
+	}
 #>

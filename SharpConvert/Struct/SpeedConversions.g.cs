@@ -34,20 +34,15 @@ public class SpeedConversion<TUnit> : ILinearConversion where TUnit : ISpeed
 
 public static class SpeedConversions
 {
-		
-	public static readonly SpeedConversion<MetersPerSecond> MeterPerSecond = new(1, "m/s", mps => new MetersPerSecond(mps));
-	/*public static readonly ConversionBis FootPerSecond = new ConversionBis(Foot.ToSiFactor, "ft/s", UnitType.Speed);*/
-	public static readonly SpeedConversion<FeetPerMinute> FootPerMinute = new (Foot.ToSiFactor / Minute.ToSiFactor, "fpm", fpm => new FeetPerMinute(fpm));
-	public static readonly SpeedConversion<Knots> Knot = new (NauticalMile.ToSiFactor / Hour.ToSiFactor, "kt", kts => new Knots(kts));
+	public static readonly SpeedConversion<MetersPerSecond> MeterPerSecond = new(1, "m/s", v => new MetersPerSecond(v));
+	public static readonly SpeedConversion<FeetPerMinute> FootPerMinute = new(0.00508, "fpm", v => new FeetPerMinute(v));
+	public static readonly SpeedConversion<Knots> Knot = new(0.514444444444444, "kt", v => new Knots(v));
 
-	[MethodImpl(MethodImplOptions.AggressiveInlining)]
 	public static TOut To<TOut, TIn>(this TIn toConvert, SpeedConversion<TOut> conversion)
 		where TOut : struct, ISpeed
 		where TIn : struct, ISpeed
 	{
-		return /*toConvert.Conversion == conversion
-			? conversion.Create(toConvert.UnitValue)
-			: */conversion.Create(toConvert.SiValue / conversion.ToSiFactor);
+		return conversion.Create(toConvert.SiValue / conversion.ToSiFactor);
 	}
 
 	public static TOut To<TOut>(this ISpeed toConvert, SpeedConversion<TOut> conversion)

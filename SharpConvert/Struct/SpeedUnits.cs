@@ -5,14 +5,6 @@ namespace MmiSoft.Core.Math.Units.Struct;
 using static LengthConversions;
 using static TimeConversions;
 
-public interface ISpeed
-{
-	double UnitValue { get; }
-	internal ILinearConversion Conversion { get; }
-	internal double SiValue { get; }
-	//internal double SiValue => UnitValue * Conversion.ToSiFactor;
-}
-
 [Serializable]
 public struct MetersPerSecond : ISpeed
 {

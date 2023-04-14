@@ -1,4 +1,5 @@
 using System;
+using System.Runtime.CompilerServices;
 
 namespace MmiSoft.Core.Math.Units.Struct;
 
@@ -24,13 +25,14 @@ public class TimeConversion<TUnit> : ILinearConversion where TUnit : ITime
 		Symbol = symbol;
 	}
 
+	[MethodImpl(MethodImplOptions.AggressiveInlining)]
 	public TUnit Create(double value) => create(value);
 }
 
 public static class TimeConversions
 {
-	public static readonly TimeConversion<Seconds> Second = new (1, "s", s => new Seconds(s));
-	public static readonly TimeConversion<Minutes> Minute = new (60, "min", m => new Minutes(m));
+	public static readonly TimeConversion<Seconds> Second = new(1, "s", s => new Seconds(s));
+	public static readonly TimeConversion<Minutes> Minute = new(60, "min", m => new Minutes(m));
 	public static readonly TimeConversion<Hours> Hour = new(3600, "h", h => new Hours(h));
 
 	public static TOut To<TOut, TIn>(this TIn toConvert, TimeConversion<TOut> conversion)

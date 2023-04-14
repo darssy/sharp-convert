@@ -1,0 +1,3 @@
+Seconds Second 1 s
+Minutes Minute 60 min
+Hours Hour 3600 h

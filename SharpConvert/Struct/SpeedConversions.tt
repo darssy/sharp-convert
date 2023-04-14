@@ -1,0 +1,30 @@
+<#@ template language="C#" hostspecific="True"#>
+<#@ output extension="g.cs" #>
+<#@ include file="Conversion.ttinclude"#><##>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Linq" #>
+using System;
+using System.Runtime.CompilerServices;
+
+namespace MmiSoft.Core.Math.Units.Struct;
+
+using static LengthConversions;
+using static TimeConversions;
+
+<#
+    GenerateConversionClass("Speed");
+#>
+
+<#
+
+    List<UnitDecl> lengthUnits = ParseUnits(Host.ResolvePath("length-units.txt"));
+    List<UnitDecl> timeUnits = ParseUnits(Host.ResolvePath("time-units.txt"));
+    string absolutePath = Host.ResolvePath("speed-units.txt");
+    string[] units = File.ReadAllLines(absolutePath);
+    List<UnitDecl> declaredUnits = new(units.Length);
+    declaredUnits.AddRange(units.Select(t => UnitDecl.DerivedFromText(t, lengthUnits, timeUnits)));
+    
+    GenerateExtensionMethods("Speed", declaredUnits);
+#>

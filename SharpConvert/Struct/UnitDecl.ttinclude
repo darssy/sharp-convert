@@ -26,5 +26,38 @@
 
             return new UnitDecl(fields[0], fields[1], double.Parse(fields[2], NumberFormatInfo.InvariantInfo), fields[3]);
         }
+
+        public static UnitDecl DerivedFromText(string text, List<UnitDecl> numeratorUnits,
+                                               List<UnitDecl> denominatorUnits, char delim = ' ')
+        {
+            string[] fields = text.Trim().Split(delim);
+
+            if (fields.Length == 0) throw new FormatException("Too few arguments for unit declaration");
+
+            string[] derivativeDecl = fields[0].Split('/');
+            if (derivativeDecl.Length != 2)
+            {
+                throw new FormatException("Expecting a derivative in the form of 'numeratorUnit/denominatorUnit'");
+            }
+            UnitDecl numerator = numeratorUnits.FirstOrDefault(n => n.UnitName == derivativeDecl[0]);
+            if (numerator == null) throw new FormatException($"Unit {derivativeDecl[0]} doesn't exist");
+
+            UnitDecl denominator = denominatorUnits.FirstOrDefault(n => n.UnitName == derivativeDecl[1]);
+            if (denominator == null) throw new FormatException($"Unit {derivativeDecl[1]} doesn't exist");
+
+            string symbol = null;
+            string unitName = null;
+            string structName = null;
+            if (fields.Length > 1) symbol = fields[1];
+            if (fields.Length > 2) unitName = fields[2];
+            if (fields.Length > 3) structName = fields[3];
+            if (fields.Length > 4) throw new FormatException("Too many arguments for unit declaration");
+
+            symbol ??= $"{numerator.Symbol}/{denominator.Symbol}";
+            unitName ??= $"{numerator.UnitName}Per{denominator.UnitName}";
+            structName ??= $"{numerator.StructName}Per{denominator.UnitName}";
+            
+            return new UnitDecl(structName, unitName, numerator.ConversionFactor / denominator.ConversionFactor, symbol);
+        }
     }
 #>

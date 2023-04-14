@@ -1,0 +1,5 @@
+Meter/Second
+Kilometer/Hour
+Foot/Second
+Foot/Minute fpm
+NauticalMile/Hour kt Knot Knots
