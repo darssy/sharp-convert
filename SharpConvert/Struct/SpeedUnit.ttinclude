@@ -1,12 +1,12 @@
 <#@ import namespace="System.Text" #>
 <#@ import namespace="System.Collections.Generic" #>
 <#+
-    void GenerateLengthClass(string structName, string unitName, bool siUnit, List<string> otherUnits)
+    void GenerateSpeedClass(string structName, string unitName, bool siUnit, List<string> otherUnits)
     {
 	    string ctorArg = structName.ToLower();
 #>
 [Serializable]
-public readonly struct <#= structName #> : ILength
+public readonly struct <#= structName #> : ISpeed
 {
 	public static readonly <#= structName #> Zero = new();
 
@@ -14,7 +14,6 @@ public readonly struct <#= structName #> : ILength
 
 	public <#= structName #>(double <#= ctorArg #>)
 	{
-		if (<#= ctorArg #> < 0) throw new ArgumentException("Cowardly refusing to create a negative length unit");
 		unitValue = <#= ctorArg #>;
 	}
 
@@ -22,7 +21,7 @@ public readonly struct <#= structName #> : ILength
 
 	public static <#= structName #> operator -(<#= structName #> x, <#= structName #> y)
 	{
-		return new <#= structName #>(System.Math.Abs(x.unitValue - y.unitValue));
+		return new <#= structName #>(x.unitValue - y.unitValue);
 	}
 <#+
 		foreach (string otherUnit in otherUnits)
@@ -30,7 +29,7 @@ public readonly struct <#= structName #> : ILength
 
 	public static <#= structName #> operator -(<#= structName #> x, <#= otherUnit #> y)
 	{
-		return x - y.To(LengthConversions.<#= unitName #>);
+		return x - y.To(SpeedConversions.<#= unitName #>);
 	}
 <#+
 		}
@@ -49,7 +48,7 @@ public readonly struct <#= structName #> : ILength
 
 	public static <#= structName #> operator +(<#= structName #> x, <#= otherUnit #> y)
 	{
-		return x + y.To(LengthConversions.<#= unitName #>);
+		return x + y.To(SpeedConversions.<#= unitName #>);
 	}
 <#+
 		}
@@ -63,9 +62,9 @@ public readonly struct <#= structName #> : ILength
 		foreach (string otherUnit in otherUnits)
 		{#>
 
-	public static implicit operator <#= structName #>(<#= otherUnit #> other)
+	public static explicit operator <#= structName #>(<#= otherUnit #> other)
 	{
-		return other.To(LengthConversions.<#= unitName #>);
+		return other.To(SpeedConversions.<#= unitName #>);
 	}
 <#+
 		}
@@ -80,21 +79,21 @@ public readonly struct <#= structName #> : ILength
 		return obj switch
 		{
 			<#= structName #> <#= structName.ToLower()[0] #> => Equals(<#= structName.ToLower()[0] #>),
-			ILength length => Equals(length.To(LengthConversions.<#= unitName #>)),
+			ISpeed length => Equals(length.To(SpeedConversions.<#= unitName #>)),
 			_ => false
 		};
 	}
 
 	public bool Equals(<#= structName #> other) => System.Math.Abs(UnitValue - other.UnitValue) <= 1e-14;
 
-	public override int GetHashCode() => 7 * UnitValue.GetHashCode();
+	public override int GetHashCode() => 13 * UnitValue.GetHashCode();
 
 	public static bool operator ==(<#= structName #> l, <#= structName #> r) => l.Equals(r);
 
 <#+
 		foreach (string otherUnit in otherUnits)
 		{#>
-	public static bool operator ==(<#= structName #> l, <#= otherUnit #> r) => l.Equals(r.To(LengthConversions.<#= unitName #>));
+	public static bool operator ==(<#= structName #> l, <#= otherUnit #> r) => l.Equals(r.To(SpeedConversions.<#= unitName #>));
 <#+
 		}
 #>
@@ -103,7 +102,7 @@ public readonly struct <#= structName #> : ILength
 <#+
 		foreach (string otherUnit in otherUnits)
 		{#>
-	public static bool operator !=(<#= structName #> l, <#= otherUnit #> r) => !l.Equals(r.To(LengthConversions.<#= unitName #>));
+	public static bool operator !=(<#= structName #> l, <#= otherUnit #> r) => !l.Equals(r.To(SpeedConversions.<#= unitName #>));
 <#+
 		}
 #>
@@ -121,17 +120,17 @@ public readonly struct <#= structName #> : ILength
 
 	public double UnitValue => unitValue;
 
-	ILinearConversion ILength.Conversion => LengthConversions.<#= unitName #>;
+	ILinearConversion ISpeed.Conversion => SpeedConversions.<#= unitName #>;
 
-	double ILength.SiValue => unitValue <#+if (!siUnit) {#>* LengthConversions.<#= unitName #>.ToSiFactor<#+}#>;
+	double ISpeed.SiValue => unitValue <#+if (!siUnit) {#>* SpeedConversions.<#= unitName #>.ToSiFactor<#+}#>;
 
-	public int CompareTo(ILength other) => UnitValue.CompareTo(other.To(LengthConversions.<#= unitName #>).UnitValue);
+	public int CompareTo(ISpeed other) => UnitValue.CompareTo(other.To(SpeedConversions.<#= unitName #>).UnitValue);
 
 	public static bool operator <(<#= structName #> l, <#= structName #> r) => l.UnitValue < r.UnitValue;
 <#+
 		foreach (string otherUnit in otherUnits)
 		{#>
-	public static bool operator <(<#= structName #> l, <#= otherUnit #> r) => l < r.To(LengthConversions.<#= unitName #>);
+	public static bool operator <(<#= structName #> l, <#= otherUnit #> r) => l < r.To(SpeedConversions.<#= unitName #>);
 <#+
 		}
 #>
@@ -140,7 +139,7 @@ public readonly struct <#= structName #> : ILength
 <#+
 		foreach (string otherUnit in otherUnits)
 		{#>
-	public static bool operator <=(<#= structName #> l, <#= otherUnit #> r) => l <= r.To(LengthConversions.<#= unitName #>);
+	public static bool operator <=(<#= structName #> l, <#= otherUnit #> r) => l <= r.To(SpeedConversions.<#= unitName #>);
 <#+
 		}
 #>
@@ -149,7 +148,7 @@ public readonly struct <#= structName #> : ILength
 <#+
 		foreach (string otherUnit in otherUnits)
 		{#>
-	public static bool operator >(<#= structName #> l, <#= otherUnit #> r) => l > r.To(LengthConversions.<#= unitName #>);
+	public static bool operator >(<#= structName #> l, <#= otherUnit #> r) => l > r.To(SpeedConversions.<#= unitName #>);
 <#+
 		}
 #>
@@ -158,7 +157,7 @@ public readonly struct <#= structName #> : ILength
 <#+
 		foreach (string otherUnit in otherUnits)
 		{#>
-	public static bool operator >=(<#= structName #> l, <#= otherUnit #> r) => l >= r.To(LengthConversions.<#= unitName #>);
+	public static bool operator >=(<#= structName #> l, <#= otherUnit #> r) => l >= r.To(SpeedConversions.<#= unitName #>);
 <#+
 		}
 #>

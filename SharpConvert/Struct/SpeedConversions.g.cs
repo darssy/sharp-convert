@@ -35,6 +35,8 @@ public class SpeedConversion<TUnit> : ILinearConversion where TUnit : ISpeed
 public static class SpeedConversions
 {
 	public static readonly SpeedConversion<MetersPerSecond> MeterPerSecond = new(1, "m/s", m => new MetersPerSecond(m));
+	public static readonly SpeedConversion<KilometersPerHour> KilometerPerHour = new(0.277777777777778, "Km/h", k => new KilometersPerHour(k));
+	public static readonly SpeedConversion<FeetPerSecond> FootPerSecond = new(0.3048, "ft/s", f => new FeetPerSecond(f));
 	public static readonly SpeedConversion<FeetPerMinute> FootPerMinute = new(0.00508, "fpm", f => new FeetPerMinute(f));
 	public static readonly SpeedConversion<Knots> Knot = new(0.514444444444444, "kt", k => new Knots(k));
 

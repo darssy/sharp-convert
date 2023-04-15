@@ -1,0 +1,202 @@
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#+
+    void GenerateClassForMagnitude(UnitDecl unitDecl, bool onlyPositiveValues, string quantity, List<string> otherUnits)
+    {
+		string structName = unitDecl.StructName;
+		string unitName = unitDecl.UnitName;
+		bool siUnit = unitDecl.ConversionFactor == 1.0;
+	    string ctorArg = structName.ToLower();
+#>
+[Serializable]
+public readonly struct <#= structName #> : I<#= quantity #>
+{
+	public static readonly <#= structName #> Zero = new();
+
+	private readonly double unitValue;
+
+	public <#= structName #>(double <#= ctorArg #>)
+	{
+<#+
+		if (onlyPositiveValues)
+		{
+#>
+		if (<#= ctorArg #> < 0) throw new ArgumentException("Cowardly refusing to create a negative <#= quantity.ToLower() #> unit");
+<#+
+		}
+#>
+		unitValue = <#= ctorArg #>;
+	}
+
+	#region minus operators
+
+<#+
+		if (onlyPositiveValues)
+		{
+#>
+	public static <#= structName #> operator -(<#= structName #> x) => new <#= structName #>(-x.unitValue);
+<#+
+		}
+#>
+
+	public static <#= structName #> operator -(<#= structName #> x, <#= structName #> y)
+	{
+<#+
+		if (onlyPositiveValues)
+		{
+#>
+		return new <#= structName #>(System.Math.Abs(x.unitValue - y.unitValue));
+<#+
+		}
+		else
+		{
+#>
+		return new <#= structName #>(x.unitValue - y.unitValue);
+<#+
+		}
+#>
+	}
+<#+
+		foreach (string otherUnit in otherUnits)
+		{#>
+
+	public static <#= structName #> operator -(<#= structName #> x, <#= otherUnit #> y)
+	{
+		return x - y.To(<#= quantity #>Conversions.<#= unitName #>);
+	}
+<#+
+		}
+#>
+	#endregion
+
+	#region plus operators
+
+	public static <#= structName #> operator +(<#= structName #> x, <#= structName #> y)
+	{
+		return new <#= structName #>(x.unitValue + y.unitValue);
+	}
+<#+
+		foreach (string otherUnit in otherUnits)
+		{#>
+
+	public static <#= structName #> operator +(<#= structName #> x, <#= otherUnit #> y)
+	{
+		return x + y.To(<#= quantity #>Conversions.<#= unitName #>);
+	}
+<#+
+		}
+#>
+
+	#endregion
+
+	#region conversion operators
+
+<#+
+		foreach (string otherUnit in otherUnits)
+		{#>
+
+	public static implicit operator <#= structName #>(<#= otherUnit #> other)
+	{
+		return other.To(<#= quantity #>Conversions.<#= unitName #>);
+	}
+<#+
+		}
+#>
+
+	#endregion
+
+	#region Equality overloads and operators
+
+	public override bool Equals(object obj)
+	{
+		return obj switch
+		{
+			<#= structName #> <#= structName.ToLower()[0] #> => Equals(<#= structName.ToLower()[0] #>),
+			I<#= quantity #> length => Equals(length.To(<#= quantity #>Conversions.<#= unitName #>)),
+			_ => false
+		};
+	}
+
+	public bool Equals(<#= structName #> other) => System.Math.Abs(UnitValue - other.UnitValue) <= 1e-14;
+
+	public override int GetHashCode() => 7 * UnitValue.GetHashCode();
+
+	public static bool operator ==(<#= structName #> l, <#= structName #> r) => l.Equals(r);
+
+<#+
+		foreach (string otherUnit in otherUnits)
+		{#>
+	public static bool operator ==(<#= structName #> l, <#= otherUnit #> r) => l.Equals(r.To(<#= quantity #>Conversions.<#= unitName #>));
+<#+
+		}
+#>
+
+	public static bool operator !=(<#= structName #> l, <#= structName #> r) => !l.Equals(r);
+<#+
+		foreach (string otherUnit in otherUnits)
+		{#>
+	public static bool operator !=(<#= structName #> l, <#= otherUnit #> r) => !l.Equals(r.To(<#= quantity #>Conversions.<#= unitName #>));
+<#+
+		}
+#>
+
+	#endregion
+
+	public static <#= structName #> operator *(<#= structName #> m, double f) => new <#= structName #>(m.unitValue * f);
+	public static <#= structName #> operator *(double f, <#= structName #> m) => new <#= structName #>(m.unitValue * f);
+
+	public static double operator /(<#= structName #> x, <#= structName #> y) => x.unitValue / y.unitValue;
+
+	public static <#= structName #> operator /(<#= structName #> x, double y) => new <#= structName #>(x.unitValue / y);
+	public static <#= structName #> operator /(<#= structName #> x, float y) => new <#= structName #>(x.unitValue / y);
+	public static <#= structName #> operator /(<#= structName #> x, int y) => new <#= structName #>(x.unitValue / y);
+
+	public double UnitValue => unitValue;
+
+	ILinearConversion I<#= quantity #>.Conversion => <#= quantity #>Conversions.<#= unitName #>;
+
+	double I<#= quantity #>.SiValue => unitValue <#+if (!siUnit) {#>* <#= quantity #>Conversions.<#= unitName #>.ToSiFactor<#+}#>;
+
+	public int CompareTo(I<#= quantity #> other) => UnitValue.CompareTo(other.To(<#= quantity #>Conversions.<#= unitName #>).UnitValue);
+
+	public static bool operator <(<#= structName #> l, <#= structName #> r) => l.UnitValue < r.UnitValue;
+<#+
+		foreach (string otherUnit in otherUnits)
+		{#>
+	public static bool operator <(<#= structName #> l, <#= otherUnit #> r) => l < r.To(<#= quantity #>Conversions.<#= unitName #>);
+<#+
+		}
+#>
+
+	public static bool operator <=(<#= structName #> l, <#= structName #> r) => l.UnitValue <= r.UnitValue;
+<#+
+		foreach (string otherUnit in otherUnits)
+		{#>
+	public static bool operator <=(<#= structName #> l, <#= otherUnit #> r) => l <= r.To(<#= quantity #>Conversions.<#= unitName #>);
+<#+
+		}
+#>
+
+	public static bool operator >(<#= structName #> l, <#= structName #> r) => l.UnitValue > r.UnitValue;
+<#+
+		foreach (string otherUnit in otherUnits)
+		{#>
+	public static bool operator >(<#= structName #> l, <#= otherUnit #> r) => l > r.To(<#= quantity #>Conversions.<#= unitName #>);
+<#+
+		}
+#>
+
+	public static bool operator >=(<#= structName #> l, <#= structName #> r) => l.UnitValue >= r.UnitValue;
+<#+
+		foreach (string otherUnit in otherUnits)
+		{#>
+	public static bool operator >=(<#= structName #> l, <#= otherUnit #> r) => l >= r.To(<#= quantity #>Conversions.<#= unitName #>);
+<#+
+		}
+#>
+
+}
+
+<#+
+    }
+#>

@@ -1,3 +1,4 @@
+/*
 using System;
 
 namespace MmiSoft.Core.Math.Units.Struct;
@@ -34,7 +35,7 @@ public struct MetersPerSecond : ISpeed
 
 	public double UnitValue => unitValue;
 	ILinearConversion ISpeed.Conversion => SpeedConversions.MeterPerSecond;
-	double ISpeed.SiValue  => unitValue/* * SpeedConversions.MeterPerSecond.ToSiFactor*/;
+	double ISpeed.SiValue  => unitValue/* * SpeedConversions.MeterPerSecond.ToSiFactor#1#;
 }
 
 [Serializable]
@@ -229,3 +230,4 @@ public readonly struct Knots : ISpeed
 	ILinearConversion ISpeed.Conversion => SpeedConversions.Knot;
 	double ISpeed.SiValue => UnitValue * SpeedConversions.Knot.ToSiFactor;
 }
+*/
