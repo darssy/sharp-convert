@@ -1,4 +1,5 @@
 <#@ import namespace="System.Text" #>
+<#@ import namespace="" #>
 <#@ import namespace="System.Collections.Generic" #>
 <#@ import namespace="System.Globalization" #>
 <#+
@@ -48,10 +49,29 @@
             string symbol = null;
             string unitName = null;
             string structName = null;
-            if (fields.Length > 1) symbol = fields[1];
-            if (fields.Length > 2) unitName = fields[2];
-            if (fields.Length > 3) structName = fields[3];
-            if (fields.Length > 4) throw new FormatException("Too many arguments for unit declaration");
+            if (fields.Length == 2)
+            {
+                symbol = fields[1];
+            }
+            else if (fields.Length == 3)
+            {
+                symbol = fields[2];
+                unitName = fields[1];
+                if (unitName.Contains("-"))
+                {
+                    (unitName, string pluralSuffix) = SplitTwo(unitName, '-');
+                    structName = unitName + pluralSuffix;
+                }
+                else if (unitName.Contains("/"))
+                {
+                    (unitName, structName) = SplitTwo(unitName, '/');
+                }
+                else
+                {
+                    structName = unitName;
+                }
+            }
+            if (fields.Length > 3) throw new FormatException("Too many arguments for unit declaration");
 
             symbol ??= $"{numerator.Symbol}/{denominator.Symbol}";
             unitName ??= $"{numerator.UnitName}Per{denominator.UnitName}";
@@ -59,5 +79,13 @@
             
             return new UnitDecl(structName, unitName, numerator.ConversionFactor / denominator.ConversionFactor, symbol);
         }
+    }
+    
+    private static (string first, string second) SplitTwo(string toSplit, char token)
+    {
+        string[] strings = toSplit.Split(token);
+        if (strings.Length >= 2) return (strings[0], strings[1]);
+        if (strings.Length == 1) return (strings[0], null);
+        return (null, null);
     }
 #>
