@@ -14,6 +14,7 @@ build:
   verbosity: normal
 artifacts:
   - path: SharpConvert\bin\$(configuration)\*.*nupkg
+  - path: SharpConvert.JsonNet\bin\$(configuration)\*.*nupkg
 dotnet_csproj:
   patch: true
   file: '**\*.csproj'
