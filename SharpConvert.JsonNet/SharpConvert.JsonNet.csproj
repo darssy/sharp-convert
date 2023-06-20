@@ -27,7 +27,7 @@
 
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-    <PackageReference Include="MmiSoft.Core" Version="0.1.4-dev.21" />
+    <PackageReference Include="MmiSoft.Core" Version="0.1.4" />
   </ItemGroup>
 
 </Project>
