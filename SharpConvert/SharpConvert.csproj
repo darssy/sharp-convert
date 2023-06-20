@@ -18,7 +18,7 @@
     <Copyright>Copyright © adamstyl 2016-$(ThisYear)</Copyright>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageTags>units of measurement;conversion;metrology</PackageTags>
-    <PackageProjectUrl>https://github.com/adamstyl/sharp-convert</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/adamstyl/sharp-convert</RepositoryUrl>
   </PropertyGroup>
   
   <ItemGroup>
