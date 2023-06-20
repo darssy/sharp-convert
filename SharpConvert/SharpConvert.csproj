@@ -13,14 +13,12 @@
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
     <BuildCount>$([System.IO.File]::ReadAllText('$(MSBuildProjectDirectory)\Properties\build.txt').Trim())</BuildCount>
     <VersionPrefix>1.2.2.$(BuildCount)</VersionPrefix>
-    <!--<AssemblyVersion>1.2.2</AssemblyVersion>
-    <FileVersion>$(AssemblyVersion)</FileVersion>
-    <InformationalVersion>$(AssemblyVersion)</InformationalVersion>
-    <PackageVersion>$(AssemblyVersion)</PackageVersion>-->
     <Description>(Yet another) Library to handle conversions between units of measurement in an object oriented manner.</Description>
     <ThisYear>$([System.DateTime]::Now.ToString("yyyy"))</ThisYear>
     <Copyright>Copyright © adamstyl 2016-$(ThisYear)</Copyright>
     <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageTags>units of measurement;conversion;metrology</PackageTags>
+    <PackageProjectUrl>https://github.com/adamstyl/sharp-convert</PackageProjectUrl>
   </PropertyGroup>
   
   <ItemGroup>
@@ -36,6 +34,18 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>LengthConversion.g.cs</LastGenOutput>
     </None>
+    <None Update="Struct\SpeedConversions.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>SpeedConversions.g.cs</LastGenOutput>
+    </None>
+    <None Update="Struct\TimeConversions.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>TimeConversions.g.cs</LastGenOutput>
+    </None>
+    <None Update="Struct\SpeedUnits.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>SpeedUnits.g.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   
   <ItemGroup>
@@ -44,10 +54,25 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>LengthConversion.tt</DependentUpon>
     </Compile>
+    <Compile Update="Struct\TimeConversions.g.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TimeConversions.tt</DependentUpon>
+    </Compile>
+    <Compile Update="Struct\SpeedConversions.g.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SpeedConversions.tt</DependentUpon>
+    </Compile>
     <Compile Update="Struct\LengthUnit.g.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>LengthUnit.tt</DependentUpon>
+    </Compile>
+    <Compile Update="Struct\SpeedUnits.g.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SpeedUnits.tt</DependentUpon>
     </Compile>
   </ItemGroup>
   

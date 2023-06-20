@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpConvert", "SharpConver
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj", "{30602F90-43FF-427D-9DA6-4D4CA6462EF7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpConvert.JsonNet", "SharpConvert.JsonNet\SharpConvert.JsonNet.csproj", "{6A55461E-75F8-4E50-AD83-D52875C55363}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|AnyCPU = Debug|AnyCPU
@@ -21,6 +23,10 @@ Global
 		{30602F90-43FF-427D-9DA6-4D4CA6462EF7}.Debug|AnyCPU.Build.0 = Debug|AnyCPU
 		{30602F90-43FF-427D-9DA6-4D4CA6462EF7}.Release|AnyCPU.ActiveCfg = Release|AnyCPU
 		{30602F90-43FF-427D-9DA6-4D4CA6462EF7}.Release|AnyCPU.Build.0 = Release|AnyCPU
+		{6A55461E-75F8-4E50-AD83-D52875C55363}.Debug|AnyCPU.ActiveCfg = Debug|Any CPU
+		{6A55461E-75F8-4E50-AD83-D52875C55363}.Debug|AnyCPU.Build.0 = Debug|Any CPU
+		{6A55461E-75F8-4E50-AD83-D52875C55363}.Release|AnyCPU.ActiveCfg = Release|Any CPU
+		{6A55461E-75F8-4E50-AD83-D52875C55363}.Release|AnyCPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

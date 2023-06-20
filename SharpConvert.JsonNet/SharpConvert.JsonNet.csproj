@@ -1,0 +1,33 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net48</TargetFramework>
+    <LangVersion>10</LangVersion>
+    <Authors>adamstyl</Authors>
+    <PackageId>SharpConvert.JsonNet</PackageId>
+    <Product>SharpConvert.JsonNet</Product>
+    <Title>SharpConvert.JsonNet</Title>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <Nullable>disable</Nullable>
+    <RootNamespace>MmiSoft.Core.Json</RootNamespace>
+    <Description>JSON.net additions for SharpConvert.</Description>
+    <ThisYear>$([System.DateTime]::Now.ToString("yyyy"))</ThisYear>
+    <Copyright>Copyright © adamstyl 2016-$(ThisYear)</Copyright>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="README.md" Pack="true" PackagePath="" />
+    <ProjectReference Include="..\SharpConvert\SharpConvert.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="MmiSoft.Core" Version="0.1.4-dev.21" />
+  </ItemGroup>
+
+</Project>
