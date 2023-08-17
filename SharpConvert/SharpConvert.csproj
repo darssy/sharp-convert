@@ -46,6 +46,18 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>SpeedUnits.g.cs</LastGenOutput>
     </None>
+    <None Update="Struct\TimeUnits.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>TimeUnits.g.cs</LastGenOutput>
+    </None>
+    <None Update="Struct\AngleConversion.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>AngleConversion.g.cs</LastGenOutput>
+    </None>
+    <None Update="Struct\AngleUnit.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>AngleUnit.g.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   
   <ItemGroup>
@@ -73,6 +85,21 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>SpeedUnits.tt</DependentUpon>
+    </Compile>
+    <Compile Update="Struct\TimeUnits.g.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TimeUnits.tt</DependentUpon>
+    </Compile>
+    <Compile Update="Struct\AngleUnit.g.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AngleUnit.tt</DependentUpon>
+    </Compile>
+    <Compile Update="Struct\AngleConversion.g.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AngleConversion.tt</DependentUpon>
     </Compile>
   </ItemGroup>
   

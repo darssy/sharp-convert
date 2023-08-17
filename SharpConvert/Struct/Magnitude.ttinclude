@@ -9,7 +9,7 @@
 	    string ctorArg = structName.ToLower();
 #>
 [Serializable]
-public readonly struct <#= structName #> : I<#= quantity #>
+public readonly partial struct <#= structName #> : I<#= quantity #>
 {
 	public static readonly <#= structName #> Zero = new();
 
