@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Runtime.CompilerServices;
 
 namespace MmiSoft.Core.Math.Units.Struct;
@@ -31,12 +31,13 @@ public class LengthConversion<TUnit> : ILinearConversion where TUnit : ILength
 
 public static class LengthConversions
 {
-	public static readonly LengthConversion<Meters> Meter = new(1, "m", v => new Meters(v));
-	public static readonly LengthConversion<Inches> Inch = new(0.254, "in", v => new Inches(v));
-	public static readonly LengthConversion<Feet> Foot = new(0.3048, "ft", v => new Feet(v));
-	public static readonly LengthConversion<Kilometers> Kilometer = new(1000, "Km", v => new Kilometers(v));
-	public static readonly LengthConversion<NauticalMiles> NauticalMile = new(1852, "NM", v => new NauticalMiles(v));
+	public static readonly LengthConversion<Meters> Meter = new(1, "m", m => new Meters(m));
+	public static readonly LengthConversion<Inches> Inch = new(0.254, "in", i => new Inches(i));
+	public static readonly LengthConversion<Feet> Foot = new(0.3048, "ft", f => new Feet(f));
+	public static readonly LengthConversion<Kilometers> Kilometer = new(1000, "Km", k => new Kilometers(k));
+	public static readonly LengthConversion<NauticalMiles> NauticalMile = new(1852, "NM", n => new NauticalMiles(n));
 
+	[MethodImpl(MethodImplOptions.AggressiveInlining)]
 	public static TOut To<TOut, TIn>(this TIn toConvert, LengthConversion<TOut> conversion)
 		where TOut : struct, ILength
 		where TIn : struct, ILength

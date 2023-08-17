@@ -6,5 +6,5 @@ using System;
 namespace MmiSoft.Core.Math.Units.Struct;
 
 <#
-    CreatePrimaryUnits(Host.ResolvePath("length-units.txt"), true, "Length");
+    CreatePrimaryUnits(Host.ResolvePath("angle-units.txt"), false, "Angle");
 #>

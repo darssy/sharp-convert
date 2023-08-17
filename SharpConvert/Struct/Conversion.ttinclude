@@ -1,6 +1,7 @@
 <#@ include file="UnitDecl.ttinclude"#><##>
 <#@ import namespace="System.Text" #>
 <#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.IO" #>
 <#+
     public void GenerateConversionClass(string magnitude)
     {
@@ -30,6 +31,7 @@ public class <#= magnitude #>Conversion<TUnit> : ILinearConversion where TUnit :
 	[MethodImpl(MethodImplOptions.AggressiveInlining)]
 	public TUnit Create(double value) => create(value);
 }
+
 <#+
     }
 #>
@@ -50,6 +52,7 @@ public static class <#= magnitude #>Conversions
         }
 #>
 
+	[MethodImpl(MethodImplOptions.AggressiveInlining)]
 	public static TOut To<TOut, TIn>(this TIn toConvert, <#= magnitude #>Conversion<TOut> conversion)
 		where TOut : struct, I<#= magnitude #>
 		where TIn : struct, I<#= magnitude #>
@@ -65,12 +68,21 @@ public static class <#= magnitude #>Conversions
 }
 <#+
     }
-    
-	List<UnitDecl> ParseUnits(string absolutePath)
+
+	private static List<UnitDecl> ParseUnits(string absolutePath)
 	{
-		string[] units = File.ReadAllLines(absolutePath);
+		string[] units = File.ReadAllLines(absolutePath, Encoding.UTF8);
 		List<UnitDecl> declaredUnits = new(units.Length);
 		declaredUnits.AddRange(units.Select(t => UnitDecl.FromText(t)));
 		return declaredUnits;
+	}
+
+	private void GenerateConversions(string unitsFileName, string magnitude)
+	{
+		GenerateConversionClass(magnitude);
+
+		string absolutePath = Host.ResolvePath(unitsFileName);
+    
+		GenerateExtensionMethods(magnitude, ParseUnits(absolutePath));
 	}
 #>

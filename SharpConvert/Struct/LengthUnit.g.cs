@@ -3,7 +3,7 @@ using System;
 namespace MmiSoft.Core.Math.Units.Struct;
 
 [Serializable]
-public readonly struct Meters : ILength
+public readonly partial struct Meters : ILength
 {
 	public static readonly Meters Zero = new();
 
@@ -172,7 +172,7 @@ public readonly struct Meters : ILength
 }
 
 [Serializable]
-public readonly struct Inches : ILength
+public readonly partial struct Inches : ILength
 {
 	public static readonly Inches Zero = new();
 
@@ -341,7 +341,7 @@ public readonly struct Inches : ILength
 }
 
 [Serializable]
-public readonly struct Feet : ILength
+public readonly partial struct Feet : ILength
 {
 	public static readonly Feet Zero = new();
 
@@ -510,7 +510,7 @@ public readonly struct Feet : ILength
 }
 
 [Serializable]
-public readonly struct Kilometers : ILength
+public readonly partial struct Kilometers : ILength
 {
 	public static readonly Kilometers Zero = new();
 
@@ -679,7 +679,7 @@ public readonly struct Kilometers : ILength
 }
 
 [Serializable]
-public readonly struct NauticalMiles : ILength
+public readonly partial struct NauticalMiles : ILength
 {
 	public static readonly NauticalMiles Zero = new();
 

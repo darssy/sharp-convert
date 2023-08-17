@@ -1,0 +1,24 @@
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Linq" #>
+<#@ include file="UnitDecl.ttinclude" once="true"#><##>
+<#@ include file="Magnitude.ttinclude" once="true"#><##>
+<#+
+    public void CreatePrimaryUnits(string absolutePath, bool onlyPositive, string magnitudeName)
+    {
+        string[] units = File.ReadAllLines(absolutePath);
+        List<UnitDecl> declaredUnits = new(units.Length);
+        declaredUnits.AddRange(units.Select(t => UnitDecl.FromText(t)));
+    
+    
+        List<string> otherUnits = declaredUnits.Select(u => u.StructName).ToList();
+        for (int i = 0; i < declaredUnits.Count; i++)
+        {
+            UnitDecl declaredUnit = declaredUnits[i];
+            otherUnits.RemoveAt(i);
+            GenerateClassForMagnitude(declaredUnit, onlyPositive, magnitudeName, otherUnits);
+            otherUnits.Insert(i, declaredUnit.StructName);
+        }
+    }
+#>

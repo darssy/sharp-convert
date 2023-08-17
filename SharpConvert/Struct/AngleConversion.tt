@@ -1,15 +1,13 @@
 <#@ template language="C#" hostspecific="True"#>
 <#@ output extension="g.cs" encoding="utf-8" #>
 <#@ include file="Conversion.ttinclude"#><##>
-<#@ import namespace="System.Text" #>
-<#@ import namespace="System.Collections.Generic" #>
-<#@ import namespace="System.IO" #>
-<#@ import namespace="System.Linq" #>
 using System;
 using System.Runtime.CompilerServices;
 
 namespace MmiSoft.Core.Math.Units.Struct;
 
 <#
-    GenerateConversions("length-units.txt", "Length");
+    GenerateConversions("angle-units.txt", "Angle");
 #>
+
+

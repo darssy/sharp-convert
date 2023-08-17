@@ -2,6 +2,7 @@
 <#@ import namespace="" #>
 <#@ import namespace="System.Collections.Generic" #>
 <#@ import namespace="System.Globalization" #>
+<#@ import namespace="System.Linq" #>
 <#+
     public class UnitDecl
     {
