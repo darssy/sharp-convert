@@ -31,14 +31,14 @@ public readonly partial struct <#= structName #> : I<#= quantity #>
 	#region minus operators
 
 <#+
-		if (onlyPositiveValues)
+		if (!onlyPositiveValues)
 		{
 #>
 	public static <#= structName #> operator -(<#= structName #> x) => new <#= structName #>(-x.unitValue);
+
 <#+
 		}
 #>
-
 	public static <#= structName #> operator -(<#= structName #> x, <#= structName #> y)
 	{
 <#+
