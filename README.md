@@ -1,5 +1,4 @@
-[![Codacy Badge](https://app.codacy.com/project/badge/Grade/9fd842845e954fa1a4036088002b5b1c)](https://app.codacy.com/gh/adamstyl/sharp-convert/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
-[![Build status](https://img.shields.io/appveyor/ci/adamstyl/sharp-convert.svg)](https://ci.appveyor.com/project/adamstyl/sharp-convert)
+[![Build status](https://img.shields.io/appveyor/ci/darssy/sharp-convert.svg)](https://ci.appveyor.com/project/darssy/sharp-convert)
 
 # Sharp Convert
 ## Purpose - disclaimer
@@ -69,6 +68,26 @@ After some years of maintaining this library and some quick research on other "c
 In order to evaluate the two approaches, I added a new `Structs` namespace that will mirror the existing functionality with value types. **This should be considered experimental until further notice.**
 
 One other important aspect is the _pluralism_ of the library. If you have a look into the next section you will immediately realize that this library is quite poor in terms of supported units when compared to other libraries. This is because each unit has **a lot** of boilerplate code that a) it has to be copied and tested by hand all the time (and we know how error prone could that be) and b) this boilerplate **can't be reduced with metaprogramming.** Unfortunately. As a result, the evolution of SharpConvert to a source generated library looks a oneway road at the moment.
+
+#### Preliminary benchmark results
+Here are some benchmark results comparing some of the implementations in SharpConvert and some popular units libraries. Result are from my development machine and are indicative. Benchmark code has not been released yet as it's quite messy.
+
+```
+BenchmarkDotNet=v0.13.5, OS=Windows 10 (10.0.19045.3930/22H2/2022Update)
+Intel Core i7-7500U CPU 2.70GHz (Kaby Lake), 1 CPU, 4 logical and 2 physical cores
+[Host]     : .NET Framework 4.8.1 (4.8.9181.0), X64 RyuJIT VectorSize=256
+DefaultJob : .NET Framework 4.8.1 (4.8.9181.0), X64 RyuJIT VectorSize=256
+```
+
+|                 Method |       Mean |     Error |    StdDev |  Ratio | RatioSD |   Gen0 | Allocated | Alloc Ratio |
+|----------------------- |-----------:|----------:|----------:|-------:|--------:|-------:|----------:|------------:|
+|        PlainOlDivision |   2.503 ns | 0.0333 ns | 0.0260 ns |   1.00 |    0.00 |      - |         - |          NA |
+| SharpConvertUglyStruct |   4.889 ns | 0.0962 ns | 0.1581 ns |   1.92 |    0.06 |      - |         - |          NA |
+|     SharpConvertStruct |   5.345 ns | 0.0918 ns | 0.1093 ns |   2.13 |    0.04 |      - |         - |          NA |
+|      SharpConvertClass |  62.212 ns | 0.5740 ns | 0.4793 ns |  24.85 |    0.30 | 0.0305 |      64 B |          NA |
+|               UnitsNet | 276.748 ns | 2.8840 ns | 2.2516 ns | 110.58 |    1.74 | 0.0229 |      48 B |          NA |
+|                GuUnits |   7.190 ns | 0.0588 ns | 0.0521 ns |   2.87 |    0.04 |      - |         - |          NA |
+
 
 ### Available units
 
