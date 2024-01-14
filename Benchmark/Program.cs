@@ -23,6 +23,7 @@ public static class Program
 		Console.WriteLine("1. ConversionBenchmark (KtsToFpm)");
 		Console.WriteLine("2. UnitOperation (Kts + Fpm, has random.Next overhead)");
 		Console.WriteLine("3. Conversion to same unit (Kts to Kts, has random.Next overhead)");
+		Console.WriteLine("4. Framework benchmark (NET7.0 and NETFramework4.8)");
 		switch (Console.ReadLine())
 		{
 			case "1":
@@ -33,6 +34,9 @@ public static class Program
 				break;
 			case "3":
 				BenchmarkRunner.Run<KtsToKtsBenchmarkList>();
+				break;
+			case "4":
+				BenchmarkRunner.Run<FrameworkBenchmark>();
 				break;
 			default:
 				Console.WriteLine("Unknown selection. Quiting");
