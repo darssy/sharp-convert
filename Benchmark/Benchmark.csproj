@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net48</TargetFramework>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <Nullable>disable</Nullable>
+    <OutputType>Exe</OutputType>
+    <LangVersion>10</LangVersion>
+    <AssemblyName>UnitsBenchmark</AssemblyName>
+    <RootNamespace>UnitsBenchmark</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="BenchmarkDotNet" Version="0.13.5" />
+    <PackageReference Include="BenchmarkDotNet.Diagnostics.Windows" Version="0.13.5" />
+    <PackageReference Include="Gu.Units" Version="0.10.7" />
+    <PackageReference Include="UnitsNet" Version="5.11.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SharpConvert.Experimental\SharpConvert.Experimental.csproj" />
+    <ProjectReference Include="..\SharpConvert\SharpConvert.csproj" />
+  </ItemGroup>
+
+</Project>
