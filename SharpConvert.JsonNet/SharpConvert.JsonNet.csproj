@@ -1,7 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net48</TargetFramework>
     <LangVersion>10</LangVersion>
     <Authors>adamstyl</Authors>
     <PackageId>SharpConvert.JsonNet</PackageId>
@@ -19,6 +18,7 @@
     <ThisYear>$([System.DateTime]::Now.ToString("yyyy"))</ThisYear>
     <Copyright>Copyright © adamstyl 2016-$(ThisYear)</Copyright>
     <PackageReadmeFile>README.md</PackageReadmeFile>
+    <TargetFrameworks>net7.0;net8.0;net48</TargetFrameworks>
   </PropertyGroup>
 
   <ItemGroup>
@@ -28,7 +28,7 @@
 
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-    <PackageReference Include="MmiSoft.Core" Version="0.1.4" />
+    <PackageReference Include="MmiSoft.Core" Version="0.1.8-dev.4" />
   </ItemGroup>
 
 </Project>
