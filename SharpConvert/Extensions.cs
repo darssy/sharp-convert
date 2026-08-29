@@ -197,6 +197,31 @@ namespace MmiSoft.Core.Math.Units
 			return new FeetPerMinute(d);
 		}
 
+		public static FeetPerSecond FeetPerSecond(this double d)
+		{
+			return new FeetPerSecond(d);
+		}
+
+		public static FeetPerSecond FeetPerSecond(this float d)
+		{
+			return new FeetPerSecond(d);
+		}
+
+		public static FeetPerSecond FeetPerSecond(this int d)
+		{
+			return new FeetPerSecond(d);
+		}
+
+		public static MetersPerSecond MetersPerSecond(this double mps)
+		{
+			return new MetersPerSecond(mps);
+		}
+
+		public static MetersPerSecond MetersPerSecond(this float mps)
+		{
+			return new MetersPerSecond(mps);
+		}
+
 		public static MetersPerSecond MetersPerSecond(this int mps)
 		{
 			return new MetersPerSecond(mps);
@@ -300,6 +325,10 @@ namespace MmiSoft.Core.Math.Units
 		public static FeetPerMinutePerSecond FeetPerMinutePerSecond(this int fpsPerSec) => new FeetPerMinutePerSecond(fpsPerSec);
 		public static FeetPerMinutePerSecond FeetPerMinutePerSecond(this float fpsPerSec) => new FeetPerMinutePerSecond(fpsPerSec);
 		public static FeetPerMinutePerSecond FeetPerMinutePerSecond(this double fpsPerSec) => new FeetPerMinutePerSecond(fpsPerSec);
+
+		public static FeetPerSecondSquared FeetPerSecondSquared(this int fpsPerSec) => new FeetPerSecondSquared(fpsPerSec);
+		public static FeetPerSecondSquared FeetPerSecondSquared(this float fpsPerSec) => new FeetPerSecondSquared(fpsPerSec);
+		public static FeetPerSecondSquared FeetPerSecondSquared(this double fpsPerSec) => new FeetPerSecondSquared(fpsPerSec);
 
 		#endregion
 	}

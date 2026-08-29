@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
+using System.Linq;
+using System.Reflection;
 using MmiSoft.Core.Math.Units;
 using NUnit.Framework;
 
@@ -43,6 +45,64 @@ namespace UnitTests.MmiSoft.Core.Math.Units
 			Knots speed = 450.Knots();
 			Knots speed2 = new Knots(450);
 			Assert.AreEqual(speed, speed2);
+		}
+
+		[Test]
+		public void ExtensionMethods_FeetPerSecond()
+		{
+			Assert.AreEqual(new FeetPerSecond(20.5), 20.5.FeetPerSecond());
+			Assert.AreEqual(new FeetPerSecond(20.5), 20.5f.FeetPerSecond());
+			Assert.AreEqual(new FeetPerSecond(20), 20.FeetPerSecond());
+		}
+
+		[Test]
+		public void ExtensionMethods_FeetPerSecondSquared()
+		{
+			Assert.AreEqual(new FeetPerSecondSquared(5.5), 5.5.FeetPerSecondSquared());
+			Assert.AreEqual(new FeetPerSecondSquared(5.5), 5.5f.FeetPerSecondSquared());
+			Assert.AreEqual(new FeetPerSecondSquared(5), 5.FeetPerSecondSquared());
+		}
+
+		[Test]
+		public void ExtensionMethods_MetersPerSecondAcceptsAllNumericTypes()
+		{
+			//only the int overload used to exist
+			Assert.AreEqual(new MetersPerSecond(12.5), 12.5.MetersPerSecond());
+			Assert.AreEqual(new MetersPerSecond(12.5), 12.5f.MetersPerSecond());
+			Assert.AreEqual(new MetersPerSecond(12), 12.MetersPerSecond());
+		}
+
+		[Test]
+		public void ExtensionMethods_EveryConcreteUnitHasDoubleFloatAndIntOverloads()
+		{
+			Type[] numericTypes = { typeof(double), typeof(float), typeof(int) };
+
+			List<MethodInfo> extensions = typeof(Extensions)
+				.GetMethods(BindingFlags.Public | BindingFlags.Static)
+				.ToList();
+
+			List<Type> unitTypes = typeof(UnitBase).Assembly
+				.GetTypes()
+				.Where(t => typeof(UnitBase).IsAssignableFrom(t) && !t.IsAbstract && t.IsPublic)
+				.OrderBy(t => t.Name)
+				.ToList();
+
+			CollectionAssert.IsNotEmpty(unitTypes);
+
+			List<string> missing = new List<string>();
+			foreach (Type unitType in unitTypes)
+			{
+				foreach (Type numericType in numericTypes)
+				{
+					bool found = extensions.Any(m => m.Name == unitType.Name
+					                                 && m.ReturnType == unitType
+					                                 && m.GetParameters().Length == 1
+					                                 && m.GetParameters()[0].ParameterType == numericType);
+					if (!found) missing.Add($"{unitType.Name}(this {numericType.Name})");
+				}
+			}
+
+			CollectionAssert.IsEmpty(missing, "Units without a fluent method: " + string.Join(", ", missing));
 		}
 
 		[Test]
