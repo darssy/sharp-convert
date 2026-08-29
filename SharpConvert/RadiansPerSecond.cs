@@ -37,5 +37,47 @@ namespace MmiSoft.Core.Math.Units
 			return (a / (AngularVelocity)omega).To<Seconds>();
 		}
 
+		public static RadiansPerSecond operator -(RadiansPerSecond x)
+		{
+			return new RadiansPerSecond(-x.unitValue);
+		}
+
+		public static RadiansPerSecond operator -(RadiansPerSecond l, RadiansPerSecond r)
+		{
+			return new RadiansPerSecond(l.unitValue - r.unitValue);
+		}
+
+		public static RadiansPerSecond operator -(RadiansPerSecond l, AngularVelocity r)
+		{
+			if (r is RadiansPerSecond rps) return l - rps;
+			return new RadiansPerSecond(l.Subtract(r));
+		}
+
+		public static RadiansPerSecond operator +(RadiansPerSecond l, RadiansPerSecond r)
+		{
+			return new RadiansPerSecond(l.unitValue + r.unitValue);
+		}
+
+		public static RadiansPerSecond operator +(RadiansPerSecond l, AngularVelocity r)
+		{
+			if (r is RadiansPerSecond rps) return l + rps;
+			return new RadiansPerSecond(l.Add(r));
+		}
+
+		public static RadiansPerSecond operator *(RadiansPerSecond omega, double f)
+		{
+			return new RadiansPerSecond(omega.unitValue * f);
+		}
+
+		public static RadiansPerSecond operator *(double f, RadiansPerSecond omega)
+		{
+			return new RadiansPerSecond(omega.unitValue * f);
+		}
+
+		public static RadiansPerSecond operator /(RadiansPerSecond omega, double f)
+		{
+			return f == 0 ? null : new RadiansPerSecond(omega.unitValue / f);
+		}
+
 	}
 }

@@ -72,9 +72,37 @@ namespace MmiSoft.Core.Math.Units
 			return copy;
 		}
 
+		public static TimeUnit operator /(TimeUnit t, double f)
+		{
+			if (f == 0) return null;
+			TimeUnit copy = (TimeUnit)t.MemberwiseClone();
+			copy.unitValue /= System.Math.Abs(f);
+			return copy;
+		}
+
+		public static TimeUnit operator /(TimeUnit t, float f)
+		{
+			return t / (double) f;
+		}
+
+		public static TimeUnit operator /(TimeUnit t, int f)
+		{
+			return t / (double) f;
+		}
+
 		public static explicit operator double(TimeUnit t)
 		{
 			return t.unitValue;
+		}
+
+		public static explicit operator float(TimeUnit t)
+		{
+			return (float)t.unitValue;
+		}
+
+		public static explicit operator int(TimeUnit t)
+		{
+			return (int)System.Math.Round(t.unitValue);
 		}
 
 		public static implicit operator TimeSpan(TimeUnit t)

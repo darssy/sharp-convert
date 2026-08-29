@@ -15,13 +15,25 @@ namespace MmiSoft.Core.Math.Units
 			: base(km, Conversion.Kilometer)
 		{ }
 
+		public static Kilometers operator -(Kilometers x, Kilometers y)
+		{
+			return new Kilometers(System.Math.Abs(x.unitValue - y.unitValue));
+		}
+
+		public static Kilometers operator +(Kilometers x, Kilometers y)
+		{
+			return new Kilometers(x.unitValue + y.unitValue);
+		}
+
 		public static Kilometers operator -(Kilometers x, LengthUnit y)
 		{
+			if (y is Kilometers km) return x - km;
 			return new Kilometers(x.SubtractAbs(y));
 		}
 
 		public static Kilometers operator +(Kilometers x, LengthUnit y)
 		{
+			if (y is Kilometers km) return x + km;
 			return new Kilometers(x.Add(y));
 		}
 	}

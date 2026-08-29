@@ -38,5 +38,25 @@ namespace MmiSoft.Core.Math.Units
 			return new Radians(x.unitValue + y.ToSi());
 		}
 
+		public static Radians operator *(Radians x, double f)
+		{
+			return new Radians(x.unitValue * f);
+		}
+
+		public static Radians operator *(double f, Radians x)
+		{
+			return new Radians(x.unitValue * f);
+		}
+
+		public static Radians operator /(Radians x, double y)
+		{
+			return y == 0 ? null : new Radians(x.unitValue / y);
+		}
+
+		public static RadiansPerSecond operator /(Radians x, Seconds t)
+		{
+			return t.UnitValue == 0 ? null : new RadiansPerSecond(x.unitValue / t.UnitValue);
+		}
+
 	}
 }

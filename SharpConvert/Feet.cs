@@ -41,5 +41,10 @@ namespace MmiSoft.Core.Math.Units
 		{
 			return y.UnitValue == 0 ? null : new FeetPerMinute(x.unitValue / y.UnitValue);
 		}
+
+		public static FeetPerSecond operator /(Feet x, Seconds y)
+		{
+			return y.UnitValue == 0 ? null : new FeetPerSecond(x.unitValue / y.UnitValue);
+		}
 	}
 }

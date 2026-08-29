@@ -62,12 +62,32 @@ namespace MmiSoft.Core.Math.Units
 			return copy;
 		}
 
+		public static SpeedUnit operator *(double factor, SpeedUnit u)
+		{
+			return u * factor;
+		}
+
 		public static SpeedUnit operator /(SpeedUnit u, double factor)
 		{
 			if (factor == 0) return null;
 			SpeedUnit copy = (SpeedUnit)u.MemberwiseClone();
 			copy.unitValue /= factor;
 			return copy;
+		}
+
+		public static SpeedUnit operator /(SpeedUnit u, float factor)
+		{
+			return u / (double) factor;
+		}
+
+		public static SpeedUnit operator /(SpeedUnit u, int factor)
+		{
+			return u / (double) factor;
+		}
+
+		public static double operator /(SpeedUnit x, SpeedUnit y)
+		{
+			return x.ToSi() / y.ToSi();
 		}
 
 		public static LengthUnit operator *(SpeedUnit u, TimeUnit t)
@@ -78,9 +98,24 @@ namespace MmiSoft.Core.Math.Units
 			return distanceTraveled;
 		}
 
+		public static LengthUnit operator *(TimeUnit t, SpeedUnit u)
+		{
+			return u * t;
+		}
+
 		public static LengthUnit operator *(SpeedUnit u, TimeSpan t)
 		{
 			return u * new Seconds(t);
+		}
+
+		public static LengthUnit operator *(TimeSpan t, SpeedUnit u)
+		{
+			return u * new Seconds(t);
+		}
+
+		public static AccelerationUnit operator /(SpeedUnit u, TimeUnit t)
+		{
+			return t == TimeUnit.Zero ? null : new MetersPerSecondSquared(u.ToSi() / t.ToSi());
 		}
 
 		public static TimeUnit operator /(LengthUnit s, SpeedUnit u)
@@ -112,6 +147,11 @@ namespace MmiSoft.Core.Math.Units
 			SpeedUnit cloned = (SpeedUnit) x.MemberwiseClone();
 			cloned.unitValue *= -1;
 			return cloned;
+		}
+
+		public static explicit operator double(SpeedUnit u)
+		{
+			return u.unitValue;
 		}
 
 		public static U Get<U>(LengthUnit s, TimeUnit t)

@@ -4,7 +4,7 @@ namespace MmiSoft.Core.Math.Units
 	using System;
 
 	[Serializable]
-	public abstract class AccelerationUnit : UnitBase
+	public abstract class AccelerationUnit : UnitBase, IComparable<AccelerationUnit>
 	{
 		public static readonly AccelerationUnit Zero = 0.MetersPerSecondSquared();
 
@@ -29,6 +29,21 @@ namespace MmiSoft.Core.Math.Units
 			return changeInSpeed;
 		}
 
+		public static SpeedUnit operator *(TimeUnit t, AccelerationUnit a)
+		{
+			return a * t;
+		}
+
+		public static SpeedUnit operator *(AccelerationUnit a, TimeSpan t)
+		{
+			return a * new Seconds(t);
+		}
+
+		public static SpeedUnit operator *(TimeSpan t, AccelerationUnit a)
+		{
+			return a * new Seconds(t);
+		}
+
 		public static bool operator <(AccelerationUnit x, AccelerationUnit y)
 		{
 			return x.ToSi() < y.ToSi();
@@ -49,6 +64,33 @@ namespace MmiSoft.Core.Math.Units
 			return x.ToSi() >= y.ToSi();
 		}
 
+		public static AccelerationUnit operator -(AccelerationUnit l, AccelerationUnit r)
+		{
+			return new MetersPerSecondSquared(l.ToSi() - r.ToSi());
+		}
+
+		public static AccelerationUnit operator +(AccelerationUnit l, AccelerationUnit r)
+		{
+			return new MetersPerSecondSquared(l.ToSi() + r.ToSi());
+		}
+
+		public static AccelerationUnit operator *(AccelerationUnit a, double factor)
+		{
+			AccelerationUnit copy = (AccelerationUnit) a.MemberwiseClone();
+			copy.unitValue *= factor;
+			return copy;
+		}
+
+		public static AccelerationUnit operator *(double factor, AccelerationUnit a)
+		{
+			return a * factor;
+		}
+
+		public static double operator /(AccelerationUnit x, AccelerationUnit y)
+		{
+			return x.ToSi() / y.ToSi();
+		}
+
 		public static TimeUnit operator /(SpeedUnit u, AccelerationUnit a)
 		{
 			if (a == Zero) return null;
@@ -66,11 +108,31 @@ namespace MmiSoft.Core.Math.Units
 			return a2;
 		}
 
+		public static AccelerationUnit operator /(AccelerationUnit a, float y)
+		{
+			return a / (double) y;
+		}
+
+		public static AccelerationUnit operator /(AccelerationUnit a, int y)
+		{
+			return a / (double) y;
+		}
+
 		public static AccelerationUnit operator -(AccelerationUnit x)
 		{
 			AccelerationUnit cloned = (AccelerationUnit)x.MemberwiseClone();
 			cloned.unitValue = -cloned.unitValue;
 			return cloned;
+		}
+
+		public static explicit operator double(AccelerationUnit a)
+		{
+			return a.unitValue;
+		}
+
+		public int CompareTo(AccelerationUnit other)
+		{
+			return CompareToImpl(other);
 		}
 	}
 }

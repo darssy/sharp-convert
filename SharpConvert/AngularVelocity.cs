@@ -41,6 +41,13 @@ namespace MmiSoft.Core.Math.Units
 			return x.ToSi() >= y.ToSi();
 		}
 
+		public static AngularVelocity operator -(AngularVelocity x)
+		{
+			AngularVelocity cloned = (AngularVelocity) x.MemberwiseClone();
+			cloned.unitValue = -cloned.unitValue;
+			return cloned;
+		}
+
 		public static AngularVelocity operator -(AngularVelocity l, AngularVelocity r)
 		{
 			return new RadiansPerSecond(l.ToSi() - r.ToSi());
@@ -56,9 +63,59 @@ namespace MmiSoft.Core.Math.Units
 			return DivideByTimeImpl(omega, t.ToSi());
 		}
 
+		public static AngleUnit operator *(TimeUnit t, AngularVelocity omega)
+		{
+			return DivideByTimeImpl(omega, t.ToSi());
+		}
+
 		public static AngleUnit operator *(AngularVelocity omega, TimeSpan t)
 		{
 			return DivideByTimeImpl(omega, t.TotalSeconds);
+		}
+
+		public static AngleUnit operator *(TimeSpan t, AngularVelocity omega)
+		{
+			return DivideByTimeImpl(omega, t.TotalSeconds);
+		}
+
+		public static AngularVelocity operator *(AngularVelocity omega, double factor)
+		{
+			AngularVelocity copy = (AngularVelocity) omega.MemberwiseClone();
+			copy.unitValue *= factor;
+			return copy;
+		}
+
+		public static AngularVelocity operator *(double factor, AngularVelocity omega)
+		{
+			return omega * factor;
+		}
+
+		public static AngularVelocity operator /(AngularVelocity omega, double factor)
+		{
+			if (factor == 0) return null;
+			AngularVelocity copy = (AngularVelocity) omega.MemberwiseClone();
+			copy.unitValue /= factor;
+			return copy;
+		}
+
+		public static AngularVelocity operator /(AngularVelocity omega, float factor)
+		{
+			return omega / (double) factor;
+		}
+
+		public static AngularVelocity operator /(AngularVelocity omega, int factor)
+		{
+			return omega / (double) factor;
+		}
+
+		public static double operator /(AngularVelocity x, AngularVelocity y)
+		{
+			return x.ToSi() / y.ToSi();
+		}
+
+		public static explicit operator double(AngularVelocity omega)
+		{
+			return omega.unitValue;
 		}
 
 		private static AngleUnit DivideByTimeImpl(AngularVelocity omega, double tInSeconds)

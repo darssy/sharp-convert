@@ -39,9 +39,34 @@ namespace MmiSoft.Core.Math.Units
 			return u.unitValue == 0 ? null : (s / (SpeedUnit)u).To<Hours>();
 		}
 
+		public static KnotsPerSecond operator /(Knots u, Seconds t)
+		{
+			return u.unitValue == 0 ? null : (u.unitValue / t.UnitValue).KnotsPerSecond();
+		}
+
+		public static Knots operator -(Knots x)
+		{
+			return new Knots(-x.unitValue);
+		}
+
+		public static Knots operator *(Knots u, double factor)
+		{
+			return new Knots(u.unitValue * factor);
+		}
+
+		public static Knots operator *(double factor, Knots u)
+		{
+			return new Knots(u.unitValue * factor);
+		}
+
+		public static Knots operator /(Knots u, double factor)
+		{
+			return factor == 0 ? null : new Knots(u.unitValue / factor);
+		}
+
 		public static Knots operator -(Knots l, SpeedUnit r)
 		{
-			if (r is Knots fpm) return l - fpm;
+			if (r is Knots kts) return l - kts;
 			return new Knots(l.Subtract(r));
 		}
 
@@ -52,7 +77,7 @@ namespace MmiSoft.Core.Math.Units
 
 		public static Knots operator +(Knots l, SpeedUnit r)
 		{
-			if (r is Knots fpm) return l - fpm;
+			if (r is Knots kts) return l + kts;
 			return new Knots(l.Add(r));
 		}
 

@@ -60,5 +60,25 @@ namespace MmiSoft.Core.Math.Units
 		{
 			return new Degrees(x.Add(y));
 		}
+
+		public static Degrees operator *(Degrees x, double f)
+		{
+			return new Degrees(x.unitValue * f);
+		}
+
+		public static Degrees operator *(double f, Degrees x)
+		{
+			return new Degrees(x.unitValue * f);
+		}
+
+		public static Degrees operator /(Degrees x, double y)
+		{
+			return y == 0 ? null : new Degrees(x.unitValue / y);
+		}
+
+		public static DegreesPerSecond operator /(Degrees x, Seconds t)
+		{
+			return t.UnitValue == 0 ? null : new DegreesPerSecond(x.unitValue / t.UnitValue);
+		}
 	}
 }

@@ -13,6 +13,11 @@ namespace MmiSoft.Core.Math.Units
 			}
 		}
 
+		public M To<M>() where M : MassUnit
+		{
+			return ConvertTo<M, MassUnit>(this);
+		}
+
 		public static bool operator <(MassUnit x, MassUnit y)
 		{
 			return x.ToSi() < y.ToSi();
@@ -47,6 +52,60 @@ namespace MmiSoft.Core.Math.Units
 			M dif = new M();
 			dif.FromSi(System.Math.Abs(x.ToSi() - y.ToSi()));
 			return dif;
+		}
+
+		/// <summary>
+		/// Mass can't be negative, so - as with every other mass operation - the absolute value of the difference
+		/// is returned.
+		/// </summary>
+		public static MassUnit operator -(MassUnit l, MassUnit r)
+		{
+			return new Kilogram(System.Math.Abs(l.ToSi() - r.ToSi()));
+		}
+
+		public static MassUnit operator +(MassUnit l, MassUnit r)
+		{
+			return new Kilogram(l.ToSi() + r.ToSi());
+		}
+
+		public static MassUnit operator *(MassUnit m, double factor)
+		{
+			MassUnit copy = (MassUnit) m.MemberwiseClone();
+			copy.unitValue *= System.Math.Abs(factor);
+			return copy;
+		}
+
+		public static MassUnit operator *(double factor, MassUnit m)
+		{
+			return m * factor;
+		}
+
+		public static MassUnit operator /(MassUnit m, double divisor)
+		{
+			if (divisor == 0) return null;
+			MassUnit copy = (MassUnit) m.MemberwiseClone();
+			copy.unitValue /= System.Math.Abs(divisor);
+			return copy;
+		}
+
+		public static MassUnit operator /(MassUnit m, float divisor)
+		{
+			return m / (double) divisor;
+		}
+
+		public static MassUnit operator /(MassUnit m, int divisor)
+		{
+			return m / (double) divisor;
+		}
+
+		public static double operator /(MassUnit x, MassUnit y)
+		{
+			return x.ToSi() / y.ToSi();
+		}
+
+		public static explicit operator double(MassUnit m)
+		{
+			return m.unitValue;
 		}
 
 		public int CompareTo(MassUnit other)

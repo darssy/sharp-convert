@@ -30,12 +30,44 @@ namespace MmiSoft.Core.Math.Units
 
 		public static Seconds operator /(FeetPerMinute u, FeetPerMinutePerSecond a)
 		{
-			return a == Zero ? null : new Seconds(u.UnitValue / a.unitValue);
+			return a == Zero ? null : new Seconds(System.Math.Abs(u.UnitValue / a.unitValue));
 		}
 
 		public static FeetPerMinutePerSecond operator /(FeetPerMinutePerSecond a, double y)
 		{
 			return y == 0 ? null : new FeetPerMinutePerSecond(a.unitValue / y);
+		}
+
+		public static FeetPerMinutePerSecond operator *(FeetPerMinutePerSecond a, double factor)
+		{
+			return new FeetPerMinutePerSecond(a.unitValue * factor);
+		}
+
+		public static FeetPerMinutePerSecond operator *(double factor, FeetPerMinutePerSecond a)
+		{
+			return new FeetPerMinutePerSecond(a.unitValue * factor);
+		}
+
+		public static FeetPerMinutePerSecond operator -(FeetPerMinutePerSecond l, FeetPerMinutePerSecond r)
+		{
+			return new FeetPerMinutePerSecond(l.unitValue - r.unitValue);
+		}
+
+		public static FeetPerMinutePerSecond operator -(FeetPerMinutePerSecond l, AccelerationUnit r)
+		{
+			if (r is FeetPerMinutePerSecond fpmps) return l - fpmps;
+			return new FeetPerMinutePerSecond(l.Subtract(r));
+		}
+
+		public static FeetPerMinutePerSecond operator +(FeetPerMinutePerSecond l, FeetPerMinutePerSecond r)
+		{
+			return new FeetPerMinutePerSecond(l.unitValue + r.unitValue);
+		}
+
+		public static FeetPerMinutePerSecond operator +(FeetPerMinutePerSecond l, AccelerationUnit r)
+		{
+			if (r is FeetPerMinutePerSecond fpmps) return l + fpmps;
+			return new FeetPerMinutePerSecond(l.Add(r));
 		}
 
 		public static FeetPerMinutePerSecond operator -(FeetPerMinutePerSecond x)

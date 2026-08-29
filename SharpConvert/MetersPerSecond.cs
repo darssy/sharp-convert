@@ -44,13 +44,38 @@ namespace MmiSoft.Core.Math.Units
 
 		public static MetersPerSecond operator +(MetersPerSecond l, SpeedUnit r)
 		{
-			if (r is MetersPerSecond mps) return l - mps;
+			if (r is MetersPerSecond mps) return l + mps;
 			return new MetersPerSecond(l.unitValue + r.ToSi());
 		}
 
 		public static MetersPerSecond operator +(MetersPerSecond l, MetersPerSecond r)
 		{
 			return new MetersPerSecond(l.unitValue + r.unitValue);
+		}
+
+		public static MetersPerSecond operator *(MetersPerSecond u, double factor)
+		{
+			return new MetersPerSecond(u.unitValue * factor);
+		}
+
+		public static MetersPerSecond operator *(double factor, MetersPerSecond u)
+		{
+			return new MetersPerSecond(u.unitValue * factor);
+		}
+
+		public static MetersPerSecond operator /(MetersPerSecond u, double factor)
+		{
+			return factor == 0 ? null : new MetersPerSecond(u.unitValue / factor);
+		}
+
+		public static MetersPerSecondSquared operator /(MetersPerSecond u, Seconds t)
+		{
+			return t.UnitValue == 0 ? null : new MetersPerSecondSquared(u.unitValue / t.UnitValue);
+		}
+
+		public static Meters operator *(MetersPerSecond u, Seconds t)
+		{
+			return new Meters(System.Math.Abs(u.unitValue * t.UnitValue));
 		}
 	}
 }

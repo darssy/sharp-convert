@@ -33,5 +33,10 @@ namespace MmiSoft.Core.Math.Units
 		{
 			return new Meters(x.unitValue + y.ToSi());
 		}
+
+		public static MetersPerSecond operator /(Meters x, Seconds y)
+		{
+			return y.UnitValue == 0 ? null : new MetersPerSecond(x.unitValue / y.UnitValue);
+		}
 	}
 }

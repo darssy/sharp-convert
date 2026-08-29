@@ -33,5 +33,20 @@ namespace MmiSoft.Core.Math.Units
 			if (y is Kilogram k) return x + k;
 			return new Kilogram(x.unitValue + y.ToSi());
 		}
+
+		public static Kilogram operator *(Kilogram x, double f)
+		{
+			return new Kilogram(x.unitValue * System.Math.Abs(f));
+		}
+
+		public static Kilogram operator *(double f, Kilogram x)
+		{
+			return new Kilogram(x.unitValue * System.Math.Abs(f));
+		}
+
+		public static Kilogram operator /(Kilogram x, double f)
+		{
+			return f == 0 ? null : new Kilogram(x.unitValue / System.Math.Abs(f));
+		}
 	}
 }

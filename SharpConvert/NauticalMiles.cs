@@ -36,5 +36,10 @@ namespace MmiSoft.Core.Math.Units
 			if (y is NauticalMiles miles) return x + miles;
 			return new NauticalMiles(x.Add(y));
 		}
+
+		public static Knots operator /(NauticalMiles x, Hours y)
+		{
+			return y.UnitValue == 0 ? null : new Knots(x.unitValue / y.UnitValue);
+		}
 	}
 }

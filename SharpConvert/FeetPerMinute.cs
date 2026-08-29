@@ -32,6 +32,26 @@ namespace MmiSoft.Core.Math.Units
 			return new FeetPerMinute(u.unitValue * factor);
 		}
 
+		public static FeetPerMinute operator *(double factor, FeetPerMinute u)
+		{
+			return new FeetPerMinute(u.unitValue * factor);
+		}
+
+		public static FeetPerMinute operator /(FeetPerMinute u, double factor)
+		{
+			return factor == 0 ? null : new FeetPerMinute(u.unitValue / factor);
+		}
+
+		public static FeetPerMinutePerSecond operator /(FeetPerMinute u, Seconds t)
+		{
+			return t.UnitValue == 0 ? null : new FeetPerMinutePerSecond(u.unitValue / t.UnitValue);
+		}
+
+		public static Feet operator *(FeetPerMinute u, Minutes t)
+		{
+			return new Feet(System.Math.Abs(u.unitValue * t.UnitValue));
+		}
+
 		public static FeetPerMinute operator -(FeetPerMinute x)
 		{
 			return new FeetPerMinute(-x.unitValue);
@@ -50,7 +70,7 @@ namespace MmiSoft.Core.Math.Units
 
 		public static FeetPerMinute operator +(FeetPerMinute l, SpeedUnit r)
 		{
-			if (r is FeetPerMinute fpm) return l - fpm;
+			if (r is FeetPerMinute fpm) return l + fpm;
 			return new FeetPerMinute(l.Add(r));
 		}
 

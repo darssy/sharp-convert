@@ -56,6 +56,13 @@ namespace MmiSoft.Core.Math.Units
 			return dif;
 		}
 
+		public static AngleUnit operator -(AngleUnit x)
+		{
+			AngleUnit cloned = (AngleUnit) x.MemberwiseClone();
+			cloned.unitValue = -cloned.unitValue;
+			return cloned;
+		}
+
 		public static AngleUnit operator -(AngleUnit l, AngleUnit r)
 		{
 			return new Radians(l.ToSi() - r.ToSi());
@@ -94,6 +101,22 @@ namespace MmiSoft.Core.Math.Units
 			AngleUnit a = (AngleUnit) x.MemberwiseClone();
 			a.FromSi(x.ToSi() / y);
 			return a;
+		}
+
+		public static double operator /(AngleUnit x, AngleUnit y)
+		{
+			return x.ToSi() / y.ToSi();
+		}
+
+		public static AngularVelocity operator /(AngleUnit a, TimeUnit t)
+		{
+			if (t == TimeUnit.Zero) return null;
+			return new RadiansPerSecond(a.ToSi() / t.ToSi());
+		}
+
+		public static explicit operator double(AngleUnit x)
+		{
+			return x.unitValue;
 		}
 
 		public double Sin()
