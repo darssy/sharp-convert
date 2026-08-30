@@ -45,7 +45,7 @@ namespace UnitTests.MmiSoft.Core.Math.Units
 		}
 
 		[Test]
-		public void ExplicitCasting_TimeSpan_ReturnsHours()
+		public void ImplicitCasting_TimeSpan_ReturnsHours()
 		{
 			Hours h = TimeSpan.FromHours(2.5);
 			Assert.AreEqual(h, 2.5.Hours());
