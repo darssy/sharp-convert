@@ -17,6 +17,11 @@ namespace MmiSoft.Core.Math.Units
 			: this(time.TotalMinutes)
 		{ }
 
+		public static implicit operator Minutes(TimeSpan t)
+		{
+			return new Minutes(t);
+		}
+
 		public static Minutes operator *(Minutes t, double f)
 		{
 			return new Minutes(t.unitValue * System.Math.Abs(f));
