@@ -16,7 +16,7 @@ namespace MmiSoft.Core.Math.Units
 			return ConvertTo<T, TimeUnit>(this);
 		}
 
-		public TimeSpan TimeSpan => (TimeSpan)this;
+		public TimeSpan TimeSpan => this;
 
 		public int CompareTo(TimeUnit other)
 		{
@@ -105,12 +105,7 @@ namespace MmiSoft.Core.Math.Units
 			return (int)System.Math.Round(t.unitValue);
 		}
 
-		/// <summary>
-		/// Deliberately explicit: TimeSpan converts implicitly to <see cref="Seconds"/>, <see cref="Minutes"/>
-		/// and <see cref="Hours"/>, and making this direction implicit as well would let TimeSpan's own
-		/// operators capture a unit operand, making every mixed expression ambiguous (CS0034).
-		/// </summary>
-		public static explicit operator TimeSpan(TimeUnit t)
+		public static implicit operator TimeSpan(TimeUnit t)
 		{
 			return TimeSpan.FromSeconds(t.ToSi());
 		}

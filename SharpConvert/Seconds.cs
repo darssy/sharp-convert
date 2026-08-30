@@ -54,7 +54,12 @@ namespace MmiSoft.Core.Math.Units
 			return new Seconds(x.unitValue + y.ToSi());
 		}
 
-		public static implicit operator Seconds(TimeSpan t)
+		/// <summary>
+		/// Explicit on purpose: <see cref="TimeUnit"/> converts implicitly to TimeSpan, so making this direction
+		/// implicit too would let TimeSpan's own operators capture a unit operand and every mixed expression
+		/// would become ambiguous (CS0034).
+		/// </summary>
+		public static explicit operator Seconds(TimeSpan t)
 		{
 			return new Seconds(t);
 		}

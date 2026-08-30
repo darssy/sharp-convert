@@ -17,7 +17,12 @@ namespace MmiSoft.Core.Math.Units
 			: this(time.TotalMinutes)
 		{ }
 
-		public static implicit operator Minutes(TimeSpan t)
+		/// <summary>
+		/// Explicit on purpose: <see cref="TimeUnit"/> converts implicitly to TimeSpan, so making this direction
+		/// implicit too would let TimeSpan's own operators capture a unit operand and every mixed expression
+		/// would become ambiguous (CS0034).
+		/// </summary>
+		public static explicit operator Minutes(TimeSpan t)
 		{
 			return new Minutes(t);
 		}
