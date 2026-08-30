@@ -18,7 +18,7 @@
     <ThisYear>$([System.DateTime]::Now.ToString("yyyy"))</ThisYear>
     <Copyright>Copyright © adamstyl 2016-$(ThisYear)</Copyright>
     <PackageReadmeFile>README.md</PackageReadmeFile>
-    <TargetFrameworks>net7.0;net8.0;net48</TargetFrameworks>
+    <TargetFrameworks>netstandard2.0;net48;net8.0</TargetFrameworks>
   </PropertyGroup>
 
   <ItemGroup>
