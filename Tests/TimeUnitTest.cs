@@ -47,10 +47,10 @@ namespace UnitTests.MmiSoft.Core.Math.Units
 		[Test]
 		public void ExplicitCasting_TimeSpan_ReturnsHours()
 		{
-			Hours h = (Hours)TimeSpan.FromHours(2.5);
+			Hours h = TimeSpan.FromHours(2.5);
 			Assert.AreEqual(h, 2.5.Hours());
 
-			Seconds s = (Seconds)new TimeSpan(0, 2, 12);
+			Seconds s = new TimeSpan(0, 2, 12);
 			Assert.AreEqual(132.Seconds(), s);
 		}
 
